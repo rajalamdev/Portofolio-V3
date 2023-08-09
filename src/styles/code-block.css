@@ -33,15 +33,19 @@
     counter-increment: listing;
   }
 .line-numbers  pre .code-line::before {
-    content: counter(listing) ". ";
+    content: counter(listing);
     display: inline-block;
-    width: 3em;         /* now works */
-	padding-left: 8px;	
+	padding: 0 2em 0 1em;
   }
 
 .transparent code[class*="language-"],
 .transparent pre[class*="language-"] {
 	background: transparent;
+}
+
+.disable-highlight code[class*="language-"] *,
+.disable-highlight pre[class*="language-"] * {
+	color: var(--text-primary);
 }
 
 code[class*="language-"],

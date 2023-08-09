@@ -16,7 +16,9 @@ const config: Config = {
       colors: {
         'bg-outside': 'var(--bg-outside)',
         'bg-primary': 'var(--bg-primary)',
-        'line': 'var(--line)'
+        'line': 'var(--line)',
+        'header-primary': 'var(--header-primary)',
+        'text-secondary': 'var(--text-primary)'
       }
     },
   },
