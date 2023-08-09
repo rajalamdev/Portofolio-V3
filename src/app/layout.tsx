@@ -1,4 +1,5 @@
-import './globals.css'
+import '../styles/globals.css'
+import '../styles/code-block.css'
 import type { Metadata } from 'next'
 import { Fira_Code, Inter} from 'next/font/google'
 
