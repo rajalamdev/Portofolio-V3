@@ -1,10 +1,12 @@
 import Image from "next/image";
+import Navbar from "./components/header/Navbar";
 
 export default async function Home() {
 
   return (
-    <main className="flex justify-center w-full min-h-screen p-8 overflow-hidden">
+    <main className="flex justify-center w-full min-h-screen p-7 overflow-hidden">
       <section className="border w-full rounded-lg bg-bg-primary relative border-line">
+        <Navbar />
         <Image
           src={"/blob-blur-primary.png"}
           width={700}

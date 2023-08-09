@@ -12,6 +12,6 @@
 
 @layer base {
   body {
-    @apply bg-bg-outside
+    @apply bg-bg-outside text-text-primary text-sm
   }
 }
