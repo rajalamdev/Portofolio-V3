@@ -13,11 +13,11 @@ const Navbar = () => {
     { text: "_contact-me", href: "/contact" },
   ];
 
-  const active = "text-header-primary border-b-2 border-b-[#43D9AD]";
+  const active = "text-header-primary border-b-2 border-b-accent-primary";
 
   return (
     <header>
-      <nav className="border-b border-line flex w-full">
+      <nav className="border-b border-line flex w-full relative z-10 bg-bg-primary">
         <Link
           href="/"
           className="w-[21%] border-r border-line py-3 hover:opacity-80 button-hover pl-6"

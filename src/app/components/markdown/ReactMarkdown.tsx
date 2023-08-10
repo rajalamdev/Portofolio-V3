@@ -9,7 +9,7 @@ import rehypePrism from 'rehype-prism-plus';
 
 type Props = {
   content: string,
-  className: string
+  className?: string
 }
 
 /** 
@@ -20,7 +20,7 @@ disable-highlight: disable the highlight to code block
 transparent: make the code block background transparent
 **/ 
 
-const Markdown = ({content, className}: Props) => {
+const ReactMarkdownComponent = ({content, className}: Props) => {
   return (
     <ReactMarkdown
         className={`text-[#bbb] ${className}`}
@@ -32,4 +32,4 @@ const Markdown = ({content, className}: Props) => {
   )
 }
 
-export default Markdown
+export default ReactMarkdownComponent
