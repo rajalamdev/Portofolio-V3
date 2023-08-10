@@ -6,8 +6,13 @@ import MdxMarkdown from "@/app/components/markdown/MdxMarkdown";
 import Navbar from "@/app/components/header/Navbar";
 
 async function getPost(slug: string) {
-    const req = await fetch("http://localhost:1337/api/posts")
+    const req = await fetch("http://localhost:1337/api/posts", {
+      cache: "no-store"
+    })
     const res = await req.json();
+
+    console.log(res.data[0].attributes.content);
+    
   
     const html = await serialize(res.data[0].attributes.content, {
       mdxOptions: {
@@ -28,7 +33,6 @@ const page = async ({ params }: { params: { slug: string }}) => {
 
   return (
     <>
-        <Navbar />
         <MdxMarkdown data={dataPost} />
     </>
   )

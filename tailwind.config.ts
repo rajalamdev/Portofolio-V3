@@ -18,7 +18,8 @@ const config: Config = {
         'bg-primary': 'var(--bg-primary)',
         'line': 'var(--line)',
         'header-primary': 'var(--header-primary)',
-        'text-primary': 'var(--text-primary)'
+        'text-primary': 'var(--text-primary)',
+        'button-hover': 'var(--button-hover)'
       }
     },
   },

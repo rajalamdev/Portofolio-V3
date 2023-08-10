@@ -5,13 +5,44 @@
 :root {
   --bg-outside: #010C15;
   --bg-primary: rgba(1, 22, 39, 1);
+  --button-hover: rgba(15, 34, 51, 1);
   --line: #1E2D3D;
-  --header-primary: white;
+  --header-primary: aliceblue;
   --text-primary: #607B96;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 15px;
+    cursor: pointer;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent;
+    border-left: 1px solid var(--line);
+}
+  
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border: 5px solid transparent;
+  background-clip: padding-box;
+  background-color: var(--text-primary);
+}
+  
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--header-primary);
 }
 
 @layer base {
   body {
     @apply bg-bg-outside text-text-primary text-sm
+  }
+}
+
+@layer utilities {
+  .button-hover {
+    @apply hover:bg-button-hover hover:text-header-primary transition-all duration-100 cursor-pointer
   }
 }
