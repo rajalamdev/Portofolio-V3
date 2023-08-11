@@ -1,17 +1,10 @@
 "use client"
-import useAudio from "@/hooks/useAudio";
+import useAudio from "./hooks/useAudio";
 import Spline from "@splinetool/react-spline"
 import { useState } from "react";
 
 export default function Home() {
   const [splineLoading, setSplineLoading] = useState(true);
-
-  const codeIntroduction = `
-~~~js
-// Based in South Tangerang, Indonesia 🇮🇩
-const curriculumVitae = "https://github.com/example/url"
-~~~
-  `;
 
   const audio = useAudio('/music/background.mp3', { volume: 1, playbackRate: 1 })
 
@@ -23,7 +16,7 @@ const curriculumVitae = "https://github.com/example/url"
               <p className="bg-accent-primary h-2 w-2 rounded-full inline-block"></p>
               <h3>{"<Hello World/>"}</h3>
               <p className="animate-waving-hand text-lg">👋</p>
-              <button onClick={() => audio.play()}>sdfsdf</button>
+              <button onClick={() => audio?.play()}>sdfsdf</button>
             </div>
             <h1 className="[word-spacing:-7px] text-header-primary font-semibold text-4xl">I am Raj Alam</h1>
             <h2>{"> Fullstack JavaScript Developer"}</h2>

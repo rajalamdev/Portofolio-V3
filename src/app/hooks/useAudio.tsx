@@ -1,3 +1,4 @@
+"use client"
 import { useEffect, useRef } from 'react';
 
 type Options = {
@@ -6,14 +7,17 @@ type Options = {
 };
 
 const useAudio = (src: string, { volume = 1, playbackRate = 1 }: Options) => {
-  const sound = useRef(new Audio(src));
+  const sound = useRef<HTMLAudioElement | undefined>(
+    typeof Audio !== "undefined" ? new Audio(src) : undefined
+  );
 
+  
   useEffect(() => {
-    sound.current.playbackRate = playbackRate;
+    sound.current!.playbackRate = playbackRate;
   }, [playbackRate]);
 
   useEffect(() => {
-    sound.current.volume = volume;
+    sound.current!.volume = volume;
   }, [volume]);
 
   return sound.current;
