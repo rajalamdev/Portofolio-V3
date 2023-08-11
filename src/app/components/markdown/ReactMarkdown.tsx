@@ -18,6 +18,7 @@ passing the className to the Markdown components to apply this style:
 line-numbers: add line numbers to code block
 disable-highlight: disable the highlight to code block
 transparent: make the code block background transparent
+reset-padding-margin: reset the padding and margin to 0
 **/ 
 
 const ReactMarkdownComponent = ({content, className}: Props) => {

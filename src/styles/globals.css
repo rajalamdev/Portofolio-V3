@@ -44,6 +44,6 @@
 
 @layer utilities {
   .button-hover {
-    @apply hover:bg-button-hover hover:text-header-primary transition-all duration-100 cursor-pointer
+    @apply hover:bg-button-hover hover:text-header-primary cursor-pointer
   }
 }

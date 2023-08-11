@@ -43,6 +43,9 @@ const config: Config = {
         'waving-hand': 'wave 2s linear infinite',
         'bounce-arrow': 'bounceArrow 2s infinite'
       },
+      cursor: {
+        'link': 'url(/link-cursor.png), pointer'
+      }
     },
   },
   plugins: [],
