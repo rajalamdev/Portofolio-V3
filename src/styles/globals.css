@@ -4,8 +4,8 @@
 
 :root {
   --bg-outside: #010C15;
-  --bg-primary: rgba(1, 22, 39, 1);
-  --button-hover: rgba(15, 34, 51, 1);
+  --bg-primary: #011627;
+  --button-hover: #0f2233;
   --line: #1E2D3D;
   --header-primary: aliceblue;
   --text-primary: #607B96;

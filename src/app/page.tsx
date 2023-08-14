@@ -1,12 +1,15 @@
 "use client"
-import useAudio from "./hooks/useAudio";
-import Spline from "@splinetool/react-spline"
-import { useState } from "react";
+import useAudio from "../hooks/useAudio";
+import Image from "next/image";
+import { useEffect, useMemo, useState } from "react";
+import Mini3dGame from "./components/mini3dGame/Mini3dGame";
+import { useAppContext } from "@/context/AppContext";
 
 export default function Home() {
-  const [splineLoading, setSplineLoading] = useState(true);
 
   const audio = useAudio('/music/background.mp3', { volume: 1, playbackRate: 1 })
+
+  const context = useAppContext();
 
   return (
     <>
@@ -16,7 +19,7 @@ export default function Home() {
               <p className="bg-accent-primary h-2 w-2 rounded-full inline-block"></p>
               <h3>{"<Hello World/>"}</h3>
               <p className="animate-waving-hand text-lg">👋</p>
-              <button onClick={() => audio?.play()}>sdfsdf</button>
+              {/* <button onClick={() => audio?.play()}>sdfsdf</button> */}
             </div>
             <h1 className="[word-spacing:-7px] text-header-primary font-semibold text-4xl">I am Raj Alam</h1>
             <h2>{"> Fullstack JavaScript Developer"}</h2>
@@ -35,18 +38,8 @@ export default function Home() {
             </p>
           </div>
       </section>
-      <section>
+      <section className="absolute right-0 top-0">
         
-        <div>
-          {splineLoading && <p className="absolute right-28 lg:right-64 animate-pulse lg:top-72 top-96">Rendering spline...</p>}
-          <Spline
-          onLoad={() => {
-            setSplineLoading(false)
-          }}
-          scene="https://prod.spline.design/mtpnyKMdEtYOpwXE/scene.splinecode"
-          // className="absolute z-0 lg:-top-64 -top-36 scale-[.6] hidden md:block w-max h-max lg:-right-56 cursor-grab active:cursor-grabbing" />
-          className="absolute z-0 -top-0 scale-[.85] hidden lg:block w-max h-max lg:-right-[600px]" />
-        </div>
       </section>
     </>
   );

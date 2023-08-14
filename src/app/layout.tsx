@@ -3,6 +3,7 @@ import "../styles/code-block.css";
 import type { Metadata } from "next";
 import { Fira_Code, Inter } from "next/font/google";
 import Layout from "./components/layout/Layout";
+import { AppProvider } from "@/context/AppContext";
 
 const firaCode = Fira_Code({
   subsets: ["latin"],
@@ -25,9 +26,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={firaCode.className}>
-        <Layout>
-          {children}
-        </Layout>
+        <AppProvider>
+          <Layout>
+            {children}
+          </Layout>
+        </AppProvider>
       </body>
     </html>
   );
