@@ -1,5 +1,5 @@
 import { Metadata } from "next"
-import Layout from "../components/layout/Layout"
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Raj Alam | About",
@@ -9,9 +9,11 @@ export const metadata: Metadata = {
   },
 }
 
-const About = () => {
+const About = async () => {
+  
   return (
-    <div></div>
+    <div>
+    </div>
   )
 }
 

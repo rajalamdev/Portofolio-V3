@@ -4,9 +4,9 @@ import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import Mini3dGame from "./components/mini3dGame/Mini3dGame";
 import { useAppContext } from "@/context/AppContext";
+// import Vercel from "../../public/vercel.svg"
 
 export default function Home() {
-
   const audio = useAudio('/music/background.mp3', { volume: 1, playbackRate: 1 })
 
   const context = useAppContext();
@@ -38,8 +38,8 @@ export default function Home() {
             </p>
           </div>
       </section>
-      <section className="absolute right-0 top-0">
-        
+      <section>
+        {/* <Vercel className="fill-slate-200 text-red-500 w-8 h-8" /> */}
       </section>
     </>
   );
