@@ -20,11 +20,11 @@ const Navbar = () => {
       <nav className="border-b border-line flex w-full relative z-10 bg-bg-primary">
         <Link
           href="/"
-          className="w-[21%] border-r border-line py-3 hover:opacity-80 button-hover pl-6"
+          className="max-w-[275px] w-full flex-grow-0 flex-shrink-0 border-r border-line py-3 hover:opacity-80 button-hover pl-6"
         >
           <h4>raj-alam</h4>
         </Link>
-        <ul className="flex w-[69%] items-center">
+        <ul className="flex flex-1 items-center">
           {navLinks.map((nav) => {
             return (
               <Link
@@ -42,7 +42,7 @@ const Navbar = () => {
             );
           })}
         </ul>
-        <div className="flex-1 border-l border-line pr-6"></div>
+        <div className="max-w-[150px] w-full border-l border-line pr-6">ukjygkjp</div>
       </nav>
     </header>
   );

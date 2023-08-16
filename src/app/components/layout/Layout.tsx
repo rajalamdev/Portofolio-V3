@@ -7,7 +7,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <section className="flex justify-center w-full h-screen p-0 lg:p-7 overflow-hidden">
         <section className="border w-full h-full rounded-lg bg-bg-primary relative border-line overflow-hidden flex flex-col">
           <Navbar />
-          <main className="overflow-x-hidden overflow-y-auto w-full h-[85%]">{children}</main>
+          <main className="overflow-x-hidden overflow-hidden w-full h-[86%]">{children}</main>
           <Footer />
         </section>
       </section>
