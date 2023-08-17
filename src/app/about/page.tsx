@@ -5,6 +5,7 @@ import DynamicSvgIcon from "../components/svg/DynamicSvgIcon";
 import { useEffect, useState } from "react";
 import Footer from "../components/footer/Footer";
 import Bio from "../components/about/Bio";
+import EmptyContent from "../components/about/EmptyContent";
 
 // export const metadata: Metadata = {
 //   title: "Raj Alam | About",
@@ -22,22 +23,25 @@ const About = () => {
     {
       folderName: "bio", 
       files: [
-        {fileName: "Bio.jsx", component: <Bio />},
-        {fileName: "Nothing.jsx", component: <Bio />}
+        {fileName: "Bio.jsx", component: Bio},
+        {fileName: "Nothing.jsx", component: Bio}
       ], 
       isActiveFolder: true
     },
     {
       folderName: "interest", 
       files: [
-        {fileName: "Hobby.jsx", component: <Bio />}
+        {fileName: "Turu.jsx", component: Bio},
+        {fileName: "Kids.jsx", component: Bio},
+        {fileName: "XD.jsx", component: Bio},
+        {fileName: "HEHE.jsx", component: Bio},
       ], 
       isActiveFolder: false
     },
   ])
 
   const [activeFiles, setActiveFiles] = useState<any>({
-    folderName: "bio", fileName: "Bio.jsx", component: <Bio />
+    folderName: "bio", fileName: "Bio.jsx", component: Bio
   })
 
   const [tabActive, setTabActive] = useState([{folder: "bio", fileName: "Bio.jsx"}])
@@ -69,11 +73,11 @@ const About = () => {
   }
   
   function removeTabHandler(currentTab: any){
-    if(currentTab.file === activeFiles.fileName) {
+    if(currentTab.fileName === activeFiles.fileName){
       setActiveFiles({})
     }
-    
-    const filteredTabActive = tabActive.filter(tab => tab.fileName !== currentTab.file)
+
+    const filteredTabActive = tabActive.filter(tab => tab.fileName !== currentTab.fileName)
     setTabActive(filteredTabActive)
   }
 
@@ -96,8 +100,8 @@ const About = () => {
           <DynamicSvgIcon name="file" className="w-6" />
         </div>
         <div className="flex flex-col flex-1 border-r border-line">
-          <div>
-            <h4 onClick={() => setPersonalInfoActive(!personalInfoActive)} className="cursor-pointer text-header-primary flex gap-2 p-2 border-b border-line">
+          <div className="max-h-60 overflow-auto">
+            <h4 onClick={() => setPersonalInfoActive(!personalInfoActive)} className="sticky top-0 bg-bg-primary z-10 cursor-pointer text-header-primary flex gap-2 p-2 border-b border-line">
               <DynamicSvgIcon name="trianglePrimary" className={`w-[10px] ${personalInfoActive ? "" : "-rotate-90"} transition-all`}/> personal-info
             </h4>
             <div className={`transition-maxHeight ${personalInfoActive ? "max-h-96" : "max-h-0"} overflow-hidden`}>
@@ -110,7 +114,7 @@ const About = () => {
                         <DynamicSvgIcon name="folder" className="w-4 fill-accent-primary" />
                         <h5>{folder.folderName}</h5>
                       </button>
-                      <div className={`max-h-0 transition-maxHeight ${folder.isActiveFolder ? "max-h-32" : ""} overflow-hidden `}>
+                      <div className={`max-h-0 transition-maxHeight ${folder.isActiveFolder ? "max-h-56" : ""} overflow-hidden `}>
                         {folder.files.map(file => {
                           return (
                             <button onClick={() => activeFilesHanlder(folder.folderName, file)} key={file.fileName} className={`flex button-hover ${file.fileName === activeFiles.fileName ? "bg-black/20 text-header-primary" : ""} gap-2 w-full px-6 py-2`}>
@@ -134,14 +138,14 @@ const About = () => {
         </div>
       </section>
       <section className="flex-1">
-        <div className="border-b w-full border-line flex">
-          {tabActive.map(tab => (
-                <p id="switch-tab" onClick={(e) => switchTabHandler(e, tab)} className={`w-max border-line cursor-pointer px-3 py-2 border-r flex gap-4 ${activeFiles.fileName === tab.fileName ? "text-white" : ""}`}>{tab.fileName} <button onClick={() => removeTabHandler(tab)}>x</button></p>
+        <div className='flex border-b border-line sticky top-0 bg-bg-primary overlow-auto'>
+          {tabActive?.map((tab:any) => (
+                  <p id="switch-tab" onClick={(e) => switchTabHandler(e, tab)} className={`w-max border-line cursor-pointer px-3 py-2 border-r flex gap-4 ${activeFiles?.fileName === tab.fileName ? "text-white" : ""}`}>{tab.fileName} <button onClick={() => removeTabHandler(tab)}>x</button></p>
+                )
               )
-            )
           }
         </div>
-        {activeFiles.component}
+        {Object.keys(activeFiles).length !== 0 && <activeFiles.component attr={[tabActive, switchTabHandler, activeFiles, removeTabHandler]} />}
       </section>
     </div>
   )

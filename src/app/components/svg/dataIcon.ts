@@ -6,7 +6,11 @@ import Linkedin from "../../../../public/icons/linkedin.svg"
 import React from "../../../../public/icons/react.svg"
 import TrianglePrimary from "../../../../public/icons/triangle-primary.svg"
 import TriangleSecondary from "../../../../public/icons/triangle-secondary.svg"
-
+import NextJS from "../../../../public/icons/nextjs.svg"
+import TypeScript from "../../../../public/icons/typescript.svg"
+import JavaScript from "../../../../public/icons/javascript.svg"
+import Tailwind from "../../../../public/icons/tailwind.svg"
+import NodeJS from "../../../../public/icons/nodejs.svg"
 
 interface IIconTypes {
     [name: string]: string
@@ -21,6 +25,11 @@ const dataIcon: IIconTypes = {
     trianglePrimary: TrianglePrimary,
     triangleSecondary: TriangleSecondary,
     react: React,
+    nextjs: NextJS,
+    typescript: TypeScript,
+    javascript: JavaScript,
+    tailwind: Tailwind,
+    nodejs: NodeJS
 }
 
 export default dataIcon

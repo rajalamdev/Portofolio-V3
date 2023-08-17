@@ -40,6 +40,7 @@ export default function Home() {
       </section>
       <section>
         {/* <Vercel className="fill-slate-200 text-red-500 w-8 h-8" /> */}
+        {/* <Mini3dGame /> */}
       </section>
     </>
   );
