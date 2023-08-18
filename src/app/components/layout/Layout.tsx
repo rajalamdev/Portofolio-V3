@@ -4,10 +4,10 @@ import Navbar from "../header/Navbar";
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <section className="flex justify-center w-full h-screen p-0 lg:p-7 overflow-hidden">
-        <section className="border w-full h-full rounded-lg bg-bg-primary relative border-line overflow-hidden flex flex-col">
+      <section className="flex justify-center w-full h-screen p-0 lg:p-7">
+        <section className="border w-full h-full rounded-lg bg-bg-primary overflow-hidden relative border-line">
           <Navbar />
-          <main className="overflow-x-hidden overflow-hidden w-full h-[86%]">{children}</main>
+          <main className="w-full h-[86%]">{children}</main>
           <Footer />
         </section>
       </section>

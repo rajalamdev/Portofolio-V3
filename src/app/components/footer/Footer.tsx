@@ -17,20 +17,20 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="border-t border-line absolute bottom-0 w-full flex justify-between z-10 bg-bg-primary">
+    <footer className="border-t border-line h-[7%] w-full flex justify-between z-10 bg-bg-primary">
       <div className="flex">
-        <h4 className="px-6 py-3 border-r border-line">find me in: </h4>
+        <h4 className="px-6 border-r border-line h-auto flex items-center">find me in: </h4>
         <div className="flex justify-center items-center">
           {findMeInLinks.map((link) => {
             return (
               <a
                 href={link.href}
                 target="_blank"
-                className={`px-4 py-3 border-r border-line button-hover group`}
+                className={`px-4 border-r border-line button-hover group h-full`}
               >
                 <DynamicSvgIcon
                   name={link.name}
-                  className={`w-4 fill-text-primary ${link.color}`}
+                  className={`w-4 fill-text-primary h-full ${link.color}`}
                 />
               </a>
             );
@@ -40,7 +40,7 @@ const Footer = () => {
       <a
         href="https://github.com/rajalamdev"
         target="_blank"
-        className="px-4 py-3 border-l border-line button-hover flex items-start gap-2"
+        className="px-4 border-l border-line button-hover flex items-center gap-2"
       >
         <p>@rajalamdev</p>
         <DynamicSvgIcon name="github" className="w-5" />

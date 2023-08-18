@@ -1,5 +1,11 @@
+import createMDX from '@next/mdx'
+import remarkPrism from 'remark-prism'
+import rehypeCodeTitles from 'rehype-code-titles'
+import rehypePrismAll from 'rehype-prism-plus/all'
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   /* config options here */
   eslint: {
     // Warning: This allows production builds to successfully complete even if
@@ -34,5 +40,15 @@ const nextConfig = {
     return config
   },
 }
+
+const withMDX = createMDX({
+  options: {
+    extension: /\.mdx?$/,
+    remarkPlugins: [remarkPrism],
+    rehypePlugins: [rehypePrismAll, rehypeCodeTitles],
+    // If you use `MDXProvider`, uncomment the following line.
+    // providerImportSource: "@mdx-js/react",
+  },
+})
  
-module.exports = nextConfig
+export default withMDX(nextConfig)

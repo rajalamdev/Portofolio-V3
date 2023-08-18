@@ -138,14 +138,16 @@ const About = () => {
         </div>
       </section>
       <section className="flex-1">
-        <div className='flex border-b border-line sticky top-0 bg-bg-primary overlow-auto'>
+        <div className='flex border-b border-line sticky top-0 bg-bg-primary overlow-auto h-[7%]'>
           {tabActive?.map((tab:any) => (
                   <p id="switch-tab" onClick={(e) => switchTabHandler(e, tab)} className={`w-max border-line cursor-pointer px-3 py-2 border-r flex gap-4 ${activeFiles?.fileName === tab.fileName ? "text-white" : ""}`}>{tab.fileName} <button onClick={() => removeTabHandler(tab)}>x</button></p>
                 )
               )
           }
         </div>
+        <div className="h-[93%]">
         {Object.keys(activeFiles).length !== 0 && <activeFiles.component attr={[tabActive, switchTabHandler, activeFiles, removeTabHandler]} />}
+        </div>
       </section>
     </div>
   )

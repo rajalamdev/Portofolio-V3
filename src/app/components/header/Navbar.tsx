@@ -16,15 +16,15 @@ const Navbar = () => {
   const active = "text-header-primary border-b-2 border-b-accent-primary";
 
   return (
-    <header>
-      <nav className="border-b border-line flex w-full relative z-10 bg-bg-primary">
+    <header className="h-[7%]">
+      <nav className="border-b h-full border-line flex w-full items-center relative z-10 bg-bg-primary">
         <Link
           href="/"
-          className="max-w-[275px] w-full flex-grow-0 flex-shrink-0 border-r border-line py-3 hover:opacity-80 button-hover pl-6"
+          className="max-w-[275px] flex items-center w-full h-full flex-grow-0 flex-shrink-0 border-r border-line hover:opacity-80 button-hover pl-6"
         >
           <h4>raj-alam</h4>
         </Link>
-        <ul className="flex flex-1 items-center">
+        <ul className="flex flex-1 h-full">
           {navLinks.map((nav) => {
             return (
               <Link
@@ -35,14 +35,14 @@ const Navbar = () => {
                   pathname.includes("/blog") && nav.href === "/blog"
                     ? active
                     : ""
-                } px-6 border-r border-line py-3 text-center button-hover`}
+                } px-6 border-r h-full border-line text-center button-hover flex items-center`}
               >
                 {nav.text}
               </Link>
             );
           })}
         </ul>
-        <div className="max-w-[150px] w-full border-l border-line pr-6">ukjygkjp</div>
+        <div className="max-w-[150px] h-full w-full border-l border-line pr-6 flex items-center">ukjygkjp</div>
       </nav>
     </header>
   );

@@ -11,43 +11,10 @@
   --text-primary: #607b96;
   --accent-primary: #43d9ad;
 }
-
-/* width */
-::-webkit-scrollbar {
-  width: 15px;
-  cursor: pointer;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: transparent;
-  border-left: 1px solid var(--line);
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  border: 5px solid transparent;
-  background-clip: padding-box;
-  background-color: var(--text-primary);
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background-color: var(--header-primary);
-}
-
-@layer base {
-  body {
-    @apply bg-bg-outside text-text-primary text-sm;
-  }
-}
-
-@layer utilities {
-  .button-hover {
-    @apply hover:bg-button-hover hover:text-header-primary cursor-pointer;
-  }
-
-  .transition-maxHeight {
-    transition: max-height 0.25s linear;
-  }
-}
+::-webkit-scrollbar {width: 15px;cursor: pointer;}
+::-webkit-scrollbar-track {background: transparent;border-left: 1px solid var(--line);}
+::-webkit-scrollbar-thumb {border: 5px solid transparent; background-clip: padding-box; background-color: var(--text-primary);}
+::-webkit-scrollbar-thumb:hover {background-color: var(--header-primary);}
+::-webkit-scrollbar-corner { border-left: 1px solid var(--line);}
+@layer base {body {@apply bg-bg-outside text-text-primary text-sm;}}
+@layer utilities {.button-hover {@apply hover:bg-button-hover hover:text-header-primary cursor-pointer;}.transition-maxHeight {transition: max-height 0.25s linear;}}

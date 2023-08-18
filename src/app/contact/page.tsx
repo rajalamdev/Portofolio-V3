@@ -4,9 +4,61 @@ import DynamicSvgIcon from "../components/svg/DynamicSvgIcon"
 const Contact = () => {
   
   return (
-    <div>
-      {/* <DynamicSvgIcon name="next" /> */}
-      <DynamicSvgIcon name="file" className="fill-red-500 w-8 h-8" />
+    <div className="h-full">
+      <div className="h-[80%] border overflow-auto">
+    Middle div Middle div Middle div Middle div Middle div Middle div Middle div Middle div Middle div Middle div Middle div Middle div Middle div Middle div Middle div Middle div Middle div Middle div Middle div Middle div Middle div Middle div Middle div Middle div Middle div Middle div Middle div Middle div 
+    MiddledivMiddledivMiddledivMiddledivMiddledivMiddledivMiddledivMiddledivMiddledivMiddledivMiddledivMiddledivMiddledivMiddledivMiddledivMiddledivMiddledivMiddledivMiddledivMiddledivMiddledivMiddledivMiddledivMiddledivMiddledivMiddledivMiddledivMiddledivMiddledivMiddlediv 
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+    Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+Middlediv<br/>
+
+</div>
     </div>
   )
 }
