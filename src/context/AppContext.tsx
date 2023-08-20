@@ -22,12 +22,15 @@ export const AppProvider = ( { children }: { children: ReactNode } ) => {
     const [enabledMusic, setEnabledMusic] = useState(false);
     const [enabled3dSpline, setEnabled3dSpline] = useState(true);
     const [screenSize, setScreenSize] = useState(0);
+    const [smallDevices, setSmallDevices] = useState(false);
 
     useEffect(() => {
-        window.addEventListener("resize", () => {
-            setScreenSize(window.innerWidth);
-        });
-    }, [screenSize]);
+        setScreenSize(window.innerWidth);
+        if(window.innerWidth < 1024) {
+            setSmallDevices(true)
+            setEnabled3dSpline(false)
+        }
+    }, []);
 
     const contextValue = {
         ...defaultState,
@@ -37,7 +40,8 @@ export const AppProvider = ( { children }: { children: ReactNode } ) => {
         enabled3dSpline,
         setEnabled3dSpline,
         screenSize,
-        setScreenSize
+        setScreenSize,
+        smallDevices
     }
 
     return (

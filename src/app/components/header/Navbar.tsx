@@ -13,6 +13,8 @@ const Navbar = () => {
 
   const context = useAppContext();  
 
+  const [showSettings, setShowSettings] = useState(false);
+
   useEffect(() => {
     if(context.enabledMusic){
       audio?.play();
@@ -60,14 +62,22 @@ const Navbar = () => {
         </ul>
         <div className="hidden lg:flex items-center max-w-[150px] h-full w-full border-l border-line pl-4 pr-6 gap-4 justify-end">
           <DynamicSvgIcon name="palette" className="w-6 cursor-pointer hover:opacity-80" />
-          <DynamicSvgIcon name="settings" className="w-6 cursor-pointer hover:opacity-80" />
+          <div onClick={() => setShowSettings(!showSettings)}>
+            <DynamicSvgIcon name="settings" className="w-6 cursor-pointer hover:opacity-80" />
+          </div>
         </div>
         <div className="pr-6 lg:hidden">
           =
         </div>
 
-        <div className="fixed left-0 right-0 bottom-0 top-0 z-30 flex backdrop-blur-sm bg-black/20 justify-center items-center">
-          <div className="max-w-[350px] h-[400px] bg-bg-primary border border-line w-full rounded-lg flex flex-col p-4">
+        {/* settings */}
+        <div className={`fixed left-0 right-0 bottom-0 top-0 transition-opacity duration-300   ${showSettings ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"} flex backdrop-blur-sm bg-black/20 justify-center items-center`}>
+          <div className={`max-w-[350px] h-[400px] ${showSettings ? "opacity-100" : "opacity-0"} transition-all bg-bg-primary border border-line w-full rounded-lg flex flex-col p-4 relative`}>
+            <div className="flex justify-end pb-2">
+              <button onClick={() => setShowSettings(false)}>
+                <DynamicSvgIcon name="xmark" className="w-3" />
+              </button>
+            </div>
             <h3 className="text-center text-header-primary font-semibold text-base mb-4">Settings</h3>
             <div className="flex flex-col gap-4 flex-1">
               <div className="flex gap-2 items-center justify-between">
@@ -76,16 +86,16 @@ const Navbar = () => {
                   <p>Enable Music Background</p>
                 </div>
                 <div onClick={() => context.setEnabledMusic(!context.enabledMusic)}>
-                  <ButtonEnableDisable enabled={context.enabledMusic} />
+                  <ButtonEnableDisable enabled={context.enabledMusic} name="music" />
                 </div>
               </div>
-              <button disabled={context.screenSize <= 1024 ? true : false} onClick={() => context.setEnabled3dSpline(!context.enabled3dSpline)} className="flex gap-2 items-center justify-between">
+              <div onClick={() => context.setEnabled3dSpline(!context.enabled3dSpline && !context.smallDevices)} className="flex gap-2 items-center justify-between">
                 <div className="flex gap-2 items-center">
                   <DynamicSvgIcon name="_3d" className="w-6" />
                   <p>Enable 3D Spline</p>
                 </div>
-                <ButtonEnableDisable enabled={context.enabled3dSpline && context.screenSize > 1024} />
-              </button>
+                <ButtonEnableDisable enabled={context.enabled3dSpline} name="3d" />
+              </div>
             </div>
             <p className="flex items-end text-center">Created by raj-alam and the design inspired by yanka</p>
           </div>

@@ -17,6 +17,7 @@ import Settings from "../../../../public/icons/settings.svg"
 import Palette from "../../../../public/icons/palette.svg"
 import _3d from "../../../../public/icons/3d.svg"
 import Sound from "../../../../public/icons/sound.svg"
+import Xmark from "../../../../public/icons/xmark.svg"
 
 
 interface IIconTypes {
@@ -42,7 +43,8 @@ const dataIcon: IIconTypes = {
     settings: Settings,
     palette: Palette,
     _3d: _3d,
-    sound: Sound
+    sound: Sound,
+    xmark: Xmark
 }
 
 export default dataIcon
