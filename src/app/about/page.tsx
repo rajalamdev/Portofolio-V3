@@ -5,7 +5,6 @@ import DynamicSvgIcon from "../components/svg/DynamicSvgIcon";
 import { useEffect, useState } from "react";
 import Footer from "../components/footer/Footer";
 import Bio from "../components/about/Bio";
-import EmptyContent from "../components/about/EmptyContent";
 
 // export const metadata: Metadata = {
 //   title: "Raj Alam | About",
@@ -38,7 +37,12 @@ const About = () => {
       ], 
       isActiveFolder: false
     },
-  ])
+  ]);
+
+  const contactList = [
+    {icon: "mail", href: "", name: "rajalamdev@gmail.com"},
+    {icon: "phone", href: "", name:"0896xxxxxxx"},
+  ]
 
   const [activeFiles, setActiveFiles] = useState<any>({
     folderName: "bio", fileName: "Bio.jsx", component: Bio
@@ -134,13 +138,23 @@ const About = () => {
             <h4 className="text-header-primary flex gap-2 p-2 border-y border-line">
               <DynamicSvgIcon name="trianglePrimary" className="w-[10px]"/> contact
             </h4>
+            <div className="px-2 space-y-3 py-3">
+              {contactList.map(contact => {
+                return (
+                  <a key={contact.icon} href={contact.href} target="_blank"  className="flex gap-2 w-max cursor-link relative after:block after:absolute after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-accent-primary after:transition-all text-white">
+                    <DynamicSvgIcon name={contact.icon} className="w-4" />
+                    <p>{contact.name}</p>
+                  </a>
+                )
+              })}
+            </div>
           </div>
         </div>
       </section>
       <section className="flex-1">
         <div className='flex border-b border-line sticky top-0 bg-bg-primary overlow-auto h-[7%]'>
           {tabActive?.map((tab:any) => (
-                  <p id="switch-tab" onClick={(e) => switchTabHandler(e, tab)} className={`w-max border-line cursor-pointer px-3 py-2 border-r flex gap-4 ${activeFiles?.fileName === tab.fileName ? "text-white" : ""}`}>{tab.fileName} <button onClick={() => removeTabHandler(tab)}>x</button></p>
+                  <p key={tab} id="switch-tab" onClick={(e) => switchTabHandler(e, tab)} className={`w-max border-line cursor-pointer px-3 py-2 border-r flex gap-4 ${activeFiles?.fileName === tab.fileName ? "text-white" : ""}`}>{tab.fileName} <button onClick={() => removeTabHandler(tab)}>x</button></p>
                 )
               )
           }

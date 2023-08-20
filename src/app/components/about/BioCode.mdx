@@ -1,4 +1,4 @@
-```tsx
+```tsx:index.tsx
 import Image from "next/image";
 import DynamicSvgIcon from "../svg/DynamicSvgIcon";
 
@@ -13,7 +13,7 @@ const Bio = () => {
   ];
 
   return (
-    <div className="max-h-full px-4 pt-4 pb-16 flex-1 overflow-auto">
+    <section className="max-h-full px-4 pt-4 pb-16 flex-1 overflow-auto">
       <Image
         src={"/me.webp"}
         width={160}
@@ -57,7 +57,7 @@ const Bio = () => {
           })}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

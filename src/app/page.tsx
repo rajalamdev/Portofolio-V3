@@ -1,13 +1,11 @@
 "use client"
-import useAudio from "../hooks/useAudio";
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Mini3dGame from "./components/mini3dGame/Mini3dGame";
 import { useAppContext } from "@/context/AppContext";
 // import Vercel from "../../public/vercel.svg"
 
 export default function Home() {
-  const audio = useAudio('/music/background.mp3', { volume: 1, playbackRate: 1 })
 
   const context = useAppContext();
 
@@ -40,7 +38,7 @@ export default function Home() {
       </section>
       <section>
         {/* <Vercel className="fill-slate-200 text-red-500 w-8 h-8" /> */}
-        {/* <Mini3dGame /> */}
+        {context.screenSize > 1024 && <Mini3dGame />}
       </section>
     </>
   );

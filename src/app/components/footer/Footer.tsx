@@ -17,13 +17,14 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="border-t border-line h-[7%] w-full flex justify-between z-10 bg-bg-primary">
+    <footer className="border-t border-line h-[7%] w-full flex justify-between z-10 bg-bg-primary relative">
       <div className="flex">
         <h4 className="px-6 border-r border-line h-auto flex items-center">find me in: </h4>
         <div className="flex justify-center items-center">
           {findMeInLinks.map((link) => {
             return (
               <a
+                key={link.name}
                 href={link.href}
                 target="_blank"
                 className={`px-4 border-r border-line button-hover group h-full`}

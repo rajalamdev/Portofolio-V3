@@ -1,7 +1,7 @@
 import "../styles/globals.css";
 import "../styles/code-block.css";
 import type { Metadata } from "next";
-import { Fira_Code, Inter } from "next/font/google";
+import { Fira_Code } from "next/font/google";
 import Layout from "./components/layout/Layout";
 import { AppProvider } from "@/context/AppContext";
 
@@ -25,8 +25,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-      </head>
       <body className={firaCode.className}>
         <AppProvider>
           <Layout>
