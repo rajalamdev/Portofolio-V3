@@ -30,9 +30,9 @@ export default function Home() {
             <p className="italic hidden sm:block">// Based in South Tangerang, Indonesia 🇮🇩</p>
             <p>
               <span className="text-[#c678dd]">const </span>
-              <span className="text-header-primary">curriculumVitae </span>
+              <span className="text-header-primary">github </span>
               <span className="text-[#61afef]">= </span>
-              <a href="/" className="cursor-link"><span className="text-[#98c379]">{'"https://github.com/example/url"'}</span></a>
+              <a href="/" className="cursor-link"><span className="text-[#98c379]">{'"https://github.com/rajalamdev"'}</span></a>
             </p>
           </div>
       </section>

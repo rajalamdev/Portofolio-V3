@@ -4,7 +4,10 @@ import Image from "next/image";
 import DynamicSvgIcon from "../components/svg/DynamicSvgIcon";
 import { useEffect, useState } from "react";
 import Footer from "../components/footer/Footer";
-import Bio from "../components/about/Bio";
+import Bio from "../components/about/bio/Bio";
+import Content from "../components/about/skills/Skills";
+import Skills from "../components/about/skills/Skills";
+import { backend, database, frontend, others } from "../components/about/skills/skillIcons";
 
 // export const metadata: Metadata = {
 //   title: "Raj Alam | About",
@@ -17,23 +20,30 @@ import Bio from "../components/about/Bio";
 
 const About = () => {
   const [personalInfoActive, setPersonalInfoActive] = useState(true)
+  const [contactActive, setContactActive] = useState(true)
 
   const [folders, setFolders] = useState([
     {
       folderName: "bio", 
       files: [
-        {fileName: "Bio.jsx", component: Bio},
-        {fileName: "Nothing.jsx", component: Bio}
+        {fileName: "Bio.jsx", component: <Bio />},
+      ], 
+      isActiveFolder: true
+    },
+    {
+      folderName: "skills", 
+      files: [
+        {fileName: "Frontend.jsx", component: <Skills skills={frontend} title="front-end" />},
+        {fileName: "Backend.jsx", component: <Skills skills={backend} title="back-end" />},
+        {fileName: "Database.jsx", component: <Skills skills={database} title="database" />},
+        {fileName: "Others.jsx", component: <Skills skills={others} title="others" />},
       ], 
       isActiveFolder: true
     },
     {
       folderName: "interest", 
       files: [
-        {fileName: "Turu.jsx", component: Bio},
-        {fileName: "Kids.jsx", component: Bio},
-        {fileName: "XD.jsx", component: Bio},
-        {fileName: "HEHE.jsx", component: Bio},
+        {fileName: "Turu.jsx", component: <Bio />},
       ], 
       isActiveFolder: false
     },
@@ -45,7 +55,7 @@ const About = () => {
   ]
 
   const [activeFiles, setActiveFiles] = useState<any>({
-    folderName: "bio", fileName: "Bio.jsx", component: Bio
+    folderName: "bio", fileName: "Bio.jsx", component: <Bio />
   })
 
   const [tabActive, setTabActive] = useState([{folder: "bio", fileName: "Bio.jsx"}])
@@ -108,7 +118,7 @@ const About = () => {
             <h4 onClick={() => setPersonalInfoActive(!personalInfoActive)} className="sticky top-0 bg-bg-primary z-10 cursor-pointer text-header-primary flex gap-2 p-2 border-b border-line">
               <DynamicSvgIcon name="trianglePrimary" className={`w-[10px] ${personalInfoActive ? "" : "-rotate-90"} transition-all`}/> personal-info
             </h4>
-            <div className={`transition-maxHeight ${personalInfoActive ? "max-h-96" : "max-h-0"} overflow-hidden`}>
+            <div className={`transition-maxHeight ${personalInfoActive ? "max-h-[512px]" : "max-h-0"} overflow-hidden`}>
               {folders.map(folder => {
                 return (
                   <div key={folder.folderName}>
@@ -135,13 +145,13 @@ const About = () => {
             </div>
           </div>
           <div>
-            <h4 className="text-header-primary flex gap-2 p-2 border-y border-line">
-              <DynamicSvgIcon name="trianglePrimary" className="w-[10px]"/> contact
+            <h4 onClick={() => setContactActive(!contactActive)} className="text-header-primary flex gap-2 p-2 border-y border-line cursor-pointer">
+              <DynamicSvgIcon name="trianglePrimary" className={`w-[10px] ${contactActive ? "" : "-rotate-[90deg]"} transition-all`}/> contact
             </h4>
-            <div className="px-2 space-y-3 py-3">
+            <div className={`px-2 space-y-3 ${contactActive ? "max-h-24" : "max-h-0"} transition-maxHeight overflow-hidden`}>
               {contactList.map(contact => {
                 return (
-                  <a key={contact.icon} href={contact.href} target="_blank"  className="flex gap-2 w-max cursor-link relative after:block after:absolute after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-accent-primary after:transition-all text-white">
+                  <a key={contact.icon} href={contact.href} target="_blank" className={`${contact.icon === "mail" && "mt-2"} flex gap-2 w-max cursor-link hover:underline`}>
                     <DynamicSvgIcon name={contact.icon} className="w-4" />
                     <p>{contact.name}</p>
                   </a>
@@ -151,16 +161,21 @@ const About = () => {
           </div>
         </div>
       </section>
-      <section className="flex-1">
-        <div className='flex border-b border-line sticky top-0 bg-bg-primary overlow-auto h-[7%]'>
-          {tabActive?.map((tab:any) => (
-                  <p key={tab} id="switch-tab" onClick={(e) => switchTabHandler(e, tab)} className={`w-max border-line cursor-pointer px-3 py-2 border-r flex gap-4 ${activeFiles?.fileName === tab.fileName ? "text-white" : ""}`}>{tab.fileName} <button onClick={() => removeTabHandler(tab)}>x</button></p>
+      <section className="flex-1 flex flex-col">
+        <div className='flex border-b border-line bg-bg-primary overflow-auto'>
+          <div className="w-full overflow-auto flex">
+            {tabActive?.map((tab:any) => (
+                    <p key={tab} id="switch-tab" onClick={(e) => switchTabHandler(e, tab)} className={`w-max border-line cursor-pointer px-3 py-2 border-r flex gap-4 ${activeFiles?.fileName === tab.fileName ? "text-white" : ""}`}>{tab.fileName} 
+                    <button onClick={() => removeTabHandler(tab)} className="p-1">
+                      <DynamicSvgIcon name="xmark" className="w-[10px] text-text-primary" />  
+                    </button></p>
+                  )
                 )
-              )
-          }
+            }
+          </div>
         </div>
-        <div className="h-[93%]">
-        {Object.keys(activeFiles).length !== 0 && <activeFiles.component attr={[tabActive, switchTabHandler, activeFiles, removeTabHandler]} />}
+        <div className="h-[93%] flex-1">
+        {Object.keys(activeFiles).length !== 0 && activeFiles.component}
         </div>
       </section>
     </div>

@@ -25,10 +25,10 @@ const Navbar = () => {
 
   const navLinks = [
     { text: "_hello", href: "/" },
-    { text: "_about-me", href: "/about" },
+    { text: "_about", href: "/about" },
     { text: "_projects", href: "/projects" },
     { text: "_blog", href: "/blog" },
-    { text: "_contact-me", href: "/contact" },
+    { text: "_contact", href: "/contact" },
   ];
 
   const active = "text-header-primary border-b-2 border-b-accent-primary";

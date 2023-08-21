@@ -18,6 +18,12 @@ import Palette from "../../../../public/icons/palette.svg"
 import _3d from "../../../../public/icons/3d.svg"
 import Sound from "../../../../public/icons/sound.svg"
 import Xmark from "../../../../public/icons/xmark.svg"
+import Figma from "../../../../public/icons/figma.svg"
+import FramerMotion from "../../../../public/icons/framer-motion.svg"
+import Git from "../../../../public/icons/git.svg"
+import MySql from "../../../../public/icons/mysql.svg"
+import Prisma from "../../../../public/icons/prisma.svg"
+import Strapi from "../../../../public/icons/strapi.svg"
 
 
 interface IIconTypes {
@@ -44,7 +50,13 @@ const dataIcon: IIconTypes = {
     palette: Palette,
     _3d: _3d,
     sound: Sound,
-    xmark: Xmark
+    xmark: Xmark,
+    figma: Figma,
+    framerMotion: FramerMotion,
+    git: Git,
+    mysql: MySql,
+    prisma: Prisma,
+    strapi: Strapi
 }
 
 export default dataIcon

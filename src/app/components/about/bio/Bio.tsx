@@ -1,5 +1,5 @@
 import Image from "next/image";
-import DynamicSvgIcon from "../svg/DynamicSvgIcon";
+import DynamicSvgIcon from "../../svg/DynamicSvgIcon";
 import BioCode from "./BioCode.mdx"
 
 
@@ -14,12 +14,11 @@ const Bio = () => {
   ];
 
   return (
-    <div className="flex h-full">
-      <div className="w-1/2 overflow-auto border-r border-line resize-x">
-        {/* <ReactMarkdownComponent content={bioSourceCode} className="line-numbers transparent" /> */}
+    <div className="grid grid-cols-2 h-full">
+      <div className="overflow-auto border-r border-line resize-x">
         <BioCode />
       </div>
-      <div className="max-h-full px-4 py-4 flex-1 overflow-auto">
+      <div className="px-4 pt-4 pb-8 overflow-auto">
         <Image
           src={"/me.webp"}
           width={160}
