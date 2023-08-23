@@ -2,12 +2,13 @@
 import { Metadata } from "next"
 import Image from "next/image";
 import DynamicSvgIcon from "../components/svg/DynamicSvgIcon";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Footer from "../components/footer/Footer";
 import Bio from "../components/about/bio/Bio";
 import Content from "../components/about/skills/Skills";
 import Skills from "../components/about/skills/Skills";
 import { backend, database, frontend, others } from "../components/about/skills/skillIcons";
+import useSWR from "swr";
 
 // export const metadata: Metadata = {
 //   title: "Raj Alam | About",
@@ -17,10 +18,13 @@ import { backend, database, frontend, others } from "../components/about/skills/
 //   },
 // }
 
+const fetcher = (url: string) => fetch(url).then(res => res.json())
 
 const About = () => {
   const [personalInfoActive, setPersonalInfoActive] = useState(true)
   const [contactActive, setContactActive] = useState(true)
+  const { data, error, isLoading } = useSWR(`${process.env.NEXT_PUBLIC_BASE_URL}/api/now-playing`, fetcher)
+  const section = useRef()
 
   const [folders, setFolders] = useState([
     {
@@ -151,7 +155,7 @@ const About = () => {
             <div className={`px-2 space-y-3 ${contactActive ? "max-h-24" : "max-h-0"} transition-maxHeight overflow-hidden`}>
               {contactList.map(contact => {
                 return (
-                  <a key={contact.icon} href={contact.href} target="_blank" className={`${contact.icon === "mail" && "mt-2"} flex gap-2 w-max cursor-link hover:underline`}>
+                  <a key={contact.icon} href={contact.href} target="_blank" className={` ${contact.icon === "mail" ? "mt-2" : "pb-2"} flex gap-2 w-max cursor-link hover:underline`}>
                     <DynamicSvgIcon name={contact.icon} className="w-4" />
                     <p>{contact.name}</p>
                   </a>
@@ -159,13 +163,27 @@ const About = () => {
               })}
             </div>
           </div>
+          <div>
+            <h4 className="text-header-primary flex gap-2 p-2 border-y border-line cursor-not-allowed">
+            <DynamicSvgIcon name="trianglePrimary" className={`w-[10px]`}/>spotify now playing
+            </h4>
+            {isLoading && <p className="px-2 py-2">Loading...</p>}
+            {!data?.isPlaying && !isLoading && <p className="px-2 py-2">currently not listening to anything</p>}
+            {data?.isPlaying && !isLoading && <a href={data?.songUrl} target="_blank" className="flex gap-2 px-2 py-2 items-center">
+              <Image src={data?.albumImageUrl} width={50} height={50} alt="spotify album" />
+              <div>
+                <h4 className="text-[12px] text-header-primary">{data?.title}</h4>
+                <p className="text-[10px]">{data?.artist}</p>
+              </div>
+            </a>}
+          </div>
         </div>
       </section>
-      <section className="flex-1 flex flex-col">
+      <section className="flex-1 flex flex-col max-w-full overflow-hidden">
         <div className='flex border-b border-line bg-bg-primary overflow-auto'>
-          <div className="w-full overflow-auto flex">
+          <div className="overflow-auto flex">
             {tabActive?.map((tab:any) => (
-                    <p key={tab} id="switch-tab" onClick={(e) => switchTabHandler(e, tab)} className={`w-max border-line cursor-pointer px-3 py-2 border-r flex gap-4 ${activeFiles?.fileName === tab.fileName ? "text-white" : ""}`}>{tab.fileName} 
+                    <p key={tab.fileName} id="switch-tab" onClick={(e) => switchTabHandler(e, tab)} className={`w-max border-line cursor-pointer px-3 py-2 border-r flex gap-4 ${activeFiles?.fileName === tab.fileName ? "text-white" : ""}`}>{tab.fileName} 
                     <button onClick={() => removeTabHandler(tab)} className="p-1">
                       <DynamicSvgIcon name="xmark" className="w-[10px] text-text-primary" />  
                     </button></p>

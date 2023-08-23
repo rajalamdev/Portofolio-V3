@@ -5,6 +5,9 @@ import rehypePrismAll from 'rehype-prism-plus/all'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    domains: ["i.scdn.co"],
+  },
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   /* config options here */
   eslint: {

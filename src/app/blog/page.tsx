@@ -1,18 +1,20 @@
+"use client"
 import { getNowPlaying } from "@/lib/spotify"
 import Layout from "../components/layout/Layout"
+import useSWR from "swr"
 
-const getNowPlayingSpotify = async () => {
-  const res = await fetch("http://localhost:3000/api/now-playing")
-  return await res.json()
+// const getNowPlayingSpotify = async () => {
+//   const res = await fetch("http://localhost:3000/api/now-playing", { next: { revalidate: 1 } })
+//   return await res.json()
 
-}
+// }
 
-const Blog = async () => {
-  const getRes = await getNowPlayingSpotify();
-  console.log(getRes)
 
+const Blog = () => {
+  
   return (
-    <div></div>
+    <div>
+    </div>
   )
 }
 

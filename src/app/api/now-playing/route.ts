@@ -17,8 +17,6 @@ export async function GET(request: NextRequest, res: NextResponse) {
   const albumImageUrl = song.item.album.images[0].url
   const songUrl = song.item.external_urls.spotify
 
-
-
   return NextResponse.json({
     album,
     albumImageUrl,
@@ -26,6 +24,5 @@ export async function GET(request: NextRequest, res: NextResponse) {
     isPlaying,
     songUrl,
     title,
-    song,
   })
 }
