@@ -38,7 +38,7 @@ export default function Home() {
       </section>
       <section>
         {/* <Vercel className="fill-slate-200 text-red-500 w-8 h-8" /> */}
-        {!context.smallDevices && <Mini3dGame />}
+        {!context.smallDevices && context.enabled3dSpline && <Mini3dGame />}
       </section>
     </>
   );
