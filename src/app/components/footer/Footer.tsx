@@ -7,12 +7,14 @@ const Footer = () => {
     {
       name: "linkedin",
       href: "https://linkedin.com/in/rajalam-dev",
-      color: "group-hover:fill-[#0A66C2]",
     },
     {
       name: "instagram",
       href: "https://instagram.com/rajalam.dev",
-      color: "group-hover:fill-[#E1306C]",
+    },
+    {
+      name: "spotify",
+      href: "https://open.spotify.com/user/282hoo67ycjs0zlqef1asq74h?si=4865dce312d1481f",
     },
   ];
 
@@ -27,11 +29,11 @@ const Footer = () => {
                 key={link.name}
                 href={link.href}
                 target="_blank"
-                className={`px-4 border-r border-line button-hover group h-full`}
+                className={`px-4 border-r border-line button-hover h-full`}
               >
                 <DynamicSvgIcon
                   name={link.name}
-                  className={`w-4 fill-text-primary h-full ${link.color}`}
+                  className={`w-4 fill-text-primary h-full`}
                 />
               </a>
             );

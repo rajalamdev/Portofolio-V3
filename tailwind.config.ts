@@ -40,11 +40,29 @@ const config: Config = {
           '0%, 20%, 50%, 80%, 100%': { transform: 'translateY(0)', color: '#86E5FF'},
           '40%': { transform: 'translateY(-30px)',color: '#F472B6' },
           '60%': { transform: 'translateY(-15px)', color: '#86E5FF' }
+        },
+        quietSoundWave: {
+          '25%': { transform: 'scaleY(.6)' },
+          '50%': { transform: 'scaleY(.4)' },
+          '75%': { transform: 'scaleY(.8)' }          
+        },
+        normalSoundWave: {
+          '25%': { transform: 'scaleY(1)' },
+          '50%': { transform: 'scaleY(.4)' },
+          '75%': { transform: 'scaleY(.6)' }          
+        },
+        loudSoundWave: {
+          '25%': { transform: 'scaleY(1)' },
+          '50%': { transform: 'scaleY(.4)' },
+          '75%': { transform: 'scaleY(1.2)' }          
         }
       },
       animation: {
         'waving-hand': 'wave 2s linear infinite',
-        'bounce-arrow': 'bounceArrow 2s infinite'
+        'bounce-arrow': 'bounceArrow 2s infinite',
+        'quiet-sound-wave': 'quietSoundWave 1.2s ease-in-out infinite',
+        'normal-sound-wave': 'normalSoundWave 1.2s ease-in-out infinite',
+        'loud-sound-wave': 'loudSoundWave 1.2s ease-in-out infinite'
       },
       cursor: {
         'link': 'url(/link-cursor.png), pointer'

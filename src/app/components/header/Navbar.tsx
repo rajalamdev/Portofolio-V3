@@ -61,7 +61,7 @@ const Navbar = () => {
           })}
         </ul>
         <div className="hidden lg:flex items-center max-w-[150px] h-full w-full border-l border-line pl-4 pr-6 gap-4 justify-end">
-          <DynamicSvgIcon name="palette" className="w-6 cursor-pointer hover:opacity-80" />
+          <DynamicSvgIcon name="moon" className="w-6 cursor-pointer hover:opacity-80 fill-accent-primary" />
           <div onClick={() => setShowSettings(!showSettings)}>
             <DynamicSvgIcon name="settings" className="w-6 cursor-pointer hover:opacity-80" />
           </div>

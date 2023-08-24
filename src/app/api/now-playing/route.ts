@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { headers } from 'next/headers'
 import { getNowPlaying } from '@/lib/spotify';
  
-export async function GET(request: NextRequest, res: NextResponse) {
+export async function GET(request: NextRequest) {
   const response = await getNowPlaying();
 
   if (response.status === 204 || response.status > 400) {

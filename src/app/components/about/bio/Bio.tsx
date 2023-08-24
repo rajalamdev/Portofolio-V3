@@ -15,18 +15,18 @@ const Bio = () => {
 
   return (
     <div className="grid grid-cols-2 h-full">
-      <div className="overflow-auto border-r border-line resize-x">
+      <div className="overflow-auto border-r border-line">
         <BioCode />
       </div>
       <div className="px-4 pt-4 pb-8 overflow-auto">
         <Image
           src={"/me.webp"}
-          width={160}
-          height={160}
+          width={140}
+          height={140}
           alt="profile picture"
           className="rounded float-left mr-4 mb-1"
         />
-        <div className="space-y-4">
+        <div className="space-y-3">
           <p>
             Hey there, I'm Raj Alam, but you can call me Alam. I've got around 4
             years of experience in Web Development. My coding journey began way
@@ -46,7 +46,7 @@ const Bio = () => {
             continuing up until now.
           </p>
         </div>
-        <div className="mt-8">
+        <div className="mt-6">
           <h5 className="text-lg text-accent-primary font-semibold mb-2">
             Current favorite tech stack
           </h5>

@@ -24,6 +24,9 @@ import Git from "../../../../public/icons/git.svg"
 import MySql from "../../../../public/icons/mysql.svg"
 import Prisma from "../../../../public/icons/prisma.svg"
 import Strapi from "../../../../public/icons/strapi.svg"
+import Discord from "../../../../public/icons/discord.svg"
+import Spotify from "../../../../public/icons/spotify.svg"
+import Moon from "../../../../public/icons/moon.svg"
 
 
 interface IIconTypes {
@@ -56,7 +59,10 @@ const dataIcon: IIconTypes = {
     git: Git,
     mysql: MySql,
     prisma: Prisma,
-    strapi: Strapi
+    strapi: Strapi,
+    discord: Discord,
+    spotify: Spotify,
+    moon: Moon
 }
 
 export default dataIcon

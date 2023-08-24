@@ -23,6 +23,7 @@ export const AppProvider = ( { children }: { children: ReactNode } ) => {
     const [enabled3dSpline, setEnabled3dSpline] = useState(true);
     const [screenSize, setScreenSize] = useState(0);
     const [smallDevices, setSmallDevices] = useState(false);
+    const [topArtistEndpoint, setTopArtistEndpoint] = useState('')
 
     useEffect(() => {
         setScreenSize(window.innerWidth);
@@ -41,7 +42,9 @@ export const AppProvider = ( { children }: { children: ReactNode } ) => {
         setEnabled3dSpline,
         screenSize,
         setScreenSize,
-        smallDevices
+        smallDevices,
+        topArtistEndpoint,
+        setTopArtistEndpoint
     }
 
     return (
