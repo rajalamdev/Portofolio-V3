@@ -19,7 +19,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="border-t border-line h-[7%] w-full flex justify-between z-10 bg-bg-primary relative">
+    <footer className="border-t border-line h-[7%] w-full flex justify-between z-10 bg-primary relative">
       <div className="flex">
         <h4 className="px-6 border-r border-line h-auto flex items-center">find me in: </h4>
         <div className="flex justify-center items-center">
@@ -33,7 +33,7 @@ const Footer = () => {
               >
                 <DynamicSvgIcon
                   name={link.name}
-                  className={`w-4 fill-text-primary h-full`}
+                  className={`w-4 h-full`}
                 />
               </a>
             );

@@ -14,12 +14,12 @@ export default function Home() {
       <section className="w-full sm:w-max relative z-10 h-full flex flex-col text-sm sm:text-base lg:pl-32 lg:pt-24 gap-12 justify-center lg:justify-start px-6">
           <div className="space-y-4 w-full">
             <div className="flex items-center justify-center w-max gap-2">
-              <p className="bg-accent-primary h-2 w-2 rounded-full inline-block"></p>
+              <p className="bg-accent h-2 w-2 rounded-full inline-block"></p>
               <h3>{"<Hello World/>"}</h3>
               <p className="animate-waving-hand text-lg">👋</p>
               {/* <button onClick={() => audio?.play()}>sdfsdf</button> */}
             </div>
-            <h1 className="[word-spacing:-7px] text-header-primary font-semibold text-4xl">I am Raj Alam</h1>
+            <h1 className="[word-spacing:-7px] text-secondary font-semibold text-4xl">I am Raj Alam</h1>
             <h2>{"> Fullstack JavaScript Developer"}</h2>
           </div>
           <div className="w-full space-y-1">
@@ -30,7 +30,7 @@ export default function Home() {
             <p className="italic hidden sm:block">// Based in South Tangerang, Indonesia 🇮🇩</p>
             <p>
               <span className="text-[#c678dd]">const </span>
-              <span className="text-header-primary">github </span>
+              <span className="text-secondary">github </span>
               <span className="text-[#61afef]">= </span>
               <a href="/" className="cursor-link"><span className="text-[#98c379]">{'"https://github.com/rajalamdev"'}</span></a>
             </p>

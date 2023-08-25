@@ -18,12 +18,13 @@ const config: Config = {
       },
       colors: {
         'bg-outside': 'var(--bg-outside)',
-        'bg-primary': 'var(--bg-primary)',
+        'primary': 'var(--primary)',
+        'secondary': 'var(--secondary)',
+        'tertiary': 'var(--tertiary)',
+        'accent': 'var(--accent)',
         'line': 'var(--line)',
-        'header-primary': 'var(--header-primary)',
-        'text-primary': 'var(--text-primary)',
         'button-hover': 'var(--button-hover)',
-        'accent-primary': 'var(--accent-primary)'
+        'button-active': 'var(--button-active)',
       },
       keyframes: {
         wave: {

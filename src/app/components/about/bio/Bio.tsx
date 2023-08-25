@@ -5,7 +5,7 @@ import BioCode from "./BioCode.mdx"
 
 const Bio = () => {
   const currentFavoriteTechStack = [
-    { name: "NextJS", icon: "nextjs", color: "fill-header-primary" },
+    { name: "NextJS", icon: "nextjs", color: "fill-secondary" },
     { name: "React.js", icon: "react", color: "fill-[#61dbfb]" },
     { name: "TypeScript", icon: "typescript", color: "fill-[#007ACC]" },
     { name: "JavaScript", icon: "javascript", color: "fill-[#f0db4f]" },
@@ -47,7 +47,7 @@ const Bio = () => {
           </p>
         </div>
         <div className="mt-6">
-          <h5 className="text-lg text-accent-primary font-semibold mb-2">
+          <h5 className="text-lg text-accent font-semibold mb-2">
             Current favorite tech stack
           </h5>
           <div className="flex gap-4 flex-wrap">

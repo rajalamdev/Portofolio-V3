@@ -119,7 +119,7 @@ const About = () => {
         </div>
         <div className="flex flex-col flex-1 border-r border-line">
           <div className="max-h-60 overflow-auto">
-            <h4 onClick={() => setPersonalInfoActive(!personalInfoActive)} className="sticky top-0 bg-bg-primary z-10 cursor-pointer text-header-primary flex gap-2 p-2 border-b border-line">
+            <h4 onClick={() => setPersonalInfoActive(!personalInfoActive)} className="sticky top-0 z-10 cursor-pointer text-secondary flex gap-2 p-2 border-b border-line">
               <DynamicSvgIcon name="trianglePrimary" className={`w-[10px] ${personalInfoActive ? "" : "-rotate-90"} transition-all`}/> personal-info
             </h4>
             <div className={`transition-maxHeight ${personalInfoActive ? "max-h-[512px]" : "max-h-0"} overflow-hidden`}>
@@ -127,15 +127,15 @@ const About = () => {
                 return (
                   <div key={folder.folderName}>
                     <div className="flex flex-col">
-                      <button onClick={() => activeFolderHanlder(folder)} className={`hover:text-header-primary flex gap-2 items-baseline hover:button-hover px-2 py-2`}>
+                      <button onClick={() => activeFolderHanlder(folder)} className={`hover:text-secondary flex gap-2 items-baseline hover:button-hover px-2 py-2`}>
                         <DynamicSvgIcon name="triangleSecondary" className={`w-2 ${folder.isActiveFolder ? "rotate-90" : ""} transition-all`} />
-                        <DynamicSvgIcon name="folder" className="w-4 fill-accent-primary" />
+                        <DynamicSvgIcon name="folder" className="w-4 fill-accent" />
                         <h5>{folder.folderName}</h5>
                       </button>
                       <div className={`max-h-0 transition-maxHeight ${folder.isActiveFolder ? "max-h-56" : ""} overflow-hidden `}>
                         {folder.files.map(file => {
                           return (
-                            <button onClick={() => activeFilesHanlder(folder.folderName, file)} key={file.fileName} className={`flex button-hover ${file.fileName === activeFiles.fileName ? "bg-black/20 text-header-primary" : ""} gap-2 w-full px-6 py-2`}>
+                            <button onClick={() => activeFilesHanlder(folder.folderName, file)} key={file.fileName} className={`flex button-hover ${file.fileName === activeFiles.fileName ? "bg-button-active text-secondary" : ""} gap-2 w-full px-6 py-2`}>
                               <DynamicSvgIcon name="react" className="w-4 fill-blue-400" />
                               <h6>{file.fileName}</h6>
                             </button>
@@ -149,7 +149,7 @@ const About = () => {
             </div>
           </div>
           <div>
-            <h4 onClick={() => setContactActive(!contactActive)} className="text-header-primary flex gap-2 p-2 border-y border-line cursor-pointer">
+            <h4 onClick={() => setContactActive(!contactActive)} className="text-secondary flex gap-2 p-2 border-y border-line cursor-pointer">
               <DynamicSvgIcon name="trianglePrimary" className={`w-[10px] ${contactActive ? "" : "-rotate-[90deg]"} transition-all`}/> contact
             </h4>
             <div className={`px-2 space-y-3 ${contactActive ? "max-h-24" : "max-h-0"} transition-maxHeight overflow-hidden`}>
@@ -164,7 +164,7 @@ const About = () => {
             </div>
           </div>
           <div>
-            <h4 className="text-header-primary flex gap-2 p-2 border-y border-line cursor-not-allowed">
+            <h4 className="text-secondary flex gap-2 p-2 border-y border-line cursor-not-allowed">
             <DynamicSvgIcon name="trianglePrimary" className={`w-[10px]`}/>spotify now playing
             </h4>
             {isLoading && <p className="px-2 py-2">Loading...</p>}
@@ -172,14 +172,14 @@ const About = () => {
             {data?.isPlaying && !isLoading && <a href={data?.songUrl} target="_blank" className="flex gap-2 px-2 py-2 items-center">
               <Image src={data?.albumImageUrl} width={50} height={50} alt="spotify album" className="self-start" />
               <div>
-                <h4 className="text-[12px] [word-spacing:-2px] text-header-primary">{data?.title}</h4>
+                <h4 className="text-[12px] [word-spacing:-2px] text-secondary">{data?.title}</h4>
                 <p className="text-[10px] [word-spacing:-2px]">{data?.artist}</p>
                 <div className="flex gap-[3px]">
-                  <span className="bg-accent-primary w-1 h-3 inline-block rounded-full animate-quiet-sound-wave"></span>
-                  <span className="bg-accent-primary w-1 h-3 inline-block rounded-full animate-normal-sound-wave"></span>
-                  <span className="bg-accent-primary w-1 h-3 inline-block rounded-full animate-quiet-sound-wave"></span>
-                  <span className="bg-accent-primary w-1 h-3 inline-block rounded-full animate-loud-sound-wave"></span>
-                  <span className="bg-accent-primary w-1 h-3 inline-block rounded-full animate-quiet-sound-wave"></span>
+                  <span className="bg-accent w-1 h-3 inline-block rounded-full animate-quiet-sound-wave"></span>
+                  <span className="bg-accent w-1 h-3 inline-block rounded-full animate-normal-sound-wave"></span>
+                  <span className="bg-accent w-1 h-3 inline-block rounded-full animate-quiet-sound-wave"></span>
+                  <span className="bg-accent w-1 h-3 inline-block rounded-full animate-loud-sound-wave"></span>
+                  <span className="bg-accent w-1 h-3 inline-block rounded-full animate-quiet-sound-wave"></span>
                 </div>
               </div>
             </a>}
@@ -187,12 +187,12 @@ const About = () => {
         </div>
       </section>
       <section className="flex-1 flex flex-col max-w-full overflow-hidden">
-        <div className='flex border-b border-line bg-bg-primary overflow-auto'>
+        <div className='flex border-b border-line overflow-auto'>
           <div className="overflow-auto flex">
             {tabActive?.map((tab:any) => (
-                    <p key={tab.fileName} id="switch-tab" onClick={(e) => switchTabHandler(e, tab)} className={`w-max border-line cursor-pointer px-3 py-2 border-r flex gap-4 ${activeFiles?.fileName === tab.fileName ? "text-white" : ""}`}>{tab.fileName} 
+                    <p key={tab.fileName} id="switch-tab" onClick={(e) => switchTabHandler(e, tab)} className={`w-max border-line cursor-pointer px-3 py-2 border-r flex gap-4 ${activeFiles?.fileName === tab.fileName ? "text-secondary" : ""}`}>{tab.fileName} 
                     <button onClick={() => removeTabHandler(tab)} className="p-1">
-                      <DynamicSvgIcon name="xmark" className="w-[10px] text-text-primary" />  
+                      <DynamicSvgIcon name="xmark" className="w-[10px]" />  
                     </button></p>
                   )
                 )

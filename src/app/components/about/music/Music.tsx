@@ -46,14 +46,14 @@ const Music = () => {
       </div>
       <div className="overflow-auto px-4 py-4">
         <div>
-          <h4 className="text-base font-medium text-header-primary">
+          <h4 className="text-base font-medium text-secondary">
             //_my-top-artists
           </h4>
           <div className="space-x-4 my-4">
             {timeRange.map((time) => (
               <button
                 className={`${
-                  artistsTimeRange === time && "bg-accent-primary text-black"
+                  artistsTimeRange === time && "bg-accent text-black"
                 } border p-2 rounded border-line`}
                 name={time}
                 onClick={artistsTimeRangeHanlder}
@@ -81,7 +81,7 @@ const Music = () => {
                       className="object-cover"
                     />
                     <div className="space-y-2">
-                      <h5 className="text-header-primary [word-spacing:-4px]">
+                      <h5 className="text-secondary [word-spacing:-4px]">
                         {artist.name}
                       </h5>
                       <p className="[word-spacing:-4px]">{artist.genres}</p>
@@ -92,7 +92,7 @@ const Music = () => {
           </div>
         </div>
         <div>
-          <h4 className="pb-4 mt-6 text-base font-medium text-header-primary">
+          <h4 className="pb-4 mt-6 text-base font-medium text-secondary">
             //_my-top-playlist
           </h4>
           <iframe

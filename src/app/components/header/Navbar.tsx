@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import DynamicSvgIcon from "../svg/DynamicSvgIcon";
 import ButtonEnableDisable from "../ButtonEnableDisable";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAppContext } from "@/context/AppContext";
 import useAudio from "@/hooks/useAudio";
 
@@ -12,8 +12,22 @@ const Navbar = () => {
   const audio = useAudio('/music/background.mp3', { volume: 1, playbackRate: 1, loop: true})
 
   const context = useAppContext();  
-
+  
   const [showSettings, setShowSettings] = useState(false);
+  const [showTheme, setShowTheme] = useState(false);
+
+  const themeSection = useRef<any>()
+  const settingSection = useRef<any>()
+
+  useEffect(() => {
+    themeSection.current.addEventListener("click", (e: any) => {
+      if(e.target === themeSection.current) return setShowTheme(false)
+    })
+
+    settingSection.current.addEventListener("click", (e: any) => {
+      if(e.target === settingSection.current) return setShowSettings(false)
+    })
+  }, [])
 
   useEffect(() => {
     if(context.enabledMusic){
@@ -31,11 +45,16 @@ const Navbar = () => {
     { text: "_contact", href: "/contact" },
   ];
 
-  const active = "text-header-primary border-b-2 border-b-accent-primary";
+  const active = "text-secondary border-b-2 border-b-accent";
+
+  function themeHandler(currentTheme: any){
+    if(context.theme.name === currentTheme.name) return
+    context.setTheme(currentTheme)
+  }
 
   return (
     <header className="h-[7%]">
-      <nav className="border-b h-full border-line flex justify-between w-full items-center relative z-20 bg-bg-primary">
+      <nav className="border-b h-full border-line flex justify-between w-full items-center relative z-20 bg-primary">
         <Link
           href="/"
           className="lg:max-w-[275px] flex items-center lg:w-full h-full flex-grow-0 flex-shrink-0 lg:border-r border-line hover:opacity-80 button-hover pl-6"
@@ -61,7 +80,9 @@ const Navbar = () => {
           })}
         </ul>
         <div className="hidden lg:flex items-center max-w-[150px] h-full w-full border-l border-line pl-4 pr-6 gap-4 justify-end">
-          <DynamicSvgIcon name="moon" className="w-6 cursor-pointer hover:opacity-80 fill-accent-primary" />
+          <div onClick={() => setShowTheme(!showTheme)}>
+            <DynamicSvgIcon name="moon" className="w-6 cursor-pointer hover:opacity-80 fill-accent" />
+          </div>
           <div onClick={() => setShowSettings(!showSettings)}>
             <DynamicSvgIcon name="settings" className="w-6 cursor-pointer hover:opacity-80" />
           </div>
@@ -70,15 +91,37 @@ const Navbar = () => {
           =
         </div>
 
+        {/* theme */}
+        <div ref={themeSection} className={`fixed left-0 right-0 bottom-0 top-0 transition-opacity duration-300   ${showTheme ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"} flex backdrop-blur-sm bg-black/20 justify-center items-center`}>
+          <div className={`max-w-[350px] h-[400px] p-4 ${showTheme ? "opacity-100" : "opacity-0"} transition-all bg-primary border border-line w-full rounded-lg flex flex-col relative overflow-hidden`}>
+            <div className="flex justify-end pb-2">
+              <button onClick={() => setShowTheme(false)}>
+                <DynamicSvgIcon name="xmark" className="w-3" />
+              </button>
+            </div>
+            <h3 className="text-center text-secondary font-semibold text-base mb-4">Select Theme</h3>
+            <div className="overflow-auto">
+              {context.themeList.map((theme: any) => {
+                return (
+                  <button onClick={() => themeHandler(theme)} className={`flex w-full gap-2 py-2 px-4 button-hover rounded ${theme.name === context.theme.name && "bg-button-active text-secondary"} items-center justify-between`}>
+                    <p>{theme.name}</p>
+                    <div className="w-4 h-4" style={{background: `linear-gradient(200deg, ${theme.primary} 20%, ${theme.accent} 100%)`}}></div>
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+
         {/* settings */}
-        <div className={`fixed left-0 right-0 bottom-0 top-0 transition-opacity duration-300   ${showSettings ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"} flex backdrop-blur-sm bg-black/20 justify-center items-center`}>
-          <div className={`max-w-[350px] h-[400px] ${showSettings ? "opacity-100" : "opacity-0"} transition-all bg-bg-primary border border-line w-full rounded-lg flex flex-col p-4 relative`}>
+        <div ref={settingSection} className={`fixed left-0 right-0 bottom-0 top-0 transition-opacity duration-300   ${showSettings ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"} flex backdrop-blur-sm bg-black/20 justify-center items-center`}>
+          <div className={`max-w-[350px] h-[400px] ${showSettings ? "opacity-100" : "opacity-0"} transition-all bg-primary border border-line w-full rounded-lg flex flex-col p-4 relative`}>
             <div className="flex justify-end pb-2">
               <button onClick={() => setShowSettings(false)}>
                 <DynamicSvgIcon name="xmark" className="w-3" />
               </button>
             </div>
-            <h3 className="text-center text-header-primary font-semibold text-base mb-4">Settings</h3>
+            <h3 className="text-center text-secondary font-semibold text-base mb-4">Settings</h3>
             <div className="flex flex-col gap-4 flex-1">
               <div className="flex gap-2 items-center justify-between">
                 <div className="flex gap-2 items-center">

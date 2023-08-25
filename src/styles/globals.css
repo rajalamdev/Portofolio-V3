@@ -4,17 +4,30 @@
 
 :root {
   --bg-outside: #010c15;
-  --bg-primary: #011627;
+  --primary: rgb(1, 22, 39);
+  --secondary: aliceblue;
+  --tertiary: #607b96;
+  --accent: #43d9ad;
+  
   --button-hover: #0f2233;
+  --button-active: rgba(0, 0, 0, 0.1);
   --line: #1e2d3d;
-  --header-primary: aliceblue;
-  --text-primary: #607b96;
-  --accent-primary: #43d9ad;
+  --testing: #0e1720;
 }
+/* elegant */
+/* --bg-outside: #081F37;
+--primary: #03001C;
+--secondary: aliceblue;
+--tertiary: #607b96;
+--accent: #8DC6FF;
+
+--button-hover: #0f2233;
+--line: #1e2d3d; */
+
 ::-webkit-scrollbar {width: 15px;cursor: pointer;}
 ::-webkit-scrollbar-track {background: transparent;border-left: 1px solid var(--line);}
-::-webkit-scrollbar-thumb {border: 5px solid transparent; background-clip: padding-box; background-color: var(--text-primary);}
-::-webkit-scrollbar-thumb:hover {background-color: var(--header-primary);}
+::-webkit-scrollbar-thumb {border: 5px solid transparent; background-clip: padding-box; background-color: var(--tertiary);}
+::-webkit-scrollbar-thumb:hover {background-color: var(--secondary);}
 ::-webkit-scrollbar-corner { border-left: 1px solid var(--line);}
-@layer base {body {@apply bg-bg-outside text-text-primary text-sm;}}
-@layer utilities {.button-hover {@apply hover:bg-button-hover hover:text-header-primary cursor-pointer;}.transition-maxHeight {transition: max-height 0.25s linear;}}
+@layer base {body {@apply bg-bg-outside text-tertiary text-sm;}}
+@layer utilities {.button-hover {@apply hover:bg-button-hover hover:text-secondary cursor-pointer;}.transition-maxHeight {transition: max-height 0.25s linear;}}
