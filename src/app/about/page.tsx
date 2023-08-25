@@ -119,7 +119,7 @@ const About = () => {
         </div>
         <div className="flex flex-col flex-1 border-r border-line">
           <div className="max-h-60 overflow-auto">
-            <h4 onClick={() => setPersonalInfoActive(!personalInfoActive)} className="sticky top-0 z-10 cursor-pointer text-secondary flex gap-2 p-2 border-b border-line">
+            <h4 onClick={() => setPersonalInfoActive(!personalInfoActive)} className="sticky top-0 z-10 bg-primary cursor-pointer text-secondary flex gap-2 p-2 border-b border-line">
               <DynamicSvgIcon name="trianglePrimary" className={`w-[10px] ${personalInfoActive ? "" : "-rotate-90"} transition-all`}/> personal-info
             </h4>
             <div className={`transition-maxHeight ${personalInfoActive ? "max-h-[512px]" : "max-h-0"} overflow-hidden`}>
