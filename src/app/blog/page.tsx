@@ -1,6 +1,6 @@
 "use client"
 import { getNowPlaying } from "@/lib/spotify"
-import Layout from "../components/layout/Layout"
+import Layout from "../../components/layout/Layout"
 import useSWR from "swr"
 
 // const getNowPlayingSpotify = async () => {

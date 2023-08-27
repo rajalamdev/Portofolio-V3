@@ -1,7 +1,7 @@
 "use client"
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import Mini3dGame from "./components/mini3dGame/Mini3dGame";
+import Mini3dGame from "../components/mini3dGame/Mini3dGame";
 import { useAppContext } from "@/context/AppContext";
 // import Vercel from "../../public/vercel.svg"
 

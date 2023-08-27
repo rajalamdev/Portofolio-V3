@@ -1,6 +1,6 @@
 "use client"
 
-import Mini3dGame from "@/app/components/mini3dGame/Mini3dGame";
+import Mini3dGame from "@/components/mini3dGame/Mini3dGame";
 import { createContext, useContext, ReactNode, useMemo, useState, useRef, useEffect } from "react"
 
 
@@ -125,19 +125,34 @@ export const AppProvider = ( { children }: { children: ReactNode } ) => {
         line: "#1e2d3d",
     })
 
-    useEffect(() => {
-        const root = document.querySelector<any>(":root");
-        root.style.setProperty("--bg-outside", theme.bg_outside)
-        root.style.setProperty("--primary", theme.primary)
-        root.style.setProperty("--secondary", theme.secondary)
-        root.style.setProperty("--tertiary", theme.tertiary)
-        root.style.setProperty("--accent", theme.accent)
-        root.style.setProperty("--button-hover", theme.button_hover)
-        root.style.setProperty("--button-active", theme.button_active)
-        root.style.setProperty("--line", theme.line)
-    })
+    function storageExist(){
+        if(typeof (Storage) === undefined) return false
+        return true
+    }
+
+    function loadDataFromStorage(){
+        const themeLocalStorage = localStorage.getItem("theme");
+        if(themeLocalStorage != null){
+            const parsedTheme = JSON.parse(themeLocalStorage)
+
+            const root = document.querySelector<any>(":root");
+            root.style.setProperty("--bg-outside", parsedTheme.bg_outside)
+            root.style.setProperty("--primary", parsedTheme.primary)
+            root.style.setProperty("--secondary", parsedTheme.secondary)
+            root.style.setProperty("--tertiary", parsedTheme.tertiary)
+            root.style.setProperty("--accent", parsedTheme.accent)
+            root.style.setProperty("--button-hover", parsedTheme.button_hover)
+            root.style.setProperty("--button-active", parsedTheme.button_active)
+            root.style.setProperty("--line", parsedTheme.line)
+            setTheme(parsedTheme)
+        }
+    }
 
     useEffect(() => {
+        if(storageExist()){
+            loadDataFromStorage();
+        }
+
         setScreenSize(window.innerWidth);
         if(window.innerWidth < 1024) {
             setSmallDevices(true)

@@ -2,8 +2,7 @@ import Image from "next/image";
 import DynamicSvgIcon from "../../svg/DynamicSvgIcon";
 import BioCode from "./BioCode.mdx"
 
-
-const Bio = () => {
+const Bio =  () => {
   const currentFavoriteTechStack = [
     { name: "NextJS", icon: "nextjs", color: "fill-secondary" },
     { name: "React.js", icon: "react", color: "fill-[#61dbfb]" },

@@ -2,6 +2,7 @@ import createMDX from '@next/mdx'
 import remarkPrism from 'remark-prism'
 import rehypeCodeTitles from 'rehype-code-titles'
 import rehypePrismAll from 'rehype-prism-plus/all'
+import withPlaiceholder from "@plaiceholder/next";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -54,4 +55,4 @@ const withMDX = createMDX({
   },
 })
  
-export default withMDX(nextConfig)
+export default withMDX(withPlaiceholder(nextConfig))

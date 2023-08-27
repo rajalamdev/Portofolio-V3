@@ -49,6 +49,16 @@ const Navbar = () => {
 
   function themeHandler(currentTheme: any){
     if(context.theme.name === currentTheme.name) return
+    const root = document.querySelector<any>(":root");
+    root.style.setProperty("--bg-outside", currentTheme.bg_outside)
+    root.style.setProperty("--primary", currentTheme.primary)
+    root.style.setProperty("--secondary", currentTheme.secondary)
+    root.style.setProperty("--tertiary", currentTheme.tertiary)
+    root.style.setProperty("--accent", currentTheme.accent)
+    root.style.setProperty("--button-hover", currentTheme.button_hover)
+    root.style.setProperty("--button-active", currentTheme.button_active)
+    root.style.setProperty("--line", currentTheme.line)
+    localStorage.setItem("theme", JSON.stringify(currentTheme))
     context.setTheme(currentTheme)
   }
 
@@ -103,7 +113,7 @@ const Navbar = () => {
             <div className="overflow-auto">
               {context.themeList.map((theme: any) => {
                 return (
-                  <button onClick={() => themeHandler(theme)} className={`flex w-full gap-2 py-2 px-4 button-hover rounded ${theme.name === context.theme.name && "bg-button-active text-secondary"} items-center justify-between`}>
+                  <button key={theme.name} onClick={() => themeHandler(theme)} className={`flex w-full gap-2 py-2 px-4 button-hover rounded ${theme.name === context.theme.name && "bg-button-active text-secondary"} items-center justify-between`}>
                     <p>{theme.name}</p>
                     <div className="w-4 h-4" style={{background: `linear-gradient(200deg, ${theme.primary} 20%, ${theme.accent} 100%)`}}></div>
                   </button>

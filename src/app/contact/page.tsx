@@ -1,5 +1,5 @@
-import Layout from "../components/layout/Layout"
-import DynamicSvgIcon from "../components/svg/DynamicSvgIcon"
+import Layout from "../../components/layout/Layout"
+import DynamicSvgIcon from "../../components/svg/DynamicSvgIcon"
 
 const Contact = () => {
   

@@ -1,15 +1,15 @@
 "use client"
 import { Metadata } from "next"
 import Image from "next/image";
-import DynamicSvgIcon from "../components/svg/DynamicSvgIcon";
+import DynamicSvgIcon from "../../components/svg/DynamicSvgIcon";
 import { useEffect, useRef, useState } from "react";
-import Footer from "../components/footer/Footer";
-import Bio from "../components/about/bio/Bio";
-import Content from "../components/about/skills/Skills";
-import Skills from "../components/about/skills/Skills";
-import { backend, database, frontend, others } from "../components/about/skills/skillIcons";
+import Footer from "../../components/footer/Footer";
+import Bio from "../../components/about/bio/Bio";
+import Content from "../../components/about/skills/Skills";
+import Skills from "../../components/about/skills/Skills";
+import { backend, database, frontend, others } from "../../components/about/skills/skillIcons";
 import useSWR from "swr";
-import Music from "../components/about/music/Music";
+import Music from "../../components/about/music/Music";
 
 // export const metadata: Metadata = {
 //   title: "Raj Alam | About",
@@ -122,7 +122,7 @@ const About = () => {
             <h4 onClick={() => setPersonalInfoActive(!personalInfoActive)} className="sticky top-0 z-10 bg-primary cursor-pointer text-secondary flex gap-2 p-2 border-b border-line">
               <DynamicSvgIcon name="trianglePrimary" className={`w-[10px] ${personalInfoActive ? "" : "-rotate-90"} transition-all`}/> personal-info
             </h4>
-            <div className={`transition-maxHeight ${personalInfoActive ? "max-h-[512px]" : "max-h-0"} overflow-hidden`}>
+            <div className={`transition-maxHeisaght ${personalInfoActive ? "max-h-[512px]" : "max-h-0"} overflow-hidden`}>
               {folders.map(folder => {
                 return (
                   <div key={folder.folderName}>
