@@ -1,6 +1,7 @@
 import Image from "next/image";
 import DynamicSvgIcon from "../../svg/DynamicSvgIcon";
 import BioCode from "./BioCode.mdx"
+import Me from "../../../../public/me.webp"
 
 const Bio =  () => {
   const currentFavoriteTechStack = [
@@ -19,11 +20,12 @@ const Bio =  () => {
       </div>
       <div className="px-4 pt-4 pb-8 overflow-auto">
         <Image
-          src={"/me.webp"}
+          src={Me}
           width={140}
           height={140}
           alt="profile picture"
           className="rounded float-left mr-4 mb-1"
+          placeholder="blur"
         />
         <div className="space-y-3">
           <p>

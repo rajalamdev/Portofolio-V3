@@ -7,7 +7,7 @@ import withPlaiceholder from "@plaiceholder/next";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["i.scdn.co"],
+    domains: ["i.scdn.co", "images.unsplash.com", "res.cloudinary.com"],
   },
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   /* config options here */

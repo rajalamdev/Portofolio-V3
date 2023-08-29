@@ -12,17 +12,7 @@
   --button-hover: #0f2233;
   --button-active: rgba(0, 0, 0, 0.1);
   --line: #1e2d3d;
-  --testing: #0e1720;
 }
-/* elegant */
-/* --bg-outside: #081F37;
---primary: #03001C;
---secondary: aliceblue;
---tertiary: #607b96;
---accent: #8DC6FF;
-
---button-hover: #0f2233;
---line: #1e2d3d; */
 
 ::-webkit-scrollbar {width: 15px;cursor: pointer;}
 ::-webkit-scrollbar-track {background: transparent;border-left: 1px solid var(--line);}

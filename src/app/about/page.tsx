@@ -113,7 +113,7 @@ const About = () => {
 
   return (
     <div className="flex h-full">
-      <section className="flex max-w-[275px] w-full flex-grow-0 flex-shrink-0">
+      <section className="flex max-w-[275px] w-full">
         <div className="px-4 py-4 border-r border-line ">
           <DynamicSvgIcon name="file" className="w-6" />
         </div>
@@ -200,7 +200,7 @@ const About = () => {
           </div>
         </div>
         <div className="h-[93%] flex-1">
-        {Object.keys(activeFiles).length !== 0 && activeFiles.component}
+          {Object.keys(activeFiles).length !== 0 && activeFiles.component}
         </div>
       </section>
     </div>
