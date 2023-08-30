@@ -55,7 +55,7 @@ const dataIcon: IIconTypes = {
     sound: Sound,
     xmark: Xmark,
     figma: Figma,
-    framerMotion: FramerMotion,
+    framer_motion: FramerMotion,
     git: Git,
     mysql: MySql,
     prisma: Prisma,

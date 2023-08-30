@@ -3,9 +3,13 @@ import remarkPrism from 'remark-prism'
 import rehypeCodeTitles from 'rehype-code-titles'
 import rehypePrismAll from 'rehype-prism-plus/all'
 import withPlaiceholder from "@plaiceholder/next";
+import lineClamp from "@tailwindcss/line-clamp"
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  plugins: [
+    lineClamp,
+  ],
   images: {
     domains: ["i.scdn.co", "images.unsplash.com", "res.cloudinary.com"],
   },
