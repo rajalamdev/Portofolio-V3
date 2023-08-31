@@ -3,6 +3,7 @@ import { useState } from "react";
 import useSWR from "swr";
 import Image from "next/image";
 import MusicCode from "./MusicCode.mdx";
+import TopArtistSkeleton from "@/components/loading-skeleton/TopArtistSkeleton";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -63,7 +64,7 @@ const Music = () => {
             ))}
           </div>
           <div>
-            {isLoadingArtists && <p>Loading...</p>}
+            {isLoadingArtists && <div><TopArtistSkeleton /></div>}
             {!isLoadingArtists &&
               dataArtists.artists?.map((artist: any, index: number) => {
                 return (

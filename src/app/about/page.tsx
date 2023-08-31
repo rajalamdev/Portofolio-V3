@@ -10,6 +10,7 @@ import Skills from "../../components/about/skills/Skills";
 import { backend, database, frontend, others } from "../../components/about/skills/skillIcons";
 import useSWR from "swr";
 import Music from "../../components/about/music/Music";
+import SpotifyNowPlayingSkeleton from "@/components/loading-skeleton/SpotifyNowPlayingSkeleton";
 
 // export const metadata: Metadata = {
 //   title: "Raj Alam | About",
@@ -167,7 +168,7 @@ const About = () => {
             <h4 className="text-secondary flex gap-2 p-2 border-y border-line cursor-not-allowed">
             <DynamicSvgIcon name="trianglePrimary" className={`w-[10px]`}/>spotify now playing
             </h4>
-            {isLoading && <p className="px-2 py-2">Loading...</p>}
+            {isLoading && <SpotifyNowPlayingSkeleton />}
             {!data?.isPlaying && !isLoading && <p className="px-2 py-2">currently not listening to anything</p>}
             {data?.isPlaying && !isLoading && <a href={data?.songUrl} target="_blank" className="flex gap-2 px-2 py-2 items-center">
               <Image src={data?.albumImageUrl} width={50} height={50} alt="spotify album" className="self-start" />

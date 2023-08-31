@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import "../styles/code-block.css";
+import 'react-loading-skeleton/dist/skeleton.css'
 import type { Metadata } from "next";
 import { Fira_Code } from "next/font/google";
 import Layout from "../components/layout/Layout";

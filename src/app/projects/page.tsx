@@ -1,9 +1,11 @@
 "use client"
+import ProjectSkeleton from "@/components/loading-skeleton/ProjectSkeleton"
 import DynamicSvgIcon from "@/components/svg/DynamicSvgIcon"
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import useSWR from "swr"
+
 
 const fetcher = (url: string) => fetch(url).then(res => res.json())
 
@@ -11,7 +13,6 @@ const Projects =  () => {
   const [queryLanguage, setQueryLanguage] = useState<any>([])
   // process.env.NEXT_PUBLIC_BASE_URL
   const { data, error, isLoading } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/projects?populate[image]=*&populate[project_categories][populate]=icons${queryLanguage.map((q: string, index: number) => `&filters[$and][${index}][project_categories][query][$contains]=${q}`).join("")}`, fetcher)
-
 
   const [filterLanguage, setFilterLanguage] = useState([
     {name: "next-js", icon: "nextjs", active: false},
@@ -61,7 +62,8 @@ const Projects =  () => {
           </div>
       </section>
       <section className="overflow-auto w-full p-6">
-        {isLoading && <p>Loading...</p>}
+        {!isLoading && data.data.length === 0 && <div className="flex justify-center items-center h-full"><p className="text-xl font-semibold">OOPS! THE PROJECT DOESN'T YET EXIST, IT'S COMING SOON...</p></div>}
+        {isLoading && <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4"><ProjectSkeleton /></div>}
         {!isLoading && (
           <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
             {data.data.map((project: any) => {
