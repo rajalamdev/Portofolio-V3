@@ -9,6 +9,7 @@ const fetcher = (url: string) => fetch(url).then(res => res.json())
 
 const Projects =  () => {
   const [queryLanguage, setQueryLanguage] = useState<any>([])
+  // process.env.NEXT_PUBLIC_BASE_URL
   const { data, error, isLoading } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/projects?populate[image]=*&populate[project_categories][populate]=icons${queryLanguage.map((q: string, index: number) => `&filters[$and][${index}][project_categories][query][$contains]=${q}`).join("")}`, fetcher)
 
 
