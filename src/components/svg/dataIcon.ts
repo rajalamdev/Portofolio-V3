@@ -27,6 +27,9 @@ import Strapi from "../../../public/icons/strapi.svg"
 import Discord from "../../../public/icons/discord.svg"
 import Spotify from "../../../public/icons/spotify.svg"
 import Moon from "../../../public/icons/moon.svg"
+import Vue from "../../../public/icons/vue.svg"
+import Time from "../../../public/icons/time.svg"
+import Eye from "../../../public/icons/eye.svg"
 
 
 interface IIconTypes {
@@ -62,7 +65,10 @@ const dataIcon: IIconTypes = {
     strapi: Strapi,
     discord: Discord,
     spotify: Spotify,
-    moon: Moon
+    moon: Moon,
+    vue: Vue,
+    eye: Eye,
+    time: Time
 }
 
 export default dataIcon
