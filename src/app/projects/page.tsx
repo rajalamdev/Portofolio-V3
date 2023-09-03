@@ -7,12 +7,9 @@ import { useEffect, useState } from "react"
 import useSWR from "swr"
 
 
-const fetcher = (url: string) => fetch(url).then(res => res.json())
-
 const Projects =  () => {
   const [queryLanguage, setQueryLanguage] = useState<any>([])
-  // process.env.NEXT_PUBLIC_BASE_URL
-  const { data, error, isLoading } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/projects?populate[image]=*&populate[project_categories][populate]=icons${queryLanguage.map((q: string, index: number) => `&filters[project_categories][query][$contains]=${q}`).join("")}`, fetcher)
+  const { data, error, isLoading } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/projects?populate[image]=*&populate[project_categories][populate]=icons${queryLanguage.map((q: string, index: number) => `&filters[project_categories][query][$contains]=${q}`).join("")}`)
 
   const [filterLanguage, setFilterLanguage] = useState([
     {name: "next-js", icon: "nextjs", active: false},

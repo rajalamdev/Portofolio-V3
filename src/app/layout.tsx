@@ -5,6 +5,8 @@ import type { Metadata } from "next";
 import { Fira_Code } from "next/font/google";
 import Layout from "../components/layout/Layout";
 import { AppProvider } from "@/context/AppContext";
+import { SWRConfig, useSWRConfig } from "swr";
+import SWRProvider from "./swr-provider";
 
 const firaCode = Fira_Code({
   subsets: ["latin"],
@@ -27,11 +29,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={firaCode.className}>
-        <AppProvider>
-          <Layout>
-            {children}
-          </Layout>
-        </AppProvider>
+        <SWRProvider>
+          <AppProvider>
+            <Layout>
+              {children}
+            </Layout>
+          </AppProvider>
+        </SWRProvider>
       </body>
     </html>
   );
