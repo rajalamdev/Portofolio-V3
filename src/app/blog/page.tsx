@@ -11,7 +11,6 @@ import BlogComponent from "./BlogComponent"
 const getNowPlayingSpotify = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blogs?populate[image]=*`, { next: { revalidate: 1 }, headers: {"Authorization": `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`} })
   return await res.json()
-
 }
 
 
