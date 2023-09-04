@@ -5,12 +5,21 @@ import convertStringToTime from "@/utils/convertStringToTime"
 import convertToMinsRead from "@/utils/convertToMinsRead"
 import { useEffect, useState } from "react"
 import useSWR from 'swr'
+import ProjectSkeleton from "@/components/loading-skeleton/ProjectSkeleton"
 
-const BlogComponent = ({ data, blurImage  }: {data: any, blurImage: any}) => {
+const BlogComponent = () => {
 
-  // const { data, error, isLoading, mutate } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blogs?populate[image]=*`)
-
+  const { data, error, mutate } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blogs?populate[image]=*&sort[0]=createdAt:desc`)
   const [blog, setBlog] = useState(data)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    if(data) {
+      setBlog(data)
+      setIsLoading(false)
+    }
+  }, [data])
+
   const testHandler = async (currentBlog: any) => {
     const findBlogIndex = blog.data.findIndex((b: any) => b.id === currentBlog.id)
     const updatedCurrentBlog = blog.data[findBlogIndex] = {
@@ -24,7 +33,6 @@ const BlogComponent = ({ data, blurImage  }: {data: any, blurImage: any}) => {
     const cloneBlog = {...blog};
     cloneBlog.data[findBlogIndex] = updatedCurrentBlog
     setBlog(cloneBlog)
-
     
     const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blogs/${currentBlog.id}`, {
       method: "PUT",
@@ -39,16 +47,15 @@ const BlogComponent = ({ data, blurImage  }: {data: any, blurImage: any}) => {
   }
 
     return (
-      <div className="columns-3 gap-4">
+      <div className={`${!isLoading && "columns-1 sm:columns-2 lg:columns-3 gap-4"}`}>
       
-
-      {blog && blog.data.map((blog: any, index: number) => {
+      {isLoading && <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4"><ProjectSkeleton /></div>}
+      {!isLoading && blog.data.map((blog: any, index: number) => {
         return (
           <div className="break-inside-avoid mb-4">
             <div className="rounded overflow-hidden border border-line cursor-pointer">
-              <div className="relative w-full h-48">
-                  {blurImage[index]}
-                  {/* <Image src={blog.attributes.image.data.attributes.formats.medium.url} width={1000} height={300} alt="image" placeholder="blur" blurDataURL={blog.attributes.image.data.attributes.formats.medium.hash} /> */}
+              <div>
+                  <Image src={blog.attributes.image.data.attributes.formats.medium.url} width={blog.attributes.image.data.attributes.formats.medium.width} height={blog.attributes.image.data.attributes.formats.medium.height} alt="image" placeholder="blur" blurDataURL={blog.attributes.image.data.attributes.placeholder} />
               </div>
               <div className="p-4 space-y-2">
                 <div className="flex gap-4">
@@ -65,7 +72,7 @@ const BlogComponent = ({ data, blurImage  }: {data: any, blurImage: any}) => {
                 <div className="space-y-2">
                   <h3 className="font-bold text-base text-secondary">{blog.attributes.title}</h3>
                   <h6 className="">{convertStringToTime(blog.attributes.publishedAt)}</h6>
-                  <p>{blog.attributes.description}</p>
+                  <p className="line-clamp-3">{blog.attributes.description}</p>
                   <div className="text-secondary">
                     {"-> continue-reading"}
                   </div>
