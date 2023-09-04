@@ -8,9 +8,9 @@ const SWRProvider = ({ children }: { children: React.ReactNode }) => {
       value={{
         fetcher: (url: string) =>
           fetch(url, {
-            headers: {
-              Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
-            },
+            // headers: {
+            //   Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+            // },
           }).then((r) => r.json()),
         
       }}

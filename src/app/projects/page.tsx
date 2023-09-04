@@ -72,7 +72,7 @@ const Projects =  () => {
                   </div>
                   <div className="space-y-4 flex-1">
                     <div className="w-full h-[180px] relative rounded overflow-hidden">
-                      <Image src={project.attributes.image.data[0].attributes.formats.medium.url} fill className="object-cover" alt="project image" />
+                      <Image src={project.attributes.image.data.attributes.formats.medium.url} fill className="object-cover" alt="project image" />
                       <div className="flex justify-end gap-2 flex-wrap absolute top-0 right-0 p-2">
                         {project.attributes.project_categories.data.map((icon: any) => {
                           return (

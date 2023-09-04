@@ -1,6 +1,6 @@
 "use client"
 
-import Mini3dGame from "@/components/mini3dGame/Mini3dGame";
+// import Mini3dGame from "@/components/mini3dGame/Mini3dGame";
 import { createContext, useContext, ReactNode, useMemo, useState, useRef, useEffect } from "react"
 
 
