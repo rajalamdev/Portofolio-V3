@@ -1,8 +1,15 @@
 "use client"
+import { useEffect, useState } from "react"
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton"
 const ProjectSkeleton = () => {
     const randomSkeleton = Math.ceil(Math.random() * 6 + 1)
-    return Array(randomSkeleton).fill(0).map(() => {
+    const [hasMounted, setHasMounted] = useState(false);
+
+    useEffect(() => {
+        setHasMounted(true)
+    }, [])
+
+    return hasMounted && Array(randomSkeleton).fill(0).map(() => {
         return (
             <SkeletonTheme baseColor="var(--line)" highlightColor="var(--tertiary)">
                 <div className='w-full mx-auto py-4 border border-line p-4 rounded'>
