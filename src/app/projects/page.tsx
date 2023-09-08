@@ -1,5 +1,6 @@
 "use client"
 import ProjectSkeleton from "@/components/loading-skeleton/ProjectSkeleton"
+import ProjectsCategoriesSkeleton from "@/components/loading-skeleton/ProjectsCategoriesSkeleton"
 import DynamicSvgIcon from "@/components/svg/DynamicSvgIcon"
 import Image from "next/image"
 import Link from "next/link"
@@ -9,36 +10,53 @@ import useSWR from "swr"
 
 const Projects =  () => {
   const [queryLanguage, setQueryLanguage] = useState<any>([])
-  const { data, error, isLoading } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/projects?populate[image]=*&populate[project_categories][populate]=icons${queryLanguage.map((q: string, index: number) => `&filters[project_categories][query][$contains]=${q}`).join("")}`)
+  const { data: projectsAPI} = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/projects?populate[image]=*&populate[project_categories][populate]=icons`)
+  const { data: projectsCategoriesAPI } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/project-categories?populate[icons]=*`)
+  const [projects, setProjects] = useState(projectsAPI)
+  const [projectsCategories, setProjectsCategories] = useState(projectsCategoriesAPI)
+  const [isLoading, setIsLoading] = useState(true)
+  const [categoriesInclude, setCategoriesInclude] = useState<any>([])
 
-  const [filterLanguage, setFilterLanguage] = useState([
-    {name: "next-js", icon: "nextjs", active: false},
-    {name: "tailwind", icon: "tailwind", active: false},
-    {name: "react-js", icon: "react", active: false},
-    {name: "vue-js", icon: "vue", active: false},
-    {name: "react-native", icon: "react", active: false},
-  ])
+  useEffect(() => {
+    if(projectsAPI && projectsCategoriesAPI){
+      setProjects(projectsAPI)
+      setProjectsCategories(projectsCategoriesAPI)
+      setIsLoading(false)
+    }
+  }, [projectsAPI, projectsCategoriesAPI])
 
-  // &filters[project_categories][query][$contains]=tailwind&filters[project_categories][query][$contains]=nextjs
-  function filteredLanguageHandler(currentLanguage: any){
-    if(!queryLanguage.some((query: string) => query === currentLanguage.name)){
-      setQueryLanguage([...queryLanguage, currentLanguage.name])
+  useEffect(() => {
+    if(!queryLanguage.length && projects){
+      setProjects(projectsAPI)
+      setCategoriesInclude([])
+      return 
+    }
+
+    if(projects){
+      const filteredProjects = projectsAPI.data.filter((project: any) => queryLanguage
+        .every((query: any) => project.attributes.project_categories.data
+        .some((d: any) => d.attributes.query == query))) 
+
+      setProjects({data: filteredProjects, meta: projects.meta})
+
+      const getAllQueries = filteredProjects
+        .map((data: any) => data.attributes.project_categories.data.map((data: any) => data.attributes.query))
+        .reduce((prev: any, cur: any) => prev.concat(cur), [])
+
+      const removeDuplicate = Array.from(new Set(getAllQueries))
+      setCategoriesInclude(removeDuplicate)
+    }
+  }, [queryLanguage])
+  
+  function filterCategoryHandler(currentCategory: any){
+    if(!queryLanguage.some((query: string) => query === currentCategory.attributes.query)){
+      setQueryLanguage([...queryLanguage, currentCategory.attributes.query])
     }
     
-    if(queryLanguage.some((query: string) => query === currentLanguage.name)){
-      const filteredQuery = queryLanguage.filter((query: string) => query != currentLanguage.name)
+    if(queryLanguage.some((query: string) => query === currentCategory.attributes.query)){
+      const filteredQuery = queryLanguage.filter((query: string) => query != currentCategory.attributes.query)
       setQueryLanguage(filteredQuery)
     }
-
-    const findCurrentLanguage = filterLanguage.findIndex(lang => lang.name === currentLanguage.name)
-    const editedCurrentLanguage = filterLanguage[findCurrentLanguage] = {
-      ...filterLanguage[findCurrentLanguage],
-      active: !filterLanguage[findCurrentLanguage].active
-    }
-
-    const updatedFilterLanguage = [...filterLanguage]
-    updatedFilterLanguage[findCurrentLanguage] = editedCurrentLanguage
-    setFilterLanguage(updatedFilterLanguage)
   }
   
   return (
@@ -48,22 +66,23 @@ const Projects =  () => {
             <DynamicSvgIcon name="trianglePrimary" className={`w-[10px]`}/> projects
           </h4>
           <div className="flex gap-2 flex-wrap p-4">
-            {filterLanguage.map((language) => {
+            {isLoading && <ProjectsCategoriesSkeleton />}
+            {!isLoading && projectsCategories.data.map((cat: any) => {
               return (
-              <div onClick={() => filteredLanguageHandler(language)} className={`${language.active && "bg-accent text-black"} cursor-pointer flex gap-2 border border-line p-2 rounded`}>
-                <DynamicSvgIcon name={`${language.icon}`} className="w-5" />
-                <p>{language.name}</p>
-              </div>
+              <button disabled={categoriesInclude.length && !categoriesInclude.includes(cat.attributes.query)}  onClick={() => filterCategoryHandler(cat)} className={`${queryLanguage.includes(cat.attributes.query) && "bg-accent text-black"} ${categoriesInclude.length && !categoriesInclude.includes(cat.attributes.query) && "opacity-50 cursor-not-allowed"} flex gap-2 border border-line p-2 rounded`}>
+                <DynamicSvgIcon name={`${cat.attributes.icons.data[0].attributes.title}`} className="w-5" />
+                <p>{cat.attributes.query}</p>
+              </button>
             )
             })}
           </div>
       </section>
       <section className="overflow-auto w-full p-6">
-        {!isLoading && data.data.length === 0 && <div className="flex justify-center items-center h-full"><p className="text-xl font-semibold">OOPS! THE PROJECT DOESN'T YET EXIST, IT'S COMING SOON...</p></div>}
+        {!isLoading && !projects.data.length && <div className="flex justify-center items-center h-full"><p className="text-xl font-semibold">OOPS! THE PROJECT DOESN'T YET EXIST, IT'S COMING SOON...</p></div>}
         {isLoading && <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4"><ProjectSkeleton /></div>}
         {!isLoading && (
           <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
-            {data.data.map((project: any) => {
+            {projects.data.map((project: any) => {
               return (
                 <Link href={`/projects/${project.attributes.slug}`} className="border border-line p-4 rounded flex flex-col gap-4 hover:scale-[1.02] cursor-pointer transition-transform">
                   <div className="space-y-1 flex-1">
