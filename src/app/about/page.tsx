@@ -25,7 +25,9 @@ const fetcher = (url: string) => fetch(url).then(res => res.json())
 const About = () => {
   const [personalInfoActive, setPersonalInfoActive] = useState(true)
   const [contactActive, setContactActive] = useState(true)
-  const { data, error, isLoading } = useSWR(`/api/now-playing`, fetcher)
+  const { data, error, isLoading } = useSWR(`/api/now-playing`, fetcher, {
+    revalidate={true}
+  })
 
   useEffect(() => {
     console.log(data)
