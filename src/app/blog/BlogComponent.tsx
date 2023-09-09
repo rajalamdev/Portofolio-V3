@@ -6,6 +6,7 @@ import convertToMinsRead from "@/utils/convertToMinsRead"
 import { useEffect, useState } from "react"
 import useSWR from 'swr'
 import ProjectSkeleton from "@/components/loading-skeleton/ProjectSkeleton"
+import BlogSkeleton from "@/components/loading-skeleton/BlogSkeleton"
 
 const fetcher = (url: string) => fetch(url, {
   headers: {
@@ -54,8 +55,7 @@ const BlogComponent = () => {
 
     return (
       <div className={`${!isLoading && "columns-1 sm:columns-2 lg:columns-3 gap-4"}`}>
-      
-      {isLoading && <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4"><ProjectSkeleton /></div>}
+      {isLoading && <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4"><BlogSkeleton /></div>}
       {!isLoading && blog.data.map((blog: any, index: number) => {
         return (
           <div className="break-inside-avoid mb-4">

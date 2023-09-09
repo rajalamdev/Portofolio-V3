@@ -5,6 +5,8 @@ import Image from "next/image";
 import MusicCode from "./MusicCode.mdx";
 import TopArtistSkeleton from "@/components/loading-skeleton/TopArtistSkeleton";
 
+const fetcher = (url: string) => fetch(url).then(res => res.json())
+
 const Music = () => {
   const [queryArtistsTimeRange, setQueryArtistsTimeRange] = useState(
     "time_range=short_term"
@@ -16,7 +18,7 @@ const Music = () => {
     error: errorArtists,
     isLoading: isLoadingArtists,
   } = useSWR(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/top-artist?${queryArtistsTimeRange}&limit=10`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/top-artist?${queryArtistsTimeRange}&limit=10`, fetcher
   );
 
   function artistsTimeRangeHanlder(e: any) {

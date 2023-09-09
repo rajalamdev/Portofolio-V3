@@ -27,10 +27,6 @@ const About = () => {
   const [contactActive, setContactActive] = useState(true)
   const { data, error, isLoading } = useSWR(`/api/now-playing`, fetcher)
 
-  useEffect(() => {
-    console.log(data)
-  }, [data])
-
   const [folders, setFolders] = useState([
     {
       folderName: "bio", 

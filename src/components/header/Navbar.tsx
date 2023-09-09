@@ -68,7 +68,6 @@ const Navbar = () => {
         <Link
           href="/"
           className="lg:max-w-[275px] flex items-center lg:w-full h-full flex-grow-0 flex-shrink-0 lg:border-r border-line hover:opacity-80 button-hover pl-6"
-          prefetch={false}
         >
           <h4>raj-alam</h4>
         </Link>
@@ -76,7 +75,6 @@ const Navbar = () => {
           {navLinks.map((nav) => {
             return (
               <Link
-                prefetch={false}
                 key={nav.href}
                 href={nav.href}
                 className={`${nav.href === pathname ? active : ""} 
