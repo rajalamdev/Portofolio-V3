@@ -7,9 +7,15 @@ import { useEffect, useState } from "react"
 import useSWR from 'swr'
 import ProjectSkeleton from "@/components/loading-skeleton/ProjectSkeleton"
 
+const fetcher = (url: string) => fetch(url, {
+  headers: {
+    Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+  },
+}).then(r => r.json())
+
 const BlogComponent = () => {
 
-  const { data, error, mutate } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blogs?populate[image]=*&sort[0]=createdAt:desc`)
+  const { data, error, mutate } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blogs?populate[image]=*&sort[0]=createdAt:desc`, fetcher)
   const [blog, setBlog] = useState(data)
   const [isLoading, setIsLoading] = useState(true)
 

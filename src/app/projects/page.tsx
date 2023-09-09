@@ -8,10 +8,17 @@ import { useEffect, useState } from "react"
 import useSWR from "swr"
 
 
+const fetcher = (url: string) => fetch(url, {
+  headers: {
+    Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+  },
+}).then(res => res.json())
+
+
 const Projects =  () => {
   const [queryLanguage, setQueryLanguage] = useState<any>([])
-  const { data: projectsAPI} = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/projects?populate[image]=*&populate[project_categories][populate]=icons`)
-  const { data: projectsCategoriesAPI } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/project-categories?populate[icons]=*`)
+  const { data: projectsAPI} = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/projects?populate[image]=*&populate[project_categories][populate]=icons`, fetcher)
+  const { data: projectsCategoriesAPI } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/project-categories?populate[icons]=*`, fetcher)
   const [projects, setProjects] = useState(projectsAPI)
   const [projectsCategories, setProjectsCategories] = useState(projectsCategoriesAPI)
   const [isLoading, setIsLoading] = useState(true)

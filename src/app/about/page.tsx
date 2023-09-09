@@ -20,12 +20,16 @@ import SpotifyNowPlayingSkeleton from "@/components/loading-skeleton/SpotifyNowP
 //   },
 // }
 
-// const fetcher = (url: string) => fetch(url).then(res => res.json())
+const fetcher = (url: string) => fetch(url).then(res => res.json())
 
 const About = () => {
   const [personalInfoActive, setPersonalInfoActive] = useState(true)
   const [contactActive, setContactActive] = useState(true)
-  const { data, error, isLoading } = useSWR(`/api/now-playing`)
+  const { data, error, isLoading } = useSWR(`/api/now-playing`, fetcher)
+
+  useEffect(() => {
+    console.log(data)
+  }, [data])
 
   const [folders, setFolders] = useState([
     {
