@@ -132,7 +132,7 @@ const Navbar = () => {
               </button>
             </div>
             <h3 className="text-center text-secondary font-semibold text-base mb-4">Settings</h3>
-            <div className="flex flex-col gap-4 flex-1">
+            <div className="flex flex-col gap-6 flex-1">
               <div className="flex gap-2 items-center justify-between">
                 <div className="flex gap-2 items-center">
                   <DynamicSvgIcon name="sound" className="w-6" />
@@ -142,12 +142,16 @@ const Navbar = () => {
                   <ButtonEnableDisable enabled={context.enabledMusic} name="music" />
                 </div>
               </div>
-              <div onClick={() => context.setEnabled3dSpline(!context.enabled3dSpline && !context.smallDevices)} className="flex gap-2 items-center justify-between">
-                <div className="flex gap-2 items-center">
-                  <DynamicSvgIcon name="_3d" className="w-6" />
-                  <p>Enable 3D Spline</p>
+              <div onClick={() => context.setEnabled3dSpline(!context.enabled3dSpline && !context.smallDevices)}>
+                <div className="flex gap-2 items-center justify-between">
+                  <div className="flex gap-2 items-center">
+                    <DynamicSvgIcon name="_3d" className="w-6" />
+                    <p>Enable 3D Games</p>
+                  </div>
+                  <ButtonEnableDisable enabled={context.enabled3dSpline} name="3d" />
                 </div>
-                <ButtonEnableDisable enabled={context.enabled3dSpline} name="3d" />
+                <p className="text-[12px] mt-2 [word-spacing:-2px]">Note: Enable 3d Games may cause lagging.</p>
+                <p className={`text-[12px] mt-2 [word-spacing:-2px] text-accent ${!context.enabled3dSpline && "hidden"}`}>Hint: Go to Home page to play the games, enjoy!</p>
               </div>
             </div>
             <p className="flex items-end text-center">Created by raj-alam and the design inspired by yanka</p>

@@ -26,7 +26,7 @@ const Blog = async () => {
 
   return (
     <>
-      <div className="overflow-auto h-full sm:p-12 p-6">
+      <div className="overflow-auto h-full sm:px-12 sm:py-10 p-6">
         <BlogComponent />
       </div>
     </>
