@@ -30,6 +30,9 @@ import Moon from "../../../public/icons/moon.svg"
 import Vue from "../../../public/icons/vue.svg"
 import Time from "../../../public/icons/time.svg"
 import Eye from "../../../public/icons/eye.svg"
+import Filter from "../../../public/icons/filter.svg"
+import Refresh from "../../../public/icons/refresh.svg"
+import Calendar from "../../../public/icons/calendar.svg"
 
 
 interface IIconTypes {
@@ -68,7 +71,10 @@ const dataIcon: IIconTypes = {
     moon: Moon,
     vue: Vue,
     eye: Eye,
-    time: Time
+    time: Time,
+    filter: Filter,
+    refresh: Refresh,
+    calendar: Calendar
 }
 
 export default dataIcon

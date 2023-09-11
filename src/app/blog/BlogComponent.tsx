@@ -3,7 +3,7 @@ import Image from "next/image"
 import DynamicSvgIcon from "@/components/svg/DynamicSvgIcon"
 import convertStringToTime from "@/utils/convertStringToTime"
 import convertToMinsRead from "@/utils/convertToMinsRead"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import useSWR from 'swr'
 import ProjectSkeleton from "@/components/loading-skeleton/ProjectSkeleton"
 import BlogSkeleton from "@/components/loading-skeleton/BlogSkeleton"
@@ -22,7 +22,17 @@ const BlogComponent = () => {
   const [blog, setBlog] = useState(blogAPI)
   const [blogCategories, setBlogCategories] = useState(blogCategoriesAPI)
   const [isLoading, setIsLoading] = useState(true)
-  const [filterCategories, setFilterCategories] = useState<any>([])
+  const [categoriesInclude, setCategoriesInclude] = useState<any>([])
+  const [currentCategory, setCurrentCategory] = useState("")
+  const [searchBlog, setSearchBlog] = useState("")
+  const [activeCategories, setActiveCategories] = useState<any>([])
+  const inputRef = useRef<any>(null)
+  const sortBy = [
+    {name: "sort-by-date", icon: "calendar"},
+    {name: "sort-by-views", icon: "eye"},
+  ]
+  const [currentSortBy, setCurrentSortBy] = useState({name: "sort-by-date", icon: "calendar"})
+  const [showSortBy, setShowSortBy] = useState(false)
 
   useEffect(() => {
     if(blogAPI && blogCategoriesAPI) {
@@ -59,67 +69,135 @@ const BlogComponent = () => {
   }
 
   useEffect(() => {
-    console.log(filterCategories)
-  }, [filterCategories])
+    console.log(currentSortBy)
+    if(currentSortBy.icon === "calendar"){
+      setBlog(blogAPI)
+    } else {
+      const copyBlog = blogAPI.data.slice();
+      const sortByViews = copyBlog.sort((blogX: any, blogY: any) => blogY.attributes.views - blogX.attributes.views)
+      setBlog({data: sortByViews, meta: blog.meta})
+    }
+  }, [currentSortBy])
+
+  useEffect(() => {
+    if(!searchBlog.length && blog){
+      setBlog(blogAPI)
+      setSearchBlog("")
+      setCategoriesInclude([])
+      setActiveCategories([])
+      return
+    }
+
+    if(blog){
+      const splitSearch = searchBlog.toString().split(" ")
+      setActiveCategories(splitSearch)
+      const searchBlogFilter = blogAPI.data.filter((blog: any) => 
+        splitSearch.every(s => blog.attributes.title.toLowerCase().includes(s.toLowerCase()))
+        ||
+        splitSearch.every(s => blog.attributes.blog_categories.data.some((cat: any) => cat.attributes.title.toLowerCase().includes(s.toLowerCase())))  
+      )
+      const getAllCategories = searchBlogFilter.map((blog: any) => blog.attributes.blog_categories.data
+        .map((cat: any) => cat.attributes.title))
+        .reduce((prev: any, cur: any) => prev.concat(cur), [])
+
+      const removeDuplicateCategories = Array.from(new Set(getAllCategories))
+      setBlog({data: searchBlogFilter, meta: blog.meta})
+        setCategoriesInclude(removeDuplicateCategories)
+     
+    }
+  }, [searchBlog])
 
   function filterHandler(currentCategory: any){
-    if(!filterCategories.includes(currentCategory.attributes.title)) return setFilterCategories([...filterCategories, currentCategory.attributes.title]) 
-    const removeCurrentCategory = filterCategories.filter((cat: any) => cat !== currentCategory.attributes.title)
-    setFilterCategories(removeCurrentCategory)
+    setCurrentCategory(currentCategory.attributes.title)
+    inputRef.current.focus()
+    if(!searchBlog.includes(currentCategory.attributes.title)){
+      setSearchBlog(prev => prev != "" ? `${prev.trim()} ${currentCategory.attributes.title}` : currentCategory.attributes.title)
+    }else {
+      const splitSearch = searchBlog.toString().split(" ")
+      const removeCurrentSearch = splitSearch.filter((s: any) => s !== currentCategory.attributes.title)
+      setSearchBlog(removeCurrentSearch.join(""))
+    }
+  }
+
+  function sortHandler(currentBy: any){
+    const setNewSort = sortBy.filter(by => by.name == currentBy.name)
+    setCurrentSortBy(setNewSort[0])
+    setShowSortBy(false)
   }
 
     return (
       <>
         <div className="space-y-4 text-secondary mb-8">
-          <div className="border-l-2 px-2 border-accent text-xl font-bold">
-            <h3>Sharing my <span className="text-accent">Stories</span>,</h3>
-            <h3>Thoughts & Experiences.</h3>
+          <div className="border-l-2 border-accent flex justify-between items-end">
+            <div className="px-4 text-2xl font-bold">
+              <h3>Sharing my <span className="text-accent">Stories</span>,</h3>
+              <h3>Thoughts & Experiences.</h3>
+            </div>
+            <div className="relative w-52">
+              <button onClick={() => setShowSortBy(!showSortBy)} className="border border-tertiary px-4 py-2 rounded flex justify-between items-center w-full active:scale-95 transition-all">
+                <div className="flex gap-2 items-center">
+                  <DynamicSvgIcon name={currentSortBy.icon} className="w-4" />
+                  <p>{currentSortBy.name}</p>
+                </div>
+                <DynamicSvgIcon name="filter" className="w-4" />
+
+              </button>
+              <div className={`absolute ${showSortBy ? "z-10 opacity-100" : "-z-50 opacity-0"} transition-all bg-primary rounded -bottom-20 border border-tertiary left-0 right-0`}>
+                {sortBy.map(by => <button onClick={() => sortHandler(by)} className={`${by.name === currentSortBy.name && "bg-accent text-black"} py-2 px-2 w-full`}>{by.name}</button>)}
+              </div>
+            </div>
           </div>
-          <div>
-            <input type="text" name="" placeholder="Search..." className="py-2 px-4 bg-transparent border border-tertiary focus:border-accent w-full" />
+          <div className="relative">
+            <input ref={inputRef} value={searchBlog} onChange={(e) => setSearchBlog(e.target.value)} type="text" name="" placeholder="Search..." className="py-2 px-4 rounded transition-all duration-300 bg-transparent outline-0 border border-tertiary focus:border-accent w-full" />
+            <div onClick={() => setSearchBlog("")}>
+              <DynamicSvgIcon name="refresh" className="w-5 absolute right-2 top-2 cursor-pointer hover:rotate-45 transition-all active:scale-95" />
+            </div>
           </div>
           <div className="flex gap-2 flex-wrap cursor-pointer">
             {isLoading && <BlogCategoriesSkeleton />}
-            {!isLoading && blogCategories.data.map((cat: any) => <div onClick={() => filterHandler(cat)} className={`py-1 rounded px-2 ${filterCategories.includes(cat.attributes.title) ? "bg-accent text-black" : "bg-line"}`}>{cat.attributes.title}</div>)}        
+            {!isLoading && blogCategories.data.map((cat: any) => <button disabled={(!blog.data.length && !categoriesInclude.includes(currentCategory)) || (categoriesInclude.length && !categoriesInclude.includes(cat.attributes.title))} onClick={() => filterHandler(cat)} className={`py-1 rounded px-2 ${activeCategories.includes(cat.attributes.title) && blog.data.length ? "bg-accent text-black" : "bg-line"} ${!blog.data.length && !categoriesInclude.includes(currentCategory) ? "opacity-50 cursor-not-allowed" : categoriesInclude.length && !categoriesInclude.includes(cat.attributes.title) && "opacity-50 cursor-not-allowed"}`}>{cat.attributes.title}</button>)}        
           </div>
         </div>
-        <div className={`${!isLoading && "columns-1 sm:columns-2 lg:columns-3 gap-4"}`}>
-          {isLoading && <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4"><BlogSkeleton /></div>}
-          {!isLoading && blog.data.map((blog: any, index: number) => {
-            return (
-              <div className="break-inside-avoid mb-4">
-                <div className="rounded overflow-hidden border border-line cursor-pointer">
-                  <div className="relative">
-                      <Image src={blog.attributes.image.data.attributes.formats.medium.url} width={blog.attributes.image.data.attributes.formats.medium.width} height={blog.attributes.image.data.attributes.formats.medium.height} alt="image" placeholder="blur" blurDataURL={blog.attributes.image.data.attributes.placeholder} />
-                      <div className="absolute right-2 bottom-2 z-50 flex gap-2 flex-wrap">
-                        {blog.attributes.blog_categories.data.map((cat: any) => <div className={`rounded py-1 px-2 bg-line text-secondary`}>{cat.attributes.title}</div>)}
-                      </div>
-                  </div>
-                  <div className="p-4 space-y-2">
-                    <div className="flex gap-4">
-                      <div className="flex gap-2 items-center">
-                        <DynamicSvgIcon name="eye" className="w-5" />
-                        <p className="text-accent">{blog.attributes.views} views</p>
-                      </div>
-                      <div className="flex gap-2 items-center">
-                        <DynamicSvgIcon name="time" className="w-5" />
-                        <p className="text-accent">{convertToMinsRead(blog.attributes.content)} mins read</p>
-                      </div>
+        {!isLoading && !blog.data.length && <p className="w-full text-center mt-32 text-xl font-semibold">OOPS! THE BLOG DOESN'T YET EXIST, IT'S COMING SOON...</p>}
+        {isLoading && <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4"><BlogSkeleton /></div>}
+        {!isLoading && (
+          <div className={"columns-1 sm:columns-2 lg:columns-3 gap-4"}>
+            {blog.data.map((blog: any, index: number) => {
+              return (
+                <div className=" mb-4">
+                  <div className="rounded break-inside-avoid-column overflow-hidden border border-line cursor-pointer">
+                    <div className="relative">
+                        <Image src={blog.attributes.image.data.attributes.formats.medium.url} width={blog.attributes.image.data.attributes.formats.medium.width} height={blog.attributes.image.data.attributes.formats.medium.height} alt="image" placeholder="blur" blurDataURL={blog.attributes.image.data.attributes.placeholder} />
+                        <div className="absolute right-2 bottom-2 z-50 flex gap-2 flex-wrap">
+                          {blog.attributes.blog_categories.data.map((cat: any) => <div className={`rounded py-1 px-2 bg-line ${activeCategories.includes(cat.attributes.title) ? "text-accent" : "text-secondary"}`}>{cat.attributes.title}</div>)}
+                        </div>
                     </div>
-                    <div className="space-y-2">
-                      <h3 className="font-bold text-base text-secondary">{blog.attributes.title}</h3>
-                      <h6 className="">{convertStringToTime(blog.attributes.publishedAt)}</h6>
-                      <p className="line-clamp-3">{blog.attributes.description}</p>
-                      <div className="text-secondary">
-                        {"-> continue-reading"}
+                    <div className="p-4 space-y-2">
+                      <div className="flex gap-4">
+                        <div className="flex gap-2 items-center">
+                          <DynamicSvgIcon name="eye" className="w-5" />
+                          <p className="text-accent">{blog.attributes.views} views</p>
+                        </div>
+                        <div className="flex gap-2 items-center">
+                          <DynamicSvgIcon name="time" className="w-5" />
+                          <p className="text-accent">{convertToMinsRead(blog.attributes.content)} mins read</p>
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <h3 className="font-bold text-base text-secondary">{blog.attributes.title}</h3>
+                        <h6 className="">{convertStringToTime(blog.attributes.publishedAt)}</h6>
+                        <p className="line-clamp-3">{blog.attributes.description}</p>
+                        <div className="text-secondary">
+                          {"-> continue-reading"}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            )
-          })}
-        </div>
+              )
+            })}
+          </div>
+        )}
     </>
     )
 
