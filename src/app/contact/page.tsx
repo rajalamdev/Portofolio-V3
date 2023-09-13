@@ -66,7 +66,6 @@ const Contact = () => {
             <p className="text-xl font-semibold py-2">OR</p>
             <div className="w-full lg:w-[2px] h-[2px] bg-line lg:flex-1"></div>
           </div>
-
           <div className="flex-1 flex gap-8 justify-center flex-wrap content-center">
             {contactBoxList.map(contact => {
               return (
