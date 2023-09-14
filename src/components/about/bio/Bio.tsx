@@ -1,7 +1,7 @@
 import Image from "next/image";
 import DynamicSvgIcon from "../../svg/DynamicSvgIcon";
 import BioCode from "./BioCode.mdx"
-import Me from "../../../../public/me.webp"
+import Me from "../../../../public/me.jpeg"
 
 const Bio =  () => {
   const currentFavoriteTechStack = [
