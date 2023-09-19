@@ -128,12 +128,12 @@ const BlogComponent = () => {
     return (
       <>
         <div className="space-y-4 text-secondary mb-8">
-          <div className="border-l-2 border-accent flex justify-between items-end">
-            <div className="px-4 text-2xl font-bold">
+          <div className="border-l-2 border-accent flex flex-wrap justify-between items-end">
+            <div className="px-4 text-xl md:text-2xl font-bold">
               <h3>Sharing my <span className="text-accent">Stories</span>,</h3>
               <h3>Thoughts & Experiences.</h3>
             </div>
-            <div className="relative w-52">
+            <div className="relative md:w-52 w-full p-4 pl-4 pr-0">
               <button onClick={() => setShowSortBy(!showSortBy)} className="border border-tertiary px-4 py-2 rounded flex justify-between items-center w-full active:scale-95 transition-all">
                 <div className="flex gap-2 items-center">
                   <DynamicSvgIcon name={currentSortBy.icon} className="w-4" />

@@ -15,6 +15,7 @@ const Navbar = () => {
   
   const [showSettings, setShowSettings] = useState(false);
   const [showTheme, setShowTheme] = useState(false);
+  const [showNavMobile, setShowNavMobile] = useState(false);
 
   const themeSection = useRef<any>()
   const settingSection = useRef<any>()
@@ -97,12 +98,45 @@ const Navbar = () => {
             <DynamicSvgIcon name="settings" className="w-6 cursor-pointer hover:opacity-80" />
           </div>
         </div>
-        <div className="pr-6 lg:hidden">
-          =
+        <div onClick={() => setShowNavMobile(!showNavMobile)} className={`mr-6 p-3 lg:hidden w-[50px] flex flex-col gap-2 relative z-50 cursor-pointer`}>
+          <div className={`h-[2px] ${showNavMobile ? "w-full rotate-45 translate-y-[20px]" : "w-[90%]"} bg-tertiary transition-all`}></div>
+          <div className={`h-[2px] w-full bg-tertiary ${showNavMobile ? "-translate-x-full opacity-0": ""}  transition-all`}></div>
+          <div className={`h-[2px] ${showNavMobile ? "w-full -rotate-45" : "w-[60%]"} bg-tertiary transition-all`}></div>
+        </div>
+
+        {/* nav mobile */}
+        <div className={`fixed left-0 right-0 bottom-0 top-0 ${showNavMobile ? "translate-y-0" : "-translate-y-full"} transition-transform duration-[500ms] ease-[cubic-bezier(.51,.92,.24,1.15)] h-full bg-primary z-30 overflow-auto`}>
+          <ul className="flex flex-col h-full overflow-auto pt-20">
+            {navLinks.map((nav) => {
+              return (
+                <Link
+                  key={nav.href}
+                  href={nav.href}
+                  onClick={() => setShowNavMobile(false)}
+                  className={`${nav.href === pathname ? active : ""} 
+                  ${
+                    pathname.includes("/blog") && nav.href === "/blog"
+                      ? active
+                      : ""
+                  } px-6 border-b border-line py-8 text-center button-hover flex items-center`}
+                >
+                  {nav.text}
+                </Link>
+              );
+            })}
+              <div onClick={() => setShowTheme(!showTheme)} className="flex items-center w-full border-b border-line cursor-pointer py-8 px-6 button-hover">
+                <p className="w-full">Theme</p>
+                <span className="font-bold text-lg">{">"}</span>
+              </div>
+              <div onClick={() => setShowSettings(!showSettings)} className="flex items-center w-full border-b border-line cursor-pointer py-8 px-6 button-hover">
+                <p className="w-full">Settings</p>
+                <span className="font-bold text-lg">{">"}</span>
+              </div>
+          </ul>
         </div>
 
         {/* theme */}
-        <div ref={themeSection} className={`fixed left-0 right-0 bottom-0 top-0 transition-opacity duration-300   ${showTheme ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"} flex backdrop-blur-sm bg-black/20 justify-center items-center`}>
+        <div ref={themeSection} className={`fixed z-50 left-0 right-0 bottom-0 top-0 transition-opacity duration-300   ${showTheme ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"} flex backdrop-blur-sm bg-black/20 justify-center items-center`}>
           <div className={`max-w-[350px] h-[400px] p-4 ${showTheme ? "opacity-100" : "opacity-0"} transition-all bg-primary border border-line w-full rounded-lg flex flex-col relative overflow-hidden`}>
             <div className="flex justify-end pb-2">
               <button onClick={() => setShowTheme(false)}>
@@ -124,7 +158,7 @@ const Navbar = () => {
         </div>
 
         {/* settings */}
-        <div ref={settingSection} className={`fixed left-0 right-0 bottom-0 top-0 transition-opacity duration-300   ${showSettings ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"} flex backdrop-blur-sm bg-black/20 justify-center items-center`}>
+        <div ref={settingSection} className={`fixed z-50 left-0 right-0 bottom-0 top-0 transition-opacity duration-300   ${showSettings ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"} flex backdrop-blur-sm bg-black/20 justify-center items-center`}>
           <div className={`max-w-[350px] h-[400px] ${showSettings ? "opacity-100" : "opacity-0"} transition-all bg-primary border border-line w-full rounded-lg flex flex-col p-4 relative`}>
             <div className="flex justify-end pb-2">
               <button onClick={() => setShowSettings(false)}>

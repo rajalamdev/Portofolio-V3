@@ -40,8 +40,8 @@ const Music = () => {
   const timeRange = ["Last month", "Last 6 months", "All time"];
 
   return (
-    <section className="grid grid-cols-2 h-full">
-      <div className="border-r border-line overflow-auto">
+    <section className="grid md:grid-cols-2 h-full">
+      <div className="border-r border-line overflow-auto md:block hidden">
         <MusicCode />
       </div>
       <div className="overflow-auto px-4 py-4">

@@ -67,8 +67,8 @@ const Projects =  () => {
   }
   
   return (
-    <div className="h-full flex">
-      <section className="max-w-[275px] border-r border-line h-full flex-grow-0 flex-shrink-0">
+    <div className="h-full flex md:flex-row flex-col">
+      <section className="md:max-w-[275px] border-r border-line h-full md:overflow-auto md:flex-grow-0 md:flex-shrink-0">
           <h4 className="sticky top-0 z-10 bg-primary cursor-pointer text-secondary flex gap-2 py-2 px-6 border-b border-line">
             <DynamicSvgIcon name="trianglePrimary" className={`w-[10px]`}/> projects
           </h4>

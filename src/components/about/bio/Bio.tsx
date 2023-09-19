@@ -14,8 +14,8 @@ const Bio =  () => {
   ];
 
   return (
-    <div className="grid grid-cols-2 h-full">
-      <div className="overflow-auto border-r border-line">
+    <div className="grid md:grid-cols-2 h-full">
+      <div className="overflow-auto border-r border-line md:block hidden">
         <BioCode />
       </div>
       <div className="px-4 pt-4 pb-8 overflow-auto">
