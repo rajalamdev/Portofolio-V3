@@ -17,15 +17,6 @@ const BlogCategoriesSkeleton = () => {
             <Skeleton width={123} height={20} />
             <Skeleton width={90} height={20} />
 
-            <Skeleton width={80} height={20} />
-            <Skeleton width={130} height={20} />
-
-            <Skeleton width={80} height={20} />
-            <Skeleton width={130} height={20} />
-
-            <Skeleton width={80} height={20} />
-            <Skeleton width={130} height={20} />
-
         </SkeletonTheme>
     )
 

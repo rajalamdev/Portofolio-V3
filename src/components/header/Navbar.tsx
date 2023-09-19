@@ -68,7 +68,7 @@ const Navbar = () => {
       <nav className="border-b h-full border-line flex justify-between w-full items-center relative z-20 bg-primary">
         <Link
           href="/"
-          className="lg:max-w-[275px] flex items-center lg:w-full h-full flex-grow-0 flex-shrink-0 lg:border-r border-line hover:opacity-80 button-hover pl-6"
+          className="lg:max-w-[275px] flex items-center lg:w-full h-full flex-grow-0 flex-shrink-0 lg:border-r border-line hover:opacity-80 button-hover px-6 relative z-50"
         >
           <h4>raj-alam</h4>
         </Link>
@@ -99,9 +99,9 @@ const Navbar = () => {
           </div>
         </div>
         <div onClick={() => setShowNavMobile(!showNavMobile)} className={`mr-6 p-3 lg:hidden w-[50px] flex flex-col gap-2 relative z-50 cursor-pointer`}>
-          <div className={`h-[2px] ${showNavMobile ? "w-full rotate-45 translate-y-[20px]" : "w-[90%]"} bg-tertiary transition-all`}></div>
-          <div className={`h-[2px] w-full bg-tertiary ${showNavMobile ? "-translate-x-full opacity-0": ""}  transition-all`}></div>
-          <div className={`h-[2px] ${showNavMobile ? "w-full -rotate-45" : "w-[60%]"} bg-tertiary transition-all`}></div>
+          <div className={`h-[2px] ${showNavMobile ? "w-full rotate-45 translate-y-[10px]" : "w-[90%]"} bg-tertiary duration-300 transition-all`}></div>
+          <div className={`h-[2px] w-full bg-tertiary ${showNavMobile ? "-translate-x-full opacity-0": ""} duration-300 transition-all`}></div>
+          <div className={`h-[2px] ${showNavMobile ? "w-full -rotate-45 -translate-y-[10px]" : "w-[60%]"} bg-tertiary duration-300 transition-all`}></div>
         </div>
 
         {/* nav mobile */}

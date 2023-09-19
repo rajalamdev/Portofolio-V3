@@ -68,11 +68,11 @@ const Projects =  () => {
   
   return (
     <div className="h-full flex md:flex-row flex-col">
-      <section className="md:max-w-[275px] border-r border-line h-full md:overflow-auto md:flex-grow-0 md:flex-shrink-0">
+      <section className="md:max-w-[275px] border-r border-line md:overflow-auto md:flex-grow-0 md:flex-shrink-0">
           <h4 className="sticky top-0 z-10 bg-primary cursor-pointer text-secondary flex gap-2 py-2 px-6 border-b border-line">
             <DynamicSvgIcon name="trianglePrimary" className={`w-[10px]`}/> projects
           </h4>
-          <div className="flex gap-2 flex-wrap p-4">
+          <div className="flex gap-2 flex-wrap p-6 md:p-4 justify-center md:justify-start">
             {isLoading && <ProjectsCategoriesSkeleton />}
             {!isLoading && projectsCategories.data.map((cat: any) => {
               return (
@@ -84,7 +84,7 @@ const Projects =  () => {
             })}
           </div>
       </section>
-      <section className="overflow-auto w-full p-6">
+      <section className="overflow-auto w-full p-6 h-full border-t border-line md:border-transparent">
         {!isLoading && !projects.data.length && <div className="flex justify-center items-center h-full"><p className="text-xl font-semibold">OOPS! THE PROJECT DOESN'T YET EXIST, IT'S COMING SOON...</p></div>}
         {isLoading && <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4"><ProjectSkeleton /></div>}
         {!isLoading && (

@@ -168,7 +168,7 @@ const BlogComponent = () => {
                   <div className="rounded break-inside-avoid-column overflow-hidden border border-line cursor-pointer">
                     <div className="relative">
                         <Image src={blog.attributes.image.data.attributes.formats.medium.url} width={blog.attributes.image.data.attributes.formats.medium.width} height={blog.attributes.image.data.attributes.formats.medium.height} alt="image" placeholder="blur" blurDataURL={blog.attributes.image.data.attributes.placeholder} />
-                        <div className="absolute right-2 bottom-2 z-50 flex gap-2 flex-wrap">
+                        <div className="absolute z-10 right-2 bottom-2 flex gap-2 flex-wrap">
                           {blog.attributes.blog_categories.data.map((cat: any) => <div className={`rounded py-1 px-2 bg-line ${activeCategories.includes(cat.attributes.title) ? "text-accent" : "text-secondary"}`}>{cat.attributes.title}</div>)}
                         </div>
                     </div>

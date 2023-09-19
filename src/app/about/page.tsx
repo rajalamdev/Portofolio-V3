@@ -11,6 +11,7 @@ import { backend, database, frontend, others } from "../../components/about/skil
 import useSWR from "swr";
 import Music from "../../components/about/music/Music";
 import SpotifyNowPlayingSkeleton from "@/components/loading-skeleton/SpotifyNowPlayingSkeleton";
+import { useAppContext } from "@/context/AppContext";
 
 // export const metadata: Metadata = {
 //   title: "Raj Alam | About",
@@ -26,6 +27,14 @@ const About = () => {
   const [personalInfoActive, setPersonalInfoActive] = useState(true)
   const [contactActive, setContactActive] = useState(true)
   const { data, error, isLoading } = useSWR(`/api/now-playing`, fetcher)
+  const context = useAppContext();
+  
+  useEffect(() => {
+    if(context.smallDevices){
+      setContactActive(false)
+      setPersonalInfoActive(false)
+    }
+  }, [])
 
   const [folders, setFolders] = useState([
     {
@@ -123,7 +132,7 @@ const About = () => {
             <h4 onClick={() => setPersonalInfoActive(!personalInfoActive)} className="sticky top-0 z-10 bg-primary cursor-pointer text-secondary flex gap-2 px-6 p-2 md:p-2 border-b border-line">
               <DynamicSvgIcon name="trianglePrimary" className={`w-[10px] ${personalInfoActive ? "" : "-rotate-90"} transition-all`}/> personal-info
             </h4>
-            <div className={`transition-maxHeisaght ${personalInfoActive ? "max-h-[512px]" : "max-h-0"} overflow-hidden`}>
+            <div className={`transition-maxHeight ${personalInfoActive ? "max-h-[512px]" : "max-h-0"} overflow-hidden`}>
               {folders.map(folder => {
                 return (
                   <div key={folder.folderName}>
@@ -133,7 +142,7 @@ const About = () => {
                         <DynamicSvgIcon name="folder" className="w-4 fill-accent" />
                         <h5>{folder.folderName}</h5>
                       </button>
-                      <div className={`max-h-0 transition-maxHeight ${folder.isActiveFolder ? "max-h-56" : ""} overflow-hidden `}>
+                      <div className={`${folder.isActiveFolder ? "max-h-56" : "max-h-0"} transition-maxHeight overflow-hidden `}>
                         {folder.files.map(file => {
                           return (
                             <button onClick={() => activeFilesHanlder(folder.folderName, file)} key={file.fileName} className={`flex button-hover ${file.fileName === activeFiles.fileName ? "bg-button-active text-secondary" : ""} gap-2 w-full px-6 py-2`}>
