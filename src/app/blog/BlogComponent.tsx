@@ -8,6 +8,7 @@ import useSWR from 'swr'
 import ProjectSkeleton from "@/components/loading-skeleton/ProjectSkeleton"
 import BlogSkeleton from "@/components/loading-skeleton/BlogSkeleton"
 import BlogCategoriesSkeleton from "@/components/loading-skeleton/BlogCategoriesSkeleton"
+import Link from "next/link"
 
 const fetcher = (url: string) => fetch(url, {
   headers: {
@@ -69,7 +70,6 @@ const BlogComponent = () => {
   }
 
   useEffect(() => {
-    console.log(currentSortBy)
     if(currentSortBy.icon === "calendar"){
       setBlog(blogAPI)
     } else {
@@ -165,7 +165,7 @@ const BlogComponent = () => {
             {blog.data.map((blog: any, index: number) => {
               return (
                 <div className=" mb-4">
-                  <div className="rounded break-inside-avoid-column overflow-hidden border border-line cursor-pointer">
+                  <Link href={`blog/${blog.attributes.slug}`} className="rounded break-inside-avoid-column overflow-hidden border border-line cursor-pointer">
                     <div className="relative">
                         <Image src={blog.attributes.image.data.attributes.formats.medium.url} width={blog.attributes.image.data.attributes.formats.medium.width} height={blog.attributes.image.data.attributes.formats.medium.height} alt="image" placeholder="blur" blurDataURL={blog.attributes.image.data.attributes.placeholder} />
                         <div className="absolute z-10 right-2 bottom-2 flex gap-2 flex-wrap">
@@ -192,7 +192,7 @@ const BlogComponent = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 </div>
               )
             })}
