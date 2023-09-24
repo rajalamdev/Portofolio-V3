@@ -5,7 +5,6 @@ import { serialize } from "next-mdx-remote/serialize";
 import MdxMarkdown from "@/components/markdown/MdxMarkdown";
 import Navbar from "@/components/header/Navbar";
 import BlogSlugClient from "./BlogSlugClient";
-import Link from "next/link";
 
 async function getPost(slug: string) {
     const req = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blogs?filters[slug][$eq]=${slug}&populate[image]=*`, {
@@ -13,7 +12,6 @@ async function getPost(slug: string) {
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
       },
       next: {revalidate: 1}
-      // cache: "force-cache"
     })
     const res = await req.json();
     
@@ -34,11 +32,10 @@ async function getPost(slug: string) {
 
 const page = async ({ params }: { params: { slug: string }}) => {
   const dataPost = await getPost(params.slug)
-  // console.log("server:", dataPost.blog.attributes.views)
+  console.log("server:", dataPost.blog.attributes.views)
   return (
     <section className="h-full overflow-auto">
-        <Link href={"/blog"}>Back</Link>
-        {/* <BlogSlugClient dataBlog={dataPost.blog} content={dataPost.content} /> */}
+        <BlogSlugClient dataBlog={dataPost.blog} content={dataPost.content} />
     </section>
   )
 }
