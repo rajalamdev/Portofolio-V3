@@ -13,6 +13,7 @@ async function getPost(slug: string) {
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
       },
       next: {revalidate: 1}
+      // cache: "force-cache"
     })
     const res = await req.json();
     
@@ -33,11 +34,11 @@ async function getPost(slug: string) {
 
 const page = async ({ params }: { params: { slug: string }}) => {
   const dataPost = await getPost(params.slug)
-  console.log("server:", dataPost.blog.attributes.views)
+  // console.log("server:", dataPost.blog.attributes.views)
   return (
     <section className="h-full overflow-auto">
         <Link href={"/blog"}>Back</Link>
-        <BlogSlugClient dataBlog={dataPost.blog} content={dataPost.content} />
+        {/* <BlogSlugClient dataBlog={dataPost.blog} content={dataPost.content} /> */}
     </section>
   )
 }

@@ -16,9 +16,9 @@ const fetcher = (url: string) => fetch(url, {
   },
 }).then(r => r.json())
 
-const BlogComponent = () => {
+const BlogComponent = ({ blogAPI }: { blogAPI: any }) => {
 
-  const { data: blogAPI } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blogs?populate[image]=*&populate[blog_categories]=*&sort[0]=createdAt:desc`, fetcher)
+  // const { data: blogAPI } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blogs?populate[image]=*&populate[blog_categories]=*&sort[0]=createdAt:desc`, fetcher)
   const { data: blogCategoriesAPI } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blog-categories`, fetcher)
   const [blog, setBlog] = useState(blogAPI)
   const [blogCategories, setBlogCategories] = useState(blogCategoriesAPI)
@@ -35,13 +35,13 @@ const BlogComponent = () => {
   const [currentSortBy, setCurrentSortBy] = useState({name: "sort-by-date", icon: "calendar"})
   const [showSortBy, setShowSortBy] = useState(false)
 
-  useEffect(() => {
-    if(blogAPI && blogCategoriesAPI) {
-      setBlog(blogAPI)  
-      setBlogCategories(blogCategoriesAPI)
-      setIsLoading(false)
-    }
-  }, [blogAPI, blogCategories])
+  // useEffect(() => {
+  //   if(blogAPI && blogCategoriesAPI) {
+  //     setBlog(blogAPI)  
+  //     setBlogCategories(blogCategoriesAPI)
+  //     setIsLoading(false)
+  //   }
+  // }, [blogAPI, blogCategories])
 
   const testHandler = async (currentBlog: any) => {
     const findBlogIndex = blog.data.findIndex((b: any) => b.id === currentBlog.id)
@@ -159,8 +159,8 @@ const BlogComponent = () => {
           </div>
         </div>
         {!isLoading && !blog.data.length && <p className="w-full text-center mt-32 text-xl font-semibold">OOPS! THE BLOG DOESN'T YET EXIST, IT'S COMING SOON...</p>}
-        {isLoading && <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4"><BlogSkeleton /></div>}
-        {!isLoading && (
+        {/* {isLoading && <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4"><BlogSkeleton /></div>} */}
+        
           <div className={"columns-1 sm:columns-2 lg:columns-3 gap-4"}>
             {blog.data.map((blog: any, index: number) => {
               return (
@@ -197,7 +197,6 @@ const BlogComponent = () => {
               )
             })}
           </div>
-        )}
     </>
     )
 
