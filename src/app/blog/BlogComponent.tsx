@@ -161,11 +161,11 @@ const BlogComponent = () => {
         {!isLoading && !blog.data.length && <p className="w-full text-center mt-32 text-xl font-semibold">OOPS! THE BLOG DOESN'T YET EXIST, IT'S COMING SOON...</p>}
         {isLoading && <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4"><BlogSkeleton /></div>}
         {!isLoading && (
-          <div className={"columns-1 sm:columns-2 lg:columns-3 gap-4"}>
+          <div className={"columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4"}>
             {blog.data.map((blog: any, index: number) => {
               return (
-                <div className=" mb-4">
-                  <Link href={`blog/${blog.attributes.slug}`} className="rounded break-inside-avoid-column overflow-hidden border border-line cursor-pointer">
+                <div className="border border-line rounded hover:-translate-y-2 transition-all duration-300 ">
+                  <Link href={`blog/${blog.attributes.slug}`} className="rounded break-inside-avoid-column overflow-hidden cursor-pointer">
                     <div className="relative">
                         <Image src={blog.attributes.image.data.attributes.formats.medium.url} width={blog.attributes.image.data.attributes.formats.medium.width} height={blog.attributes.image.data.attributes.formats.medium.height} alt="image" placeholder="blur" blurDataURL={blog.attributes.image.data.attributes.placeholder} />
                         <div className="absolute z-10 right-2 bottom-2 flex gap-2 flex-wrap">
