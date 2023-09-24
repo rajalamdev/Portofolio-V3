@@ -12,7 +12,7 @@ async function getPost(slug: string) {
       headers: {
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
       },
-      next: {revalidate: 0}
+      next: {revalidate: 1}
     })
     const res = await req.json();
     
