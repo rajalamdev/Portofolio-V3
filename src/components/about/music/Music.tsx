@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useSWR from "swr";
 import Image from "next/image";
 import MusicCode from "./MusicCode.mdx";
@@ -18,8 +18,14 @@ const Music = () => {
     error: errorArtists,
     isLoading: isLoadingArtists,
   } = useSWR(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/top-artist?${queryArtistsTimeRange}&limit=10`, fetcher
+    `/api/top-artist?${queryArtistsTimeRange}&limit=10`, fetcher
   );
+
+  useEffect(() => {
+    if(dataArtists){
+      console.log(dataArtists)
+    }
+  }, [dataArtists])
 
   function artistsTimeRangeHanlder(e: any) {
     const time = e.target.name;
