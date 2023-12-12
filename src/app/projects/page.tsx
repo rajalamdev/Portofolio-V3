@@ -23,6 +23,7 @@ const Projects =  () => {
   const [projectsCategories, setProjectsCategories] = useState(projectsCategoriesAPI)
   const [isLoading, setIsLoading] = useState(true)
   const [categoriesInclude, setCategoriesInclude] = useState<any>([])
+  const [currentCategory, setCurrentCategory] = useState("")
 
   useEffect(() => {
     if(projectsAPI && projectsCategoriesAPI){
@@ -31,6 +32,10 @@ const Projects =  () => {
       setIsLoading(false)
     }
   }, [projectsAPI, projectsCategoriesAPI])
+
+  useEffect(() => {
+    console.log(categoriesInclude)
+  }, [categoriesInclude])
 
   useEffect(() => {
     if(!queryLanguage.length && projects){
@@ -56,6 +61,8 @@ const Projects =  () => {
   }, [queryLanguage])
   
   function filterCategoryHandler(currentCategory: any){
+    setCurrentCategory(currentCategory.attributes.query)
+
     if(!queryLanguage.some((query: string) => query === currentCategory.attributes.query)){
       setQueryLanguage([...queryLanguage, currentCategory.attributes.query])
     }
@@ -76,7 +83,7 @@ const Projects =  () => {
             {isLoading && <ProjectsCategoriesSkeleton />}
             {!isLoading && projectsCategories.data.map((cat: any) => {
               return (
-              <button disabled={categoriesInclude.length && !categoriesInclude.includes(cat.attributes.query)}  onClick={() => filterCategoryHandler(cat)} className={`${queryLanguage.includes(cat.attributes.query) && "bg-accent text-black"} ${categoriesInclude.length && !categoriesInclude.includes(cat.attributes.query) && "opacity-50 cursor-not-allowed"} flex gap-2 border border-line p-2 rounded`}>
+              <button disabled={(categoriesInclude.length && !categoriesInclude.includes(cat.attributes.query)) || (!projects.data.length && cat.attributes.query != currentCategory)}  onClick={() => filterCategoryHandler(cat)} className={`${queryLanguage.includes(cat.attributes.query) && "bg-accent text-black"} ${categoriesInclude.length && !categoriesInclude.includes(cat.attributes.query) && "opacity-50 cursor-not-allowed"} ${!projects.data.length && cat.attributes.query != currentCategory && "opacity-50 cursor-not-allowed"} flex gap-2 border border-line p-2 rounded`}>
                 <DynamicSvgIcon name={`${cat.attributes.icons.data[0].attributes.title}`} className="w-5" />
                 <p>{cat.attributes.query}</p>
               </button>
@@ -98,7 +105,7 @@ const Projects =  () => {
                   </div>
                   <div className="space-y-4 flex-1">
                     <div className="w-full h-[180px] relative rounded overflow-hidden">
-                      <Image src={project.attributes.image.data.attributes.formats.medium.url} fill className="object-cover" alt="project image" />
+                      <Image src={project.attributes.image.data.attributes.formats.medium.url} fill className="object-cover" alt="project image" placeholder="blur" blurDataURL={project.attributes.image.data.attributes.placeholder} />
                       <div className="flex justify-end gap-2 flex-wrap absolute top-0 right-0 p-2">
                         {project.attributes.project_categories.data.map((icon: any) => {
                           return (

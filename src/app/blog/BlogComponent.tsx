@@ -91,6 +91,7 @@ const BlogComponent = () => {
     if(blog){
       const splitSearch = searchBlog.toString().split(" ")
       setActiveCategories(splitSearch)
+      
       const searchBlogFilter = blogAPI.data.filter((blog: any) => 
         splitSearch.every(s => blog.attributes.title.toLowerCase().includes(s.toLowerCase()))
         ||
@@ -102,7 +103,8 @@ const BlogComponent = () => {
 
       const removeDuplicateCategories = Array.from(new Set(getAllCategories))
       setBlog({data: searchBlogFilter, meta: blog.meta})
-        setCategoriesInclude(removeDuplicateCategories)
+      setCategoriesInclude(removeDuplicateCategories)
+      console.log(currentCategory)
      
     }
   }, [searchBlog])
@@ -161,11 +163,11 @@ const BlogComponent = () => {
         {!isLoading && !blog.data.length && <p className="w-full text-center mt-32 text-xl font-semibold">OOPS! THE BLOG DOESN'T YET EXIST, IT'S COMING SOON...</p>}
         {isLoading && <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4"><BlogSkeleton /></div>}
         {!isLoading && (
-          <div className={"columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4"}>
+          <div className={"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"}>
             {blog.data.map((blog: any, index: number) => {
               return (
                 <div className="border border-line rounded hover:-translate-y-2 transition-all duration-300 ">
-                  <Link href={`blog/${blog.attributes.slug}`} className="rounded break-inside-avoid-column overflow-hidden cursor-pointer">
+                  <Link href={`blog/${blog.attributes.slug}`} className="rounded overflow-hidden cursor-pointer">
                     <div className="relative">
                         <Image src={blog.attributes.image.data.attributes.formats.medium.url} width={blog.attributes.image.data.attributes.formats.medium.width} height={blog.attributes.image.data.attributes.formats.medium.height} alt="image" placeholder="blur" blurDataURL={blog.attributes.image.data.attributes.placeholder} />
                         <div className="absolute z-10 right-2 bottom-2 flex gap-2 flex-wrap">
