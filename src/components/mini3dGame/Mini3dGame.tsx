@@ -9,7 +9,7 @@ const Mini3dGame = () => {
 
   return (
     <div className={`hidden ${context.enabled3dSpline ? "lg:block" : "hidden"}`}>
-          {splineLoading && <p className="absolute right-28 lg:right-64 animate-pulse lg:top-72 top-96">Rendering spline...</p>}
+          {splineLoading && <p className="absolute right-28 lg:right-64 animate-pulse lg:top-48 ">Rendering 3d Games...</p>}
           <Spline
           onLoad={() => {
             setSplineLoading(false)

@@ -4,14 +4,16 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Mini3dGame from "../components/mini3dGame/Mini3dGame";
 import { useAppContext } from "@/context/AppContext";
 // import Vercel from "../../public/vercel.svg"
+import Background from "../../public/background.svg"
+import DynamicSvgIcon from "@/components/svg/DynamicSvgIcon";
 
 export default function Home() {
 
   const context = useAppContext();
 
   return (
-    <>
-      <section className="w-full sm:w-max relative z-10 h-full flex flex-col text-sm sm:text-base lg:pl-32 lg:pt-24 gap-12 justify-center lg:justify-start px-6">
+    <div className="w-full h-full relative">
+      <section className="w-full  sm:w-max relative z-10 h-full flex flex-col text-sm sm:text-base lg:pl-32 lg:pt-24 gap-12 justify-center lg:justify-start px-6">
           <div className="space-y-4 w-full">
             <div className="flex items-center justify-center w-max gap-2">
               <p className="bg-accent h-2 w-2 rounded-full inline-block"></p>
@@ -37,9 +39,10 @@ export default function Home() {
           </div>
       </section>
       <section>
+        {!context.smallDevices && !context.enabled3dSpline && <Background className="absolute -right-36 scale-50 -top-64 fill-accent animate-pulse" />}
         {/* <Vercel className="fill-slate-200 text-red-500 w-8 h-8" /> */}
         {!context.smallDevices && context.enabled3dSpline && <Mini3dGame />}
       </section>
-    </>
+    </div>
   );
 }

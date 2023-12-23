@@ -40,7 +40,7 @@ export const AppProvider = ( { children }: { children: ReactNode } ) => {
             primary: "#fff",
             secondary: "#1b232b",
             tertiary: "#61677A",
-            accent: "#e5e5e5",
+            accent: "#999",
             button_hover: "#f8f8f8",
             button_active: "rgba(0, 0, 0, 0.07)",
             line: "#c3c9d3",
