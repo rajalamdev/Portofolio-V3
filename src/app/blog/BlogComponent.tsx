@@ -16,11 +16,11 @@ const fetcher = (url: string) => fetch(url, {
   },
 }).then(r => r.json())
 
-const BlogComponent = ({ data }: {data: any}) => {
-  const { data: blogAPI } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blogs?populate[image]=*&populate[blog_categories]=*&sort[0]=createdAt:desc`, fetcher)
-  const { data: blogCategoriesAPI } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blog-categories`, fetcher)
-  const [blog, setBlog] = useState(data)
-  const [blogCategories, setBlogCategories] = useState(blogCategoriesAPI)
+const BlogComponent = ({ blogs, categories }: {blogs: any, categories: any}) => {
+  // const { data: blogAPI } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blogs?populate[image]=*&populate[blog_categories]=*&sort[0]=createdAt:desc`, fetcher)
+  // const { data: blogCategoriesAPI } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blog-categories`, fetcher)
+  const [blog, setBlog] = useState(blogs)
+  const [blogCategories, setBlogCategories] = useState(categories)
   const [isLoading, setIsLoading] = useState(true)
   const [categoriesInclude, setCategoriesInclude] = useState<any>([])
   const [currentCategory, setCurrentCategory] = useState("")
@@ -70,9 +70,9 @@ const BlogComponent = ({ data }: {data: any}) => {
 
   useEffect(() => {
     if(currentSortBy.icon === "calendar"){
-      setBlog(blogAPI)
+      setBlog(blogs)
     } else {
-      const copyBlog = blogAPI.data.slice();
+      const copyBlog = blogs.data.slice();
       const sortByViews = copyBlog.sort((blogX: any, blogY: any) => blogY.attributes.views - blogX.attributes.views)
       setBlog({data: sortByViews, meta: blog.meta})
     }
@@ -80,7 +80,7 @@ const BlogComponent = ({ data }: {data: any}) => {
 
   useEffect(() => {
     if(!searchBlog.length && blog){
-      setBlog(blogAPI)
+      setBlog(blogs)
       setSearchBlog("")
       setCategoriesInclude([])
       setActiveCategories([])
@@ -91,7 +91,7 @@ const BlogComponent = ({ data }: {data: any}) => {
       const splitSearch = searchBlog.toString().split(" ")
       setActiveCategories(splitSearch)
       
-      const searchBlogFilter = blogAPI.data.filter((blog: any) => 
+      const searchBlogFilter = blogs.data.filter((blog: any) => 
         splitSearch.every(s => blog.attributes.title.toLowerCase().includes(s.toLowerCase()))
         ||
         splitSearch.every(s => blog.attributes.blog_categories.data.some((cat: any) => cat.attributes.title.toLowerCase().includes(s.toLowerCase())))  
@@ -155,15 +155,15 @@ const BlogComponent = ({ data }: {data: any}) => {
             </div>
           </div>
           <div className="flex gap-2 flex-wrap cursor-pointer">
-            {isLoading && <BlogCategoriesSkeleton />}
-            {!isLoading && blogCategories.data.map((cat: any) => <button disabled={(!blog.data.length && !categoriesInclude.includes(currentCategory)) || (categoriesInclude.length && !categoriesInclude.includes(cat.attributes.title))} onClick={() => filterHandler(cat)} className={`py-1 rounded px-2 ${activeCategories.includes(cat.attributes.title) && blog.data.length ? "bg-accent text-black" : "bg-line"} ${!blog.data.length && !categoriesInclude.includes(currentCategory) ? "opacity-50 cursor-not-allowed" : categoriesInclude.length && !categoriesInclude.includes(cat.attributes.title) && "opacity-50 cursor-not-allowed"}`}>{cat.attributes.title}</button>)}        
+            {/* {isLoading && <BlogCategoriesSkeleton />} */}
+            {isLoading && blogCategories.data.map((cat: any) => <button disabled={(!blog.data.length && cat.attributes.title != currentCategory) || (categoriesInclude.length && !categoriesInclude.includes(cat.attributes.title))} onClick={() => filterHandler(cat)} className={`py-1 rounded px-2 ${activeCategories.includes(cat.attributes.title) && blog.data.length ? "bg-accent text-black" : !blog.data.length && cat.attributes.title == currentCategory ? "bg-accent text-black" : "bg-line"} ${!blog.data.length && cat.attributes.title != currentCategory ? "opacity-50 cursor-not-allowed" : categoriesInclude.length && !categoriesInclude.includes(cat.attributes.title) && "opacity-50 cursor-not-allowed"}`}>{cat.attributes.title}</button>)}        
           </div>
         </div>
         {!isLoading && !blog.data.length && <p className="w-full text-center mt-32 text-xl font-semibold">OOPS! THE BLOG DOESN'T YET EXIST, IT'S COMING SOON...</p>}
         {/* {isLoading && <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4"><BlogSkeleton /></div>} */}
         {isLoading && (
           <div className={"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"}>
-            {data.data.map((blog: any, index: number) => {
+            {blog.data.map((blog: any, index: number) => {
               return (
                 <div className="border border-line rounded hover:-translate-y-2 transition-all duration-300 ">
                   <Link href={`blog/${blog.attributes.slug}`} className="rounded overflow-hidden cursor-pointer">

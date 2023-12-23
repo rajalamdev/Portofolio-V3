@@ -20,14 +20,21 @@ const getNowPlayingSpotify = async () => {
   return await res.json();
 };
 
-const Blog = async () => {
-  const data = await getNowPlayingSpotify();
+const getAllCategories = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blog-categories`, {
+    cache: 'force-cache',
+    headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}` },
+  })
+  return await res.json();
+}
 
+const Blog = async () => {
+  const data = await Promise.all([getNowPlayingSpotify(), getAllCategories()]);
 
   return (
     <>
       <div className="overflow-auto h-full sm:px-12 sm:py-10 p-6">
-        <BlogComponent data={data} />
+        <BlogComponent blogs={data[0]} categories={data[1]} />
       </div>
     </>
   );
