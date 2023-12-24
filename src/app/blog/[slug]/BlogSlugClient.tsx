@@ -1,7 +1,8 @@
 "use client"
 import MdxMarkdown from "@/components/markdown/MdxMarkdown";
+import { useAppContext } from "@/context/AppContext";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { startTransition, useEffect, useState } from "react";
 import { mutate } from "swr";
 // import { revalidatePath } from "next/cache";
 
@@ -10,7 +11,6 @@ const BlogSlugClient = ({ dataBlog, content }: {dataBlog: any, content: any}) =>
   const router = useRouter()
 
   useEffect(() => {
-    console.log(dataBlog.attributes.views)
     const incrementViews = async () => {
         await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blogs/${dataBlog.id}`, {
             method: "PUT",
@@ -23,7 +23,22 @@ const BlogSlugClient = ({ dataBlog, content }: {dataBlog: any, content: any}) =>
             })
         })
         mutate(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blogs?populate[image]=*&populate[blog_categories]=*&sort[0]=createdAt:desc`)
-        router.refresh()
+        // context.setBlogView((prev: any) => prev + 1)
+
+
+        startTransition(() => {
+            setBlogAPI((prev: any) => {
+                return {
+                    ...prev,
+                    attributes: {
+                        ...prev.attributes,
+                        views: prev.attributes.views + 1
+                    }
+                }
+            })
+            
+            router.refresh()
+        })
     }
     incrementViews()
   }, [])

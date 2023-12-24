@@ -174,7 +174,7 @@ export const AppProvider = ( { children }: { children: ReactNode } ) => {
         setTopArtistEndpoint,
         theme,
         setTheme,
-        themeList
+        themeList,
     }
 
     return (

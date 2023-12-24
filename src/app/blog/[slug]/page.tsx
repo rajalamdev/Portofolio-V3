@@ -11,30 +11,31 @@ async function getPost(slug: string) {
       headers: {
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
       },
-      cache: 'force-cache'
+      // cache: 'force-cache'
+      next: { revalidate: 1}
     })
     const res = await req.json();
     
   
-    // const html = await serialize(res.data[0].attributes.content, {
-    //   mdxOptions: {
-    //     rehypePlugins: [
-    //       rehypeCodeTitles,
-    //       rehypePrism
-    //   ],
-    //     remarkPlugins: [
-    //         remarkGfm
-    //     ]
-    //   }
-    // });
-    // return {blog: res.data[0], content: html}
+    const html = await serialize(res.data[0].attributes.content, {
+      mdxOptions: {
+        rehypePlugins: [
+          rehypeCodeTitles,
+          rehypePrism
+      ],
+        remarkPlugins: [
+            remarkGfm
+        ]
+      }
+    });
+    return {blog: res.data[0], content: html}
   }
 
 const page = async ({ params }: { params: { slug: string }}) => {
   const dataPost = await getPost(params.slug)
   return (
     <section className="h-full overflow-auto">
-        {/* <BlogSlugClient dataBlog={dataPost.blog} content={dataPost.content} /> */}
+        <BlogSlugClient dataBlog={dataPost.blog} content={dataPost.content} />
     </section>
   )
 }

@@ -9,6 +9,8 @@ import ProjectSkeleton from "@/components/loading-skeleton/ProjectSkeleton"
 import BlogSkeleton from "@/components/loading-skeleton/BlogSkeleton"
 import BlogCategoriesSkeleton from "@/components/loading-skeleton/BlogCategoriesSkeleton"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useAppContext } from "@/context/AppContext"
 
 const fetcher = (url: string) => fetch(url, {
   headers: {
@@ -16,7 +18,8 @@ const fetcher = (url: string) => fetch(url, {
   },
 }).then(r => r.json())
 
-const BlogComponent = ({ blogs, categories }: {blogs: any, categories: any}) => {
+const BlogClient = ({ blogs, categories }: {blogs: any, categories: any}) => {
+  const router = useRouter()
   // const { data: blogAPI } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blogs?populate[image]=*&populate[blog_categories]=*&sort[0]=createdAt:desc`, fetcher)
   // const { data: blogCategoriesAPI } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blog-categories`, fetcher)
   const [blog, setBlog] = useState(blogs)
@@ -204,4 +207,4 @@ const BlogComponent = ({ blogs, categories }: {blogs: any, categories: any}) => 
 
 }
 
-export default BlogComponent
+export default BlogClient
