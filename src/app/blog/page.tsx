@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import BlogClient from "./BlogClient";
 import DynamicBlurImage from "@/components/images/DynamicBlurImage";
 
-export const getBlogs = async () => {
+const getBlogs = async () => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blogs?populate[image]=*&populate[blog_categories]=*&sort[0]=createdAt:desc`,
     {
