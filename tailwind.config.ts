@@ -8,6 +8,13 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      // typography: {
+      //   DEFAULT: {
+      //     css: {
+      //       maxWidth: '1000ch', // add required value here
+      //     }
+      //   }
+      // },
       screens: {
         'lg': "1128px"
       },
@@ -73,6 +80,8 @@ const config: Config = {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 }
 export default config

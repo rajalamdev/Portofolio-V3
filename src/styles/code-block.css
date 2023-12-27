@@ -25,6 +25,27 @@
   overflow: auto;
 }
 
+.colorful code[class*="language-"],
+pre[class*="language-"] {
+  background: var(--bg-outside);
+  color: hsl(220, 14%, 71%);
+  text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.5;
+  -moz-tab-size: 2;
+  -o-tab-size: 2;
+  tab-size: 2;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+  overflow: auto;
+}
+
 code[class*="language-"],
 pre[class*="language-"] {
   background: var(--bg-outside);
@@ -43,6 +64,7 @@ pre[class*="language-"] {
   -moz-hyphens: none;
   -ms-hyphens: none;
   hyphens: none;
+  overflow: auto;
 }
 code[class*="language-"]::-moz-selection,
 code[class*="language-"] *::-moz-selection,

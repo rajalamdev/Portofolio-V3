@@ -1,5 +1,4 @@
 import querystring from 'querystring'
-import { useAppContext } from '@/context/AppContext'
 
 const client_id = process.env.SPOTIFY_CLIENT_ID
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET
@@ -11,15 +10,14 @@ const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`
 // now playing
 const NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`
 
-
 export const getNowPlaying = async () => {
     const { access_token } = await getAccessToken();
 
     return fetch(NOW_PLAYING_ENDPOINT, {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      })
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    })
 } 
 
 export const getTopArtist = async (query: string) => {
@@ -43,7 +41,6 @@ const getAccessToken = async () => {
           refresh_token,
         }),
         next: { revalidate: 1 },
-        
       })
     
       return response.json()
