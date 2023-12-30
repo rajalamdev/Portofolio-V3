@@ -9,6 +9,7 @@ import { mutate } from "swr";
 const BlogSlugClient = ({ dataBlog, content }: {dataBlog: any, content: any}) => {
   const [blogAPI, setBlogAPI] = useState(dataBlog)
   const router = useRouter()
+  console.log(blogAPI.attributes.views + 1)
 
   useEffect(() => {
     const incrementViews = async () => {
@@ -22,23 +23,8 @@ const BlogSlugClient = ({ dataBlog, content }: {dataBlog: any, content: any}) =>
                 data: {views: dataBlog.attributes.views + 1}
             })
         })
-        mutate(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blogs?populate[image]=*&populate[blog_categories]=*&sort[0]=createdAt:desc`)
-        // context.setBlogView((prev: any) => prev + 1)
-
-
-        startTransition(() => {
-            setBlogAPI((prev: any) => {
-                return {
-                    ...prev,
-                    attributes: {
-                        ...prev.attributes,
-                        views: prev.attributes.views + 1
-                    }
-                }
-            })
-            
-            router.refresh()
-        })
+        // mutate(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blogs?populate[image]=*&populate[blog_categories]=*&sort[0]=createdAt:desc`)
+        router.refresh()
     }
     incrementViews()
   }, [])
