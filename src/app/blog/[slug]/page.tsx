@@ -5,6 +5,7 @@ import { serialize } from "next-mdx-remote/serialize";
 import MdxMarkdown from "@/components/markdown/MdxMarkdown";
 import Navbar from "@/components/header/Navbar";
 import BlogSlugClient from "./BlogSlugClient";
+import { unified } from "unified"
 
 async function getPost(slug: string) {
     const req = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blogs?filters[slug][$eq]=${slug}&populate[image]=*`, {

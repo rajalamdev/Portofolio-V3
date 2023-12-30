@@ -4,6 +4,7 @@ import rehypeCodeTitles from 'rehype-code-titles'
 import rehypePrismAll from 'rehype-prism-plus/all'
 import withPlaiceholder from "@plaiceholder/next";
 import lineClamp from "@tailwindcss/line-clamp"
+import remarkGfm from 'remark-gfm';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -52,10 +53,10 @@ const nextConfig = {
 const withMDX = createMDX({
   options: {
     extension: /\.mdx?$/,
-    remarkPlugins: [remarkPrism],
+    remarkPlugins: [remarkPrism, remarkGfm],
     rehypePlugins: [rehypePrismAll, rehypeCodeTitles],
     // If you use `MDXProvider`, uncomment the following line.
-    // providerImportSource: "@mdx-js/react",
+    providerImportSource: "@mdx-js/react",
   },
 })
  
