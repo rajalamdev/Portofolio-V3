@@ -15,7 +15,7 @@ const getBlogs = async () => {
     {
       // cache: 'no-store',
       headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}` },
-      next: { revalidate: 0 },
+      next: { revalidate: 1},
     }
   );
   return await res.json();
