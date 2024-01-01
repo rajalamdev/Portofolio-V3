@@ -33,7 +33,7 @@ const BlogSlugClient = ({ dataBlog, content }: {dataBlog: any, content: any}) =>
 
   return (
     <>
-        <div className="p-8 space-y-2 text-secondary">
+        <div className="py-4 px-28 space-y-2 text-secondary">
             <div className="relative w-full h-[450px]">
                 <Image src={blogAPI.attributes.image.data.attributes.url} fill alt="blog image header" className="object-cover rounded-xl" placeholder="blur" blurDataURL={blogAPI.attributes.image.data.attributes.placeholder} />
             </div>
@@ -52,8 +52,8 @@ const BlogSlugClient = ({ dataBlog, content }: {dataBlog: any, content: any}) =>
             </div>
             <div className="w-full h-[2px] bg-line"></div>
         </div>
-        <div className="overflow-x-hidden colorful prose prose-invert text-[#c9ced3] max-w-none flex">
-            <div className="px-8 w-3/4 text-base">
+        <div className="overflow-x-hidden flex px-28">
+            <div className="w-3/4 pr-4 text-base colorful prose prose-invert text-[#c9ced3] max-w-none">
                 <MdxMarkdown data={content} />
             </div>
             <div className="flex-1 bg-red-500">
