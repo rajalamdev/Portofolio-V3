@@ -4,6 +4,7 @@ import Layout from "../../components/layout/Layout"
 import DynamicSvgIcon from "../../components/svg/DynamicSvgIcon"
 import Image from "next/image"
 import { useEffect, useState } from "react"
+import { useAppContext } from "@/context/AppContext"
 
 const Contact = () => {
   const contactBoxList = [
@@ -33,6 +34,8 @@ const Contact = () => {
     }, 1000)
   }, [])
 
+  const context = useAppContext()
+
   return (
     <div className="h-full overflow-y-auto overflow-x-hidden px-6 sm:px-12 flex flex-col relative">
         <div className="flex h-20 gap-4 top-0 left-0 mb-8">
@@ -57,7 +60,7 @@ const Contact = () => {
                 <span className="absolute bg-primary -top-[10px] px-2 left-2 peer z-10 cursor-pointer">_message</span>
                 <textarea value="Just wanted to say hi!" name="name" id="name" className="min-h-[100px] max-h-[120px] text-secondary outline-none bg-transparent border border-tertiary p-2 rounded w-full focus:scale-x-105 focus:border-accent transition-transform duration-300 px-4" autoComplete="false" required />
               </label>
-              <button type="submit" className="py-2 px-4 bg-accent rounded text-black active:ring-2 ring-accent ring-offset-4 ring-offset-primary">send-message</button>
+              <button type="submit" className="buttonColorful py-2 px-4 bg-accent rounded active:ring-2 ring-accent ring-offset-4 ring-offset-primary">send-message</button>
             </form>
           </div>
 
@@ -70,8 +73,8 @@ const Contact = () => {
             {contactBoxList.map(contact => {
               return (
                 <div className="group lg:w-56 w-64 lg:h-[120px] h-[130px] cursor-pointer" key={contact.name}>
-                  <div className="bg-accent w-full h-full rounded-br-3xl rounded-tl-3xl flex justify-center items-center relative group-hover:-translate-y-4 transition-all duration-300">
-                    <DynamicSvgIcon name={contact.icon} className="w-10 fill-secondary" />
+                  <div className="bg-accent buttonColorful w-full h-full rounded-br-3xl rounded-tl-3xl flex justify-center items-center relative group-hover:-translate-y-4 transition-all duration-300">
+                    <DynamicSvgIcon name={contact.icon} className="w-10 fill-white" />
                     <p className="absolute text-secondary bottom-0 opacity-0 group-hover:opacity-100 group-hover:-bottom-8 -z-10 transition-all duration-300">{contact.name}</p>
                   </div>
                 </div>

@@ -33,6 +33,7 @@ export const AppProvider = ( { children }: { children: ReactNode } ) => {
             button_hover: "#0f2233",
             button_active: "rgba(0, 0, 0, 0.2)",
             line: "#1e2d3d",
+            type: "dark"
         },
         {
             name: "Snowy",
@@ -40,10 +41,11 @@ export const AppProvider = ( { children }: { children: ReactNode } ) => {
             primary: "#fff",
             secondary: "#1b232b",
             tertiary: "#61677A",
-            accent: "#999",
+            accent: "#27272a",
             button_hover: "#f8f8f8",
             button_active: "rgba(0, 0, 0, 0.07)",
             line: "#c3c9d3",
+            type: "light"
         },
         {
             name: "Elegant",
@@ -55,6 +57,7 @@ export const AppProvider = ( { children }: { children: ReactNode } ) => {
             button_hover: "#102733",
             button_active: "#07141b",
             line: "#0b1c25",
+            type: "dark"
         },
         {
             name: "Peach",
@@ -66,6 +69,7 @@ export const AppProvider = ( { children }: { children: ReactNode } ) => {
             button_hover: "#472542",
             button_active: "rgba(0, 0, 0, 0.2)",
             line: "#5a2f51",
+            type: "dark"
         },
         {
             name: "Azure",
@@ -77,6 +81,7 @@ export const AppProvider = ( { children }: { children: ReactNode } ) => {
             button_hover: "#0f2233",
             button_active: "rgba(0, 0, 0, 0.2)",
             line: "#0e1720",
+            type: "dark"
         },
         {
             name: "Coffee",
@@ -88,6 +93,7 @@ export const AppProvider = ( { children }: { children: ReactNode } ) => {
             button_hover: "#574343",
             button_active: "rgba(0, 0, 0, 0.2)",
             line: "#332525",
+            type: "dark"
         },
         {
             name: "Vermilion",
@@ -99,6 +105,7 @@ export const AppProvider = ( { children }: { children: ReactNode } ) => {
             button_hover: "#580404",
             button_active: "rgba(0, 0, 0, 0.25)",
             line: "#691414",
+            type: "dark"
         },
         {
             name: "Xanthous",
@@ -110,6 +117,7 @@ export const AppProvider = ( { children }: { children: ReactNode } ) => {
             button_hover: "#222631",
             button_active: "rgba(0, 0, 0, 0.25)",
             line: "#2b303d",            
+            type: "dark"
         },
     ]
 
@@ -123,6 +131,7 @@ export const AppProvider = ( { children }: { children: ReactNode } ) => {
         button_hover: "#0f2233",
         button_active: "rgba(0, 0, 0, 0.2)",
         line: "#1e2d3d",
+        type: "dark"
     })
 
     function storageExist(){
@@ -131,10 +140,11 @@ export const AppProvider = ( { children }: { children: ReactNode } ) => {
     }
 
     function loadDataFromStorage(){
+
         const themeLocalStorage = localStorage.getItem("theme");
         if(themeLocalStorage != null){
             const parsedTheme = JSON.parse(themeLocalStorage)
-
+            const html = document.querySelector<any>("html");
             const root = document.querySelector<any>(":root");
             root.style.setProperty("--bg-outside", parsedTheme.bg_outside)
             root.style.setProperty("--primary", parsedTheme.primary)
@@ -144,6 +154,7 @@ export const AppProvider = ( { children }: { children: ReactNode } ) => {
             root.style.setProperty("--button-hover", parsedTheme.button_hover)
             root.style.setProperty("--button-active", parsedTheme.button_active)
             root.style.setProperty("--line", parsedTheme.line)
+            html.className = parsedTheme.type == "dark" ? "dark" : "light"
             setTheme(parsedTheme)
         }
     }

@@ -51,6 +51,12 @@ const Navbar = () => {
   function themeHandler(currentTheme: any){
     if(context.theme.name === currentTheme.name) return
     const root = document.querySelector<any>(":root");
+    const html = document.querySelector<any>("html");
+    if (currentTheme.type === "dark") {
+      html.className = "dark";
+    } else {
+      html.className = "light";
+    }
     root.style.setProperty("--bg-outside", currentTheme.bg_outside)
     root.style.setProperty("--primary", currentTheme.primary)
     root.style.setProperty("--secondary", currentTheme.secondary)

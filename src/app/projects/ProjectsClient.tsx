@@ -2,6 +2,7 @@
 import ProjectSkeleton from "@/components/loading-skeleton/ProjectSkeleton"
 import ProjectsCategoriesSkeleton from "@/components/loading-skeleton/ProjectsCategoriesSkeleton"
 import DynamicSvgIcon from "@/components/svg/DynamicSvgIcon"
+import { useAppContext } from "@/context/AppContext"
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState } from "react"
@@ -23,6 +24,7 @@ const ProjectsClient = ({ projectsApi, projectsCategoriesApi }: any) => {
     const [isLoading, setIsLoading] = useState(true)
     const [categoriesInclude, setCategoriesInclude] = useState<any>([])
     const [currentCategory, setCurrentCategory] = useState("")
+    const context = useAppContext()
   
     useEffect(() => {
       if(!queryLanguage.length && projects){
@@ -94,7 +96,7 @@ const ProjectsClient = ({ projectsApi, projectsCategoriesApi }: any) => {
                     {project.attributes.project_categories.data.map((icon: any) => {
                         return (
                         <div className="p-1 flex gap-2 bg-accent">
-                            <DynamicSvgIcon name={icon.attributes.icons.data[0].attributes.title} className="w-4 fill-black" />
+                            <DynamicSvgIcon name={icon.attributes.icons.data[0].attributes.title} className={`w-4 ${context.theme.type == "light" ? "fill-white" : "fill-black"}`} />
                         </div>
                         )
                     })}

@@ -25,9 +25,9 @@
   overflow: auto;
 }
 
-.colorful code[class*="language-"],
-pre[class*="language-"] {
-  background: var(--bg-outside);
+.lightMode code[class*="language-"],
+.lightMode pre[class*="language-"] {
+  background: #1f2937;
   color: hsl(220, 14%, 71%);
   text-shadow: 0 1px rgba(0, 0, 0, 0.3);
   direction: ltr;
@@ -46,9 +46,35 @@ pre[class*="language-"] {
   overflow: auto;
 }
 
+.darkMode code[class*="language-"],
+.darkMode pre[class*="language-"] {
+  background: #0d1117;
+  color: hsl(220, 14%, 71%);
+  text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.5;
+  -moz-tab-size: 2;
+  -o-tab-size: 2;
+  tab-size: 2;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+  overflow: auto;
+}
+
+.colorful code[class*="language-"],
+.colorful pre[class*="language-"] {
+  color: hsl(220, 14%, 71%);
+}
+
 code[class*="language-"],
 pre[class*="language-"] {
-  background: var(--bg-outside);
+  background: #0d1117;
   color: var(--tertiary);
   text-shadow: 0 1px rgba(0, 0, 0, 0.3);
   direction: ltr;
@@ -66,6 +92,7 @@ pre[class*="language-"] {
   hyphens: none;
   overflow: auto;
 }
+
 code[class*="language-"]::-moz-selection,
 code[class*="language-"] *::-moz-selection,
 pre[class*="language-"] *::-moz-selection {

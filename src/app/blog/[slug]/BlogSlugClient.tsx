@@ -6,12 +6,12 @@ import convertStringToTime from "@/utils/convertStringToTime";
 import convertToMinsRead from "@/utils/convertToMinsRead";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { startTransition, useEffect, useState } from "react";
-import { mutate } from "swr";
+import { useEffect, useState } from "react";
 
 const BlogSlugClient = ({ dataBlog, content }: {dataBlog: any, content: any}) => {
   const [blogAPI, setBlogAPI] = useState(dataBlog)
   const router = useRouter()
+  const context = useAppContext()
 
   useEffect(() => {
     const incrementViews = async () => {
@@ -52,8 +52,8 @@ const BlogSlugClient = ({ dataBlog, content }: {dataBlog: any, content: any}) =>
             </div>
             <div className="w-full h-[2px] bg-line"></div>
         </div>
-        <div className="overflow-x-hidden flex px-28">
-            <div className="w-3/4 pr-4 text-base colorful prose prose-invert text-[#c9ced3] max-w-none">
+        <div className="overflow-x-hidden flex px-28 py-4">
+            <div className={`w-3/4 pr-4 text-base prose colorful ${context.theme.type == "light" ? "lightMode" : "text-[#c9ced3] prose-invert prose-pre:bg-[#0d1117] darkMode"} max-w-none`}>
                 <MdxMarkdown data={content} />
             </div>
             <div className="flex-1 bg-red-500">
