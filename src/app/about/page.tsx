@@ -180,7 +180,7 @@ const About = () => {
             {isLoading && <SpotifyNowPlayingSkeleton />}
             {!data?.isPlaying && !isLoading && <p className="px-2 py-2">currently not listening to anything</p>}
             {data?.isPlaying && !isLoading && <a href={data?.songUrl} target="_blank" className="flex gap-2 py-2 px-6 md:px-2 md:py-2 items-center">
-              <Image src={data?.albumImageUrl} width={50} height={50} alt="spotify album" className="self-start" />
+              <Image src={data?.albumImageUrl} width={50} height={50} alt="spotify album" className="self-start" placeholder="blur" blurDataURL={data?.hashImage} />
               <div>
                 <h4 className="text-[12px] [word-spacing:-2px] text-secondary">{data?.title}</h4>
                 <p className="text-[10px] [word-spacing:-2px]">{data?.artist}</p>

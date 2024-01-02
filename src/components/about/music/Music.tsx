@@ -21,12 +21,6 @@ const Music = () => {
     `/api/top-artist?${queryArtistsTimeRange}&limit=10`, fetcher
   );
 
-  useEffect(() => {
-    if(dataArtists){
-      console.log(dataArtists)
-    }
-  }, [dataArtists])
-
   function artistsTimeRangeHanlder(e: any) {
     const time = e.target.name;
     switch (time) {
@@ -59,7 +53,7 @@ const Music = () => {
             {timeRange.map((time) => (
               <button
                 className={`${
-                  artistsTimeRange === time && "bg-accent text-black"
+                  artistsTimeRange === time && "bg-accent buttonColorful"
                 } border p-2 rounded border-line`}
                 name={time}
                 onClick={artistsTimeRangeHanlder}
@@ -85,6 +79,8 @@ const Music = () => {
                       height={80}
                       alt="artist image"
                       className="object-cover"
+                      placeholder="blur"
+                      blurDataURL={artist.hashImage}
                     />
                     <div className="space-y-2">
                       <h5 className="text-secondary [word-spacing:-4px]">

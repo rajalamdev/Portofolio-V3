@@ -17,7 +17,7 @@ export const getNowPlaying = async () => {
       headers: {
         Authorization: `Bearer ${access_token}`,
       },
-      next: { revalidate: 0.1 },
+      next: { revalidate: 1 },
     })
 } 
 
@@ -41,7 +41,7 @@ const getAccessToken = async () => {
           grant_type: 'refresh_token',
           refresh_token,
         }),
-        next: { revalidate: 10 },
+        next: { revalidate: 1 },
       })
     
       return response.json()

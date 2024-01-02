@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getNowPlaying } from '@/lib/spotify';
+import { getPlaiceholder } from 'plaiceholder';
  
 export async function GET() {
   const response = await getNowPlaying();
@@ -16,6 +17,12 @@ export async function GET() {
   const albumImageUrl = song.item.album.images[0].url
   const songUrl = song.item.external_urls.spotify
 
+  const buffer = await fetch(albumImageUrl).then(async (res) =>
+    Buffer.from(await res.arrayBuffer())
+  );
+  
+  const { base64 } = await getPlaiceholder(buffer);
+
   return NextResponse.json({
     album,
     albumImageUrl,
@@ -23,5 +30,6 @@ export async function GET() {
     isPlaying,
     songUrl,
     title,
+    hashImage: base64
   })
 }
