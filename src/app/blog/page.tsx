@@ -13,9 +13,9 @@ const getBlogs = async () => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blogs?populate[image]=*&populate[blog_categories]=*&sort[0]=createdAt:desc`,
     {
-      // cache: 'no-store',
+      cache: 'no-store',
       headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}` },
-      next: { revalidate: 1},
+      // next: { revalidate: 1},
     }
   );
   return await res.json();
