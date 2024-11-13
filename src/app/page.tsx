@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <div className="w-full h-full relative">
-      <section className="w-full  sm:w-max relative z-10 h-full flex flex-col text-sm sm:text-base lg:pl-32 lg:pt-24 gap-12 justify-center lg:justify-start px-6">
+      <section className="w-full m:w-max relative z-10 h-full flex flex-col text-sm sm:text-base lg:pl-32 lg:pt-24 gap-12 justify-center lg:justify-start px-6">
           <div className="space-y-4 w-full">
             <div className="flex items-center justify-center w-max gap-2">
               <p className="bg-accent h-2 w-2 rounded-full inline-block"></p>
@@ -22,19 +22,29 @@ export default function Home() {
               {/* <button onClick={() => audio?.play()}>sdfsdf</button> */}
             </div>
             <h1 className="[word-spacing:-7px] text-secondary font-semibold text-4xl">I am Raj Alam</h1>
-            <h2>{"> Fullstack JavaScript Developer"}</h2>
+            <h2>{"> Just an Ordinary Developer"}</h2>
           </div>
           <div className="w-full space-y-1">
             <div className="sm:hidden space-y-1">
               <p className="italic">// Based in South Tangerang,</p>
-              <p className="italic">// Indonesia 🇮🇩</p>
+              <p className="italic flex gap-2 items-center">// Indonesia 
+                <span className="flex flex-col">
+                  <span className="bg-red-500 block w-6 h-[6px]"></span>
+                  <span className="bg-white block w-6 h-[6px]"></span>
+                </span>
+              </p>
             </div>
-            <p className="italic hidden sm:block">// Based in South Tangerang, Indonesia 🇮🇩</p>
+            <p className="italic hidden sm:flex gap-2 items-center">// Based in South Tangerang, Indonesia 
+              <span className="flex flex-col">
+                <span className="bg-red-500 block w-6 h-2"></span>
+                <span className="bg-white block w-6 h-2"></span>
+              </span>
+            </p>
             <p>
               <span className="text-[#c678dd]">const </span>
               <span className="text-secondary">github </span>
               <span className="text-[#61afef]">= </span>
-              <a href="/" className="cursor-link"><span className="text-[#98c379]">{'"https://github.com/rajalamdev"'}</span></a>
+              <a href="https://github.com/rajalamdev" target="_blank" className="cursor-link"><span className="text-[#98c379]">{'"https://github.com/rajalamdev"'}</span></a>
             </p>
           </div>
       </section>

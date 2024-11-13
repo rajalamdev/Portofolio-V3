@@ -8,14 +8,15 @@ const Mini3dGame = () => {
   const context = useAppContext();
 
   return (
-    <div className={`hidden ${context.enabled3dSpline ? "lg:block" : "hidden"}`}>
+    <div className={`hidden ${context.enabled3dSpline ? "lg:block" : "hidden"} bg-red-500`}>
           {splineLoading && <p className="absolute right-28 lg:right-64 animate-pulse lg:top-48 ">Rendering 3d Games...</p>}
           <Spline
           onLoad={() => {
             setSplineLoading(false)
           }}
           scene="https://prod.spline.design/mtpnyKMdEtYOpwXE/scene.splinecode"
-          className="absolute z-0 -top-0 w-max h-max lg:-right-[600px]" />
+          className="absolute z-10 w-full h-full -top-0 bottom-0 left-[650px]" />
+          {/* className='w-full h-full' /> */}
     </div>
   )
 }
