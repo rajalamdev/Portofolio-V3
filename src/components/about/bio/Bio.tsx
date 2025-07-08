@@ -117,7 +117,7 @@ const Bio =  () => {
                 <div key={idx} className="relative flex items-start group">
                   {/* Timeline node */}
                   <div className="absolute -left-4 top-2 flex flex-col items-center z-10">
-                    <div className="w-4 h-4 rounded-full bg-accent border-4 border-white dark:border-black shadow-lg transition-transform duration-300 group-hover:scale-110" />
+                    <div className="w-4 h-4 rounded-full bg-accent border-4 border-primary shadow-lg transition-transform duration-300 group-hover:scale-110" />
                     {/* Line to next node */}
                     {idx < experiences.length - 1 && (
                       <div className="w-1 h-24 bg-gradient-to-b from-accent/80 to-primary/30 mx-auto"></div>
@@ -125,9 +125,9 @@ const Bio =  () => {
                   </div>
                   {/* Content */}
                   <div className="ml-4 flex-1">
-                    <div className="flex flex-col md:flex-row md:items-center gap-1 mb-1 justify-between">
-                      <span className="font-bold text-lg text-accent">{exp.title}</span>
-                      <span className="text-secondary text-xs md:ml-3">{exp.period}</span>
+                    <div className="flex flex-col md:flex-row md:items-center gap-1 mb-1">
+                      <span className="font-bold text-lg text-accent ">{exp.title}</span>
+                      <span className="text-secondary text-xs flex-1 flex md:justify-end">{exp.period}</span>
                     </div>
                     <div className="mb-2 text-secondary">
                       {exp.company}

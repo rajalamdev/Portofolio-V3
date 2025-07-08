@@ -67,7 +67,7 @@ const ProjectsClient = ({ projectsApi, projectsCategoriesApi, showFilter = false
           priority
         />
         <div className="absolute inset-0 bg-black/60" />
-        <div className="flex gap-6 max-w-4xl flex-wrap justify-center items-center relative z-20">
+        <div className="flex gap-3 md:gap-6 md:max-w-4xl flex-wrap justify-center items-center relative z-20 px-2">
           {projectsCategoriesApi.map((cat: any) => {
             const isActive = queryLanguage.includes(cat.query);
             const found = tagIconColorList.find(item => item.tag === cat.query);
@@ -78,8 +78,8 @@ const ProjectsClient = ({ projectsApi, projectsCategoriesApi, showFilter = false
               <button 
                 key={cat.id}
                 onClick={() => filterCategoryHandler(cat.query)}
-                className={`py-2 px-4  ${isActive ? "bg-accent ring-2 ring-accent text-black" : "bg-primary ring-2 ring-accent text-white"} rounded ring-offset-4 ring-offset-primary flex items-center gap-2`}>
-                <DynamicSvgIcon name={iconName} width={18} height={18} className={iconClass} style={iconStyle} />
+                className={`py-1 px-2 md:py-2 md:px-4  ${isActive ? "bg-accent ring-1 md:ring-2 ring-accent text-black" : "bg-primary ring-1 md:ring-2 ring-accent text-white"} text-xs md:text-base rounded ring-offset-2 md:ring-offset-4 ring-offset-primary flex items-center gap-2`}>
+                <DynamicSvgIcon name={iconName} className={`${iconClass} w-2 h-2 md:w-4 md:h-4`} style={iconStyle} />
                 {cat.query}
               </button>
             );

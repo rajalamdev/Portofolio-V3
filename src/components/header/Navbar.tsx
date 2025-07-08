@@ -143,7 +143,7 @@ const Navbar = () => {
         </div>
 
         {/* theme */}
-        <div ref={themeSection} className={`fixed z-50 left-0 right-0 bottom-0 top-0 transition-opacity duration-300   ${showTheme ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"} flex backdrop-blur-sm bg-black/20 justify-center items-center`}>
+        <div ref={themeSection} className={`fixed z-[100] left-0 right-0 bottom-0 top-0 transition-opacity duration-300   ${showTheme ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"} flex backdrop-blur-sm bg-black/20 justify-center items-center`}>
           <div className={`max-w-[350px] h-[400px] p-4 ${showTheme ? "opacity-100" : "opacity-0"} transition-all bg-primary border border-line w-full rounded-lg flex flex-col relative overflow-hidden`}>
             <div className="flex justify-end pb-2">
               <button onClick={() => setShowTheme(false)}>

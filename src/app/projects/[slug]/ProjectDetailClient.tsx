@@ -173,7 +173,7 @@ const ProjectDetailClient = ({ project, allProjects }: { project: any, allProjec
           </button>
         </div>
         {/* Info Section */}
-        <div className="flex flex-col gap-6 min-w-0 order-1 md:order-2">
+        <div className="flex flex-col gap-6 min-w-0 order-1 md:order-2 px-4">
           <h1 className="text-2xl md:text-4xl font-extrabold text-accent drop-shadow">{project.title}</h1>
           <p className="text-base md:text-lg text-secondary leading-relaxed drop-shadow-md">{project.description}</p>
           {/* Tech Stack Tags */}
