@@ -5,6 +5,8 @@ import Link from "next/link";
 import DynamicSvgIcon from "@/components/svg/DynamicSvgIcon";
 import { tagIconColorList } from "@/constant/tagIconColor";
 
+// TESTING
+
 const ProjectDetailClient = ({ project, allProjects }: { project: any, allProjects: any[] }) => {
   // Related projects: hanya berdasarkan category yang sama
   const relatedProjects = allProjects

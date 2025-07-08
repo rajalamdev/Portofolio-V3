@@ -38,6 +38,7 @@ const Navbar = () => {
     }
   }, [context.enabledMusic])
 
+  // HIDE BLOG
   const navLinks = [
     { text: "_hello", href: "/" },
     { text: "_about", href: "/about" },

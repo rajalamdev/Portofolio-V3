@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { projects } from '@/constant/projects';
 
+// GET PROJECT BY ID
 export async function GET(request: Request, { params }: { params: { slug: string } }) {
   const project = projects.find((p) => p.slug === params.slug);
 

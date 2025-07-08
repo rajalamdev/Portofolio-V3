@@ -6,6 +6,7 @@ import { useState, useEffect } from "react"
 import DynamicSvgIcon from "@/components/svg/DynamicSvgIcon";
 import { tagIconColorList } from "@/constant/tagIconColor";
 
+// TESTING
 interface ProjectsClientProps {
   projectsApi: any[];
   projectsCategoriesApi: any[];
