@@ -5,7 +5,7 @@ import Image from "next/image"
 
 const fetchProjectsApi = async () => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-  const res = await fetch(`${baseUrl}/api/projects`, { cache: 'no-store' });
+  const res = await fetch(`https://rajalam.vercel.app/api/projects`, { cache: 'no-store' });
   if (!res.ok) {
     // Untuk debugging, log error response
     const text = await res.text();

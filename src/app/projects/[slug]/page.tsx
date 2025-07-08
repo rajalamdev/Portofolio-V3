@@ -10,7 +10,7 @@ const fetchProjectsApi = async () => {
 };
 
 const fetchProjectBySlug = async (slug: string) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/projects/${slug}`, {
+  const res = await fetch(`https://rajalam.vercel.app/api/projects/${slug}`, {
     cache: 'no-store',
   });
   if (!res.ok) throw new Error('Project not found');
