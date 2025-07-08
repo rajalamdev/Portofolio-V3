@@ -42,7 +42,7 @@ const Navbar = () => {
     { text: "_hello", href: "/" },
     { text: "_about", href: "/about" },
     { text: "_projects", href: "/projects" },
-    { text: "_blog", href: "/blog" },
+    // { text: "_blog", href: "/blog" },
     { text: "_contact", href: "/contact" },
   ];
 

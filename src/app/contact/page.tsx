@@ -60,7 +60,7 @@ const Contact = () => {
                 <span className="absolute bg-primary -top-[10px] px-2 left-2 peer z-10 cursor-pointer">_message</span>
                 <textarea value="Just wanted to say hi!" name="name" id="name" className="min-h-[100px] max-h-[120px] text-secondary outline-none bg-transparent border border-tertiary p-2 rounded w-full focus:scale-x-105 focus:border-accent transition-transform duration-300 px-4" autoComplete="false" required />
               </label>
-              <button type="submit" className="buttonColorful py-2 px-4 bg-accent rounded active:ring-2 ring-accent ring-offset-4 ring-offset-primary">send-message</button>
+              <button type="submit" className="center hover:ring-2 ring-accent ring-offset-4 active:ring-offset-1 ring-offset-primary text-primary transition-all font-medium py-2 px-4 bg-accent rounded">send-message</button>
             </form>
           </div>
 

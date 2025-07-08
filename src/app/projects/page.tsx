@@ -1,28 +1,36 @@
 import ProjectsClient from "./ProjectsClient"
+import Image from "next/image"
 
 const fetchProjectsApi = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/projects?populate[image]=*&populate[project_categories][populate]=icons`, {
-    cache: 'force-cache',
-    headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}` },
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/projects`, {
+    cache: 'no-store',
   })
   return await res.json();
 }
 
-const fetchProjectsCategoriesApi = async () => {
-   const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/project-categories?populate[icons]=*`, {
-    cache: 'force-cache',
-    headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}` },
-   })
-
-   return await res.json();
-}
-
 const Projects = async () => {
-  const data = await Promise.all([fetchProjectsApi(), fetchProjectsCategoriesApi()])
+  const { projects } = await fetchProjectsApi();
+
+  // Deduplicate projects by id
+  const uniqueProjects = Array.from(
+    new Map(projects.map(item => [item.id, item])).values()
+  );
+
+  // Build categories from tags
+  const allTags = Array.from(new Set(uniqueProjects.flatMap((p) => p.tags)));
+  const projectsCategoriesApi = allTags.map((tag, i) => ({
+    id: i,
+    query: tag,
+    // Optionally add icon mapping here
+  }));
+
   return (
-    <>
-      <ProjectsClient projectsApi={data[0]} projectsCategoriesApi={data[1]} />
-    </>
+    <div className="relative w-full h-full overflow-auto">
+        <ProjectsClient 
+          projectsApi={uniqueProjects} 
+          projectsCategoriesApi={projectsCategoriesApi} 
+        />
+    </div>
   )
 }
 

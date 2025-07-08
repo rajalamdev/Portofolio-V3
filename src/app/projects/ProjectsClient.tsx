@@ -1,117 +1,140 @@
 "use client"
-import ProjectSkeleton from "@/components/loading-skeleton/ProjectSkeleton"
-import ProjectsCategoriesSkeleton from "@/components/loading-skeleton/ProjectsCategoriesSkeleton"
-import DynamicSvgIcon from "@/components/svg/DynamicSvgIcon"
-import { useAppContext } from "@/context/AppContext"
+import { Console } from "console";
 import Image from "next/image"
 import Link from "next/link"
-import { useEffect, useState } from "react"
-// import useSWR from "swr"
+import { useState, useEffect } from "react"
+import DynamicSvgIcon from "@/components/svg/DynamicSvgIcon";
+import { tagIconColorList } from "@/constant/tagIconColor";
 
+interface ProjectsClientProps {
+  projectsApi: any[];
+  projectsCategoriesApi: any[];
+  showFilter?: boolean;
+}
 
-// const fetcher = (url: string) => fetch(url, {
-//   headers: {
-//     Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
-//   },
-// }).then(res => res.json())
+const ProjectsClient = ({ projectsApi, projectsCategoriesApi, showFilter = false }: ProjectsClientProps) => {
+  const [projects, setProjects] = useState<any[]>(projectsApi);
+  const [queryLanguage, setQueryLanguage] = useState<string[]>([]);
 
-const ProjectsClient = ({ projectsApi, projectsCategoriesApi }: any) => {
-    const [queryLanguage, setQueryLanguage] = useState<any>([])
-    // const { data: projectsAPI} = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/projects?populate[image]=*&populate[project_categories][populate]=icons`, fetcher)
-    // const { data: projectsCategoriesAPI } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/project-categories?populate[icons]=*`, fetcher)
-    const [projects, setProjects] = useState(projectsApi)
-    const [projectsCategories, setProjectsCategories] = useState(projectsCategoriesApi)
-    const [isLoading, setIsLoading] = useState(true)
-    const [categoriesInclude, setCategoriesInclude] = useState<any>([])
-    const [currentCategory, setCurrentCategory] = useState("")
-    const context = useAppContext()
-  
-    useEffect(() => {
-      if(!queryLanguage.length && projects){
-        setProjects(projectsApi)
-        setCategoriesInclude([])
-        return 
+  function formatDate(dateString: string) {
+    const months = [
+      "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+    ];
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+    return `${day} ${month} ${year}`;
+  }
+
+  function filterCategoryHandler(tag: string) {
+    setQueryLanguage((prevQueryLanguage) => {
+      if (!prevQueryLanguage.includes(tag)) {
+        return [...prevQueryLanguage, tag];
+      } else {
+        return prevQueryLanguage.filter((q) => q !== tag);
       }
-  
-      if(projects){
-        const filteredProjects = projectsApi.data.filter((project: any) => queryLanguage
-          .every((query: any) => project.attributes.project_categories.data
-          .some((d: any) => d.attributes.query == query))) 
-  
-        setProjects({data: filteredProjects, meta: projects.meta})
-  
-        const getAllQueries = filteredProjects
-          .map((data: any) => data.attributes.project_categories.data.map((data: any) => data.attributes.query))
-          .reduce((prev: any, cur: any) => prev.concat(cur), [])
-  
-        const removeDuplicate = Array.from(new Set(getAllQueries))
-        setCategoriesInclude(removeDuplicate)
-      }
-    }, [queryLanguage])
-    
-    function filterCategoryHandler(currentCategory: any){
-      setCurrentCategory(currentCategory.attributes.query)
-  
-      if(!queryLanguage.some((query: string) => query === currentCategory.attributes.query)){
-        setQueryLanguage([...queryLanguage, currentCategory.attributes.query])
-      }
-      
-      if(queryLanguage.some((query: string) => query === currentCategory.attributes.query)){
-        const filteredQuery = queryLanguage.filter((query: string) => query != currentCategory.attributes.query)
-        setQueryLanguage(filteredQuery)
-      }
+    });
+  }
+
+  useEffect(() => {
+    console.log("queryLanguage:", queryLanguage);
+    console.log("projectsApi:", projectsApi);
+
+    if (queryLanguage.length === 0) {
+      // Sort all projects by created date descending
+      const sorted = [...projectsApi].sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
+      setProjects(sorted);
+    } else {
+      const filtered = projectsApi.filter((project: any) =>
+        queryLanguage.every((query) => project.tags.includes(query))
+      );
+      // Sort filtered projects by created date descending
+      const sorted = [...filtered].sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
+      setProjects(sorted);
     }
+  }, [queryLanguage, projectsApi]);
 
   return (
-    <div className="h-full flex md:flex-row flex-col">
-      <section className="md:max-w-[275px] border-r border-line md:overflow-auto md:flex-grow-0 md:flex-shrink-0">
-          <h4 className="sticky top-0 z-10 bg-primary cursor-pointer text-secondary flex gap-2 py-2 px-6 border-b border-line">
-            <DynamicSvgIcon name="trianglePrimary" className={`w-[10px]`}/> projects
-          </h4>
-          <div className="flex gap-2 flex-wrap p-6 md:p-4 justify-center md:justify-start">
-            {projectsCategories.data.map((cat: any) => {
-              return (
-              <button disabled={(categoriesInclude.length && !categoriesInclude.includes(cat.attributes.query)) || (!projects.data.length && cat.attributes.query != currentCategory)}  onClick={() => filterCategoryHandler(cat)} className={`${queryLanguage.includes(cat.attributes.query) && "bg-accent text-black"} ${categoriesInclude.length && !categoriesInclude.includes(cat.attributes.query) && "opacity-50 cursor-not-allowed"} ${!projects.data.length && cat.attributes.query != currentCategory && "opacity-50 cursor-not-allowed"} flex gap-2 border border-line p-2 rounded`}>
-                <DynamicSvgIcon name={`${cat.attributes.icons.data[0].attributes.title}`} className="w-5" />
-                <p>{cat.attributes.query}</p>
-              </button>
-            )
-            })}
-          </div>
-      </section>
-      <section className="overflow-auto w-full p-6 h-full border-t border-line md:border-transparent">
-        {!projects.data.length && <div className="flex justify-center items-center h-full"><p className="text-xl font-semibold">OOPS! THE PROJECT DOESN'T YET EXIST, IT'S COMING SOON...</p></div>}
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
-        {projects.data.map((project: any) => {
+    <section className="flex flex-col h-full w-full overflow-auto">
+      <div className="relative w-full h-72 flex justify-center items-center">
+        <Image 
+          src="/bg-projects.webp"
+          alt="Projects Background"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="flex gap-6 max-w-4xl flex-wrap justify-center items-center relative z-20">
+          {projectsCategoriesApi.map((cat: any) => {
+            const isActive = queryLanguage.includes(cat.query);
+            const found = tagIconColorList.find(item => item.tag === cat.query);
+            const iconName = found?.icon || 'file';
+            const iconClass = isActive ? 'text-primary' : '';
+            const iconStyle = !isActive && found?.color ? { color: found.color } : {};
             return (
-            <Link href={`/projects/${project.attributes.slug}`} className="border border-line p-4 rounded flex flex-col gap-4 hover:scale-[1.02] cursor-pointer transition-transform">
-                <div className="space-y-1 flex-1">
-                <h4 className="text-secondary">{project.attributes.title}</h4>
-                <p className="line-clamp-3">{project.attributes.description}</p>
-                </div>
-                <div className="space-y-4 flex-1">
-                <div className="w-full h-[180px] relative rounded overflow-hidden">
-                    <Image src={project.attributes.image.data.attributes.formats.medium.url} fill className="object-cover" alt="project image" placeholder="blur" blurDataURL={project.attributes.image.data.attributes.placeholder} />
-                    <div className="flex justify-end gap-2 flex-wrap absolute top-0 right-0 p-2">
-                    {project.attributes.project_categories.data.map((icon: any) => {
-                        return (
-                        <div className="p-1 flex gap-2 bg-accent">
-                            <DynamicSvgIcon name={icon.attributes.icons.data[0].attributes.title} className={`w-4 ${context.theme.type == "light" ? "fill-white" : "fill-black"}`} />
-                        </div>
-                        )
-                    })}
-                    </div>
-                </div>
-                </div>
-                <p className="text-accent">
-                {"view-projects ->"}
-                </p>
-            </Link>
-            )
-        })}
+              <button 
+                key={cat.id}
+                onClick={() => filterCategoryHandler(cat.query)}
+                className={`py-2 px-4  ${isActive ? "bg-accent ring-2 ring-accent text-black" : "bg-primary ring-2 ring-accent text-white"} rounded ring-offset-4 ring-offset-primary flex items-center gap-2`}>
+                <DynamicSvgIcon name={iconName} width={18} height={18} className={iconClass} style={iconStyle} />
+                {cat.query}
+              </button>
+            );
+          })}
         </div>
-      </section>
-    </div>
+      </div>
+      {projects.length === 0 && 
+          <div className="flex justify-center items-center flex-1">
+            <p className="text-xl text-center font-semibold">OOPS! THE PROJECT DOESN&apos;T YET EXIST, IT&apos;S COMING SOON...</p>
+          </div>
+      }
+      {projects.length > 0 && 
+      <div className="flex-1 min-h-0 -mt-8 px-6">
+          <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-6 pb-8">
+            {projects.map((project: any) => (
+              <Link
+                href={`/projects/${project.slug}`}
+                key={project.id}
+                className="relative border border-line p-0 rounded-2xl overflow-hidden group min-h-[260px] flex flex-col justify-end shadow-2xl bg-black/60 transition-transform duration-300 hover:scale-[1.03] hover:shadow-accent/30 hover:shadow-2xl"
+              >
+                {/* Thumbnail as background */}
+                <div className="absolute inset-0 w-full h-full z-0 transition-transform duration-300 group-hover:scale-105">
+                  <Image
+                    src={project.thumbnail}
+                    alt={project.title}
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                  {/* Overlay for readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10 group-hover:from-black/90 transition-colors duration-300" />
+                  <div className="absolute inset-0 bg-black/80 transition-all duration-300 group-hover:bg-transparent"></div>
+                </div>
+                {/* Card content */}
+                <div className="relative z-10 p-6 flex flex-col gap-3 h-full">
+                  <h4 className="text-accent text-xl font-bold drop-shadow-md mb-1">{project.title}</h4>
+                  <p className="text-xs text-gray-400 mb-1">Created at: {formatDate(project.created)}</p>
+                  <p className="line-clamp-3 text-secondary drop-shadow-md mb-2">{project.description}</p>
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    {project.tags.map((tag: string, idx: number) => (
+                      <span key={idx} className="bg-[#1c2a3a] text-accent text-xs px-3 py-1 rounded-full font-semibold shadow hover:bg-accent/70 transition-all duration-200 cursor-pointer">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="text-accent mt-auto font-semibold underline underline-offset-2 hover:text-white transition-colors duration-200">
+                    {"view project →"}
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+      </div>
+      }
+      {/* Cards/message area */}
+    </section>
   )
 }
 

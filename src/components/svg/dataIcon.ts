@@ -33,6 +33,15 @@ import Eye from "../../../public/icons/eye.svg"
 import Filter from "../../../public/icons/filter.svg"
 import Refresh from "../../../public/icons/refresh.svg"
 import Calendar from "../../../public/icons/calendar.svg"
+import angular from "../../../public/icons/angular.svg"
+import expo from "../../../public/icons/expo.svg"
+import laravel from "../../../public/icons/laravel.svg"
+import mongodb from "../../../public/icons/mongodb.svg"
+import postgres from "../../../public/icons/postgres.svg"
+import express from "../../../public/icons/express.svg"
+import bootstrap from "../../../public/icons/bootstrap.svg"
+import firebase from "../../../public/icons/firebase.svg"
+
 
 
 interface IIconTypes {
@@ -74,7 +83,15 @@ const dataIcon: IIconTypes = {
     time: Time,
     filter: Filter,
     refresh: Refresh,
-    calendar: Calendar
+    calendar: Calendar,
+    angular,
+    expo,
+    laravel,
+    mongodb,
+    postgres,
+    express,
+    bootstrap,
+    firebase
 }
 
 export default dataIcon
