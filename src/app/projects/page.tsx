@@ -4,9 +4,13 @@ import Image from "next/image"
 // TESTING
 
 const fetchProjectsApi = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/projects`, {
-    cache: 'no-store',
-  })
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+  const res = await fetch(`${baseUrl}/api/projects`, { cache: 'no-store' });
+  if (!res.ok) {
+    // Untuk debugging, log error response
+    const text = await res.text();
+    throw new Error(`Failed to fetch projects: ${res.status} - ${text}`);
+  }
   return await res.json();
 }
 
