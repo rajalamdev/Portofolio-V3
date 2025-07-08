@@ -13,11 +13,11 @@ const Projects = async () => {
 
   // Deduplicate projects by id
   const uniqueProjects = Array.from(
-    new Map(projects.map(item => [item.id, item])).values()
+    new Map(projects.map((item: any) => [item.id, item])).values()
   );
 
   // Build categories from tags
-  const allTags = Array.from(new Set(uniqueProjects.flatMap((p) => p.tags)));
+  const allTags = Array.from(new Set(uniqueProjects.flatMap((p: any) => p.tags)));
   const projectsCategoriesApi = allTags.map((tag, i) => ({
     id: i,
     query: tag,
