@@ -9,7 +9,10 @@ import useAudio from "@/hooks/useAudio";
 
 const Navbar = () => {
   const pathname = usePathname();
+  const subPath = pathname.split("/")
   const audio = useAudio('/music/background.mp3', { volume: 1, playbackRate: 1, loop: true})
+  console.log(subPath, pathname)
+
 
   const context = useAppContext();  
   
@@ -85,7 +88,7 @@ const Navbar = () => {
               <Link
                 key={nav.href}
                 href={nav.href}
-                className={`${nav.href === pathname ? active : ""} 
+                className={`${(nav.href === pathname) || (subPath.length > 2 && ("/" + subPath[1] === nav.href)) ? active : ""} 
                 ${
                   pathname.includes("/blog") && nav.href === "/blog"
                     ? active

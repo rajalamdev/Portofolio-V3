@@ -21,3 +21,65 @@
 ::-webkit-scrollbar-corner { border-left: 1px solid var(--line);}
 @layer base {body {@apply bg-bg-outside text-tertiary text-sm;}}
 @layer utilities {.light .buttonColorful {@apply text-white} .dark .buttonColorful {@apply text-black} .button-hover {@apply hover:bg-button-hover hover:text-secondary cursor-pointer;} .transition-maxHeight {transition: max-height 0.25s linear;}}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-fade-in {
+  animation: fadeIn 0.5s;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-3px);}
+  40% { transform: translateX(3px);}
+  60% { transform: translateX(-2px);}
+  80% { transform: translateX(2px);}
+  100% { transform: translateX(0);}
+}
+.animate-shake {
+  animation: shake 0.25s;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.7);}
+  80% { transform: scale(1.1);}
+  100% { transform: scale(1);}
+}
+.animate-pop {
+  animation: pop 0.5s;
+}
+
+@keyframes loadingBar {
+  0% { width: 100%; }
+  100% { width: 0; }
+}
+.animate-loading-bar {
+  animation: loadingBar 2s linear forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}
+.animate-fade-in-out {
+  animation: fadeInOut 2s forwards;
+}
+
+@keyframes dots {
+  0% { content: ""; }
+  20% { content: "."; }
+  40% { content: ".."; }
+  60% { content: "..."; }
+  80% { content: ""; }
+  100% { content: ""; }
+}
+.sending-dots::after {
+  display: inline-block;
+  content: "";
+  animation: dots 1s steps(4, end) infinite;
+  letter-spacing: 1px;
+}
