@@ -10,7 +10,7 @@ import { tagIconColorList } from "@/constant/tagIconColor";
 const ProjectDetailClient = ({ project, allProjects }: { project: any, allProjects: any[] }) => {
   // Related projects: hanya berdasarkan category yang sama
   const relatedProjects = allProjects
-    .filter((p) => p.category === project.category)
+    .filter((p) => p.category === project.category && p.id !== project.id)
     .slice(0, 3);
   // Jika kurang dari 3, tambahkan project lain (yang belum masuk dan slug beda)
   if (relatedProjects.length < 3) {
