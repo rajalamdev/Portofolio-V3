@@ -13,7 +13,7 @@ const Skills = ({ skills, title}: any) => {
             <div className="flex flex-wrap gap-10">
               {skills.map((skill : any) => {
                 return (
-                  <div className="flex flex-col items-center justify-center gap-2">
+                  <div key={skill.name} className="flex flex-col items-center justify-center gap-2">
                     <DynamicSvgIcon name={skill.icon} className={`w-10 lg:w-14 ${skill.color} flex-1`} />
                     <p>{skill.name}</p>
                   </div>

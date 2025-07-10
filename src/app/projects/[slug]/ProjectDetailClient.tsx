@@ -92,13 +92,13 @@ const ProjectDetailClient = ({ project, allProjects }: { project: any, allProjec
           </div>
         </div>
         {/* Fun Fact with Icon */}
-        <div className="w-full mt-4 flex items-center gap-2 bg-accent/10 border border-accent rounded-lg p-3 text-xs text-accent shadow z-10">
-          <DynamicSvgIcon name="eye" alt="Fun Fact" width={18} height={18} />
+        <div className="w-full mt-2 flex items-center gap-2 bg-accent/10 border border-accent rounded-lg p-3 text-[10px] text-accent shadow z-10">
+          {/* <DynamicSvgIcon name="eye" alt="Fun Fact" width={18} height={18} /> */}
           <span>{project.funFact}</span>
         </div>
         {/* CTA Button */}
         <Link href={"/contact"}
-          className="mt-6 w-full py-2 px-4 text-center hover:ring-2 ring-accent ring-offset-4 active:ring-offset-1 ring-offset-primary transition-all rounded-lg font-bold shadow
+          className="mt-2 w-full py-2 px-4 text-center hover:ring-2 ring-accent ring-offset-4 active:ring-offset-1 ring-offset-primary transition-all rounded-lg font-bold shadow
             bg-accent text-black hover:bg-primary hover:text-white
             dark:bg-accent dark:text-black dark:hover:bg-primary dark:hover:text-white
             "
@@ -159,8 +159,8 @@ const ProjectDetailClient = ({ project, allProjects }: { project: any, allProjec
             <span>{project.funFact}</span>
           </div>
           {/* CTA Button */}
-          <button
-            className="mt-6 w-full py-2 rounded-lg font-bold shadow transition
+          <Link href={"/contact"}
+            className="mt-6 w-full text-center py-2 rounded-lg font-bold shadow transition
               bg-accent text-black hover:bg-primary hover:text-white
               dark:bg-accent dark:text-black dark:hover:bg-primary dark:hover:text-white
               "
@@ -170,7 +170,7 @@ const ProjectDetailClient = ({ project, allProjects }: { project: any, allProjec
             }}
           >
             Contact Me
-          </button>
+          </Link>
         </div>
         {/* Info Section */}
         <div className="flex flex-col gap-6 min-w-0 order-1 md:order-2 px-4">
@@ -205,7 +205,7 @@ const ProjectDetailClient = ({ project, allProjects }: { project: any, allProjec
           {/* Screenshot & Gallery (mobile only, hidden on desktop) */}
           <div className="block md:hidden">
             <div
-              className="relative w-full aspect-video rounded-xl overflow-hidden shadow-lg border border-line cursor-zoom-in group"
+              className="relative w-full hover:ring-2 transition-all ring-accent ring-offset-2 ring-offset-primary  aspect-video rounded-xl overflow-hidden shadow-lg border border-line cursor-zoom-in group"
               onClick={() => setFullscreenImg(project.thumbnail)}
             >
               <Image
@@ -222,7 +222,7 @@ const ProjectDetailClient = ({ project, allProjects }: { project: any, allProjec
                 {project.screenshots.map((src: string, idx: number) => (
                   <div
                     key={idx}
-                    className="relative aspect-video rounded-xl border border-line overflow-hidden cursor-zoom-in group"
+                    className="relative hover:ring-2 transition-all ring-accent ring-offset-2 ring-offset-primary aspect-video rounded-xl border border-line overflow-hidden cursor-zoom-in group"
                     onClick={() => setFullscreenImg(src)}
                   >
                     <Image
@@ -244,7 +244,7 @@ const ProjectDetailClient = ({ project, allProjects }: { project: any, allProjec
               hover:ring-2 ring-accent ring-offset-4 active:ring-offset-1 ring-offset-primary transition-all
             "
           >
-            View Project
+            View Project 🚀
           </button>
           {/* Related Projects */}
           <div className="pb-8">

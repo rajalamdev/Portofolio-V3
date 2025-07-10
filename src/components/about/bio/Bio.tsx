@@ -69,6 +69,7 @@ const Bio =  () => {
     { name: "JavaScript", icon: "javascript", color: "fill-[#f0db4f]" },
     { name: "TailwindCSS", icon: "tailwind", color: "fill-[#3490dc]" },
     { name: "Node.js", icon: "nodejs", color: "fill-[#3c873a]" },
+    { name: "Express.js", icon: "express", color: "fill-[#fff]" },
   ];
 
   return (
@@ -125,9 +126,9 @@ const Bio =  () => {
                   </div>
                   {/* Content */}
                   <div className="ml-4 flex-1">
-                    <div className="flex flex-col md:flex-row md:items-center gap-1 mb-1">
+                    <div className="flex flex-col md:flex-row md:items-center gap-4 mb-1">
                       <span className="font-bold text-lg text-accent ">{exp.title}</span>
-                      <span className="text-secondary text-xs flex-1 flex md:justify-end">{exp.period}</span>
+                      <span className="text-secondary text-[10px] flex-1 flex md:justify-end">{exp.period}</span>
                     </div>
                     <div className="mb-2 text-secondary">
                       {exp.company}
@@ -166,7 +167,7 @@ const Bio =  () => {
         </div>
         <div className="flex justify-start mt-10">
           <a
-            href="/cv.pdf" // Ganti dengan path CV kamu
+            href="/CV Raj Alam - 2025.pdf" // Ganti dengan path CV kamu
             download
             className="group inline-flex items-center gap-2 px-6 py-2 rounded-lg bg-accent text-black font-bold shadow-lg hover:ring-2 ring-accent ring-offset-4 active:ring-offset-1 ring-offset-primary transition-all"
           >

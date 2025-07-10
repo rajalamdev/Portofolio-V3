@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useState, useEffect } from "react"
 import DynamicSvgIcon from "@/components/svg/DynamicSvgIcon";
 import { tagIconColorList } from "@/constant/tagIconColor";
+import { formatDate } from "@/utils/formatDate";
 
 // TESTING
 interface ProjectsClientProps {
@@ -16,17 +17,6 @@ interface ProjectsClientProps {
 const ProjectsClient = ({ projectsApi, projectsCategoriesApi, showFilter = false }: ProjectsClientProps) => {
   const [projects, setProjects] = useState<any[]>(projectsApi);
   const [queryLanguage, setQueryLanguage] = useState<string[]>([]);
-
-  function formatDate(dateString: string) {
-    const months = [
-      "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"
-    ];
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const month = months[date.getMonth()];
-    const year = date.getFullYear();
-    return `${day} ${month} ${year}`;
-  }
 
   function filterCategoryHandler(tag: string) {
     setQueryLanguage((prevQueryLanguage) => {
