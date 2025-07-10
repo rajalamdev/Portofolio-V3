@@ -21,7 +21,7 @@ const Footer = () => {
   return (
     <footer className="border-t border-line h-[7%] w-full flex sm:justify-between z-10 bg-primary relative">
       <div className="flex w-[275px]">
-        <h4 className="px-6 h-auto flex items-center border-r border-line">find me in: </h4>
+        <h4 className="px-6 h-auto flex text-xs items-center border-r border-line">find me in: </h4>
         <div className="flex justify-center items-center flex-1">
           {findMeInLinks.map((link) => {
             return (
