@@ -1,8 +1,5 @@
 "use client"
-import DynamicBlurImage from "@/components/images/DynamicBlurImage"
-import Layout from "../../components/layout/Layout"
 import DynamicSvgIcon from "../../components/svg/DynamicSvgIcon"
-import Image from "next/image"
 import { useEffect, useState } from "react"
 import { useAppContext } from "@/context/AppContext"
 import Alert from "@/components/Alert";
@@ -10,10 +7,10 @@ import LoadingBar from "@/components/LoadingBar";
 
 const Contact = () => {
   const contactBoxList = [
-    {name: "LinkedIn", icon: "linkedin", href: ""},
-    {name: "Instagram", icon: "instagram", href: ""},
-    {name: "Github", icon: "github", href: ""},
-    {name: "Spotify", icon: "spotify", href: ""},
+    {name: "LinkedIn", icon: "linkedin", href: "https://linkedin.com/in/rajalamdev"},
+    {name: "Instagram", icon: "instagram", href: "https://instagram.com/rajalamdev"},
+    {name: "Github", icon: "github", href: "https://github.com/rajalamdev"},
+    {name: "Spotify", icon: "spotify", href: "https://open.spotify.com/user/282hoo67ycjs0zlqef1asq74h?si=4865dce312d1481f"},
   ]
 
   const [time, setTime] = useState("")
@@ -125,12 +122,12 @@ const Contact = () => {
           <div className="flex-1 flex gap-8 justify-center flex-wrap content-center">
             {contactBoxList.map(contact => {
               return (
-                <div className="group lg:w-56 w-64 lg:h-[120px] h-[130px] cursor-pointer" key={contact.name}>
+                <a target="_blank" href={contact.href} className="group lg:w-56 w-64 lg:h-[120px] h-[130px] cursor-pointer" key={contact.name}>
                   <div className="bg-accent buttonColorful w-full h-full rounded-br-3xl rounded-tl-3xl flex justify-center items-center relative group-hover:-translate-y-4 transition-all duration-300">
                     <DynamicSvgIcon name={contact.icon} className="w-10 fill-white" />
                     <p className="absolute text-secondary bottom-0 opacity-0 group-hover:opacity-100 group-hover:-bottom-8 -z-10 transition-all duration-300">{contact.name}</p>
                   </div>
-                </div>
+                </a>
               )
             })}
           </div>

@@ -1,5 +1,4 @@
 import ProjectsClient from "./ProjectsClient"
-import Image from "next/image"
 
 // TESTING
 
