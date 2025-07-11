@@ -12,8 +12,9 @@ export default function Home() {
     <div className="w-full h-full relative">
       <section className="w-full m:w-max relative z-10 h-full flex flex-col text-sm sm:text-base lg:pl-32 lg:pt-24 gap-12 justify-center lg:justify-start px-6">
           <div className="space-y-4 w-full">
-            <div className="flex items-center justify-center w-max gap-2">
-              <p className="bg-accent h-2 w-2 rounded-full inline-block"></p>
+            <div className="flex items-center justify-center w-max gap-4">
+              <p className="bg-accent h-2 w-2 rounded-full inline-block relative before:block before:w-3 before:h-3 before:bg-accent before:animate-ping before:absolute
+                            before:-right-[2px] before:mx-auto before:-top-[2px] before:rounded-full"></p>
               <h3>{"<Hello World/>"}</h3>
               <p className="animate-waving-hand text-lg">👋</p>
               {/* <button onClick={() => audio?.play()}>sdfsdf</button> */}

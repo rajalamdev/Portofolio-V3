@@ -75,7 +75,7 @@ const Navbar = () => {
 
   return (
     <header className="h-[7%]">
-      <nav className="border-b h-full border-line flex justify-between w-full items-center relative z-20 bg-primary">
+      <nav className="border-b h-full border-line flex justify-between w-full items-center relative z-[100] bg-primary">
         <Link
           href="/"
           className="lg:max-w-[275px] flex items-center lg:w-full h-full flex-grow-0 flex-shrink-0 lg:border-r border-line hover:opacity-80 button-hover px-6 relative z-50"
@@ -115,7 +115,7 @@ const Navbar = () => {
         </div>
 
         {/* nav mobile */}
-        <div className={`fixed left-0 right-0 bottom-0 top-0 ${showNavMobile ? "translate-y-0" : "-translate-y-full"} transition-transform duration-[500ms] ease-[cubic-bezier(.51,.92,.24,1.15)] h-full bg-primary z-30 overflow-auto`}>
+        <div className={`fixed left-0 right-0 bottom-0 top-0 ${showNavMobile ? "translate-y-0 z-30" : "-translate-y-full z-0"} transition-transform duration-[500ms] ease-[cubic-bezier(.51,.92,.24,1.15)] h-full bg-primary overflow-auto`}>
           <ul className="flex flex-col h-full overflow-auto pt-20">
             {navLinks.map((nav) => {
               return (
@@ -168,7 +168,7 @@ const Navbar = () => {
         </div>
 
         {/* settings */}
-        <div ref={settingSection} className={`fixed z-50 left-0 right-0 bottom-0 top-0 transition-opacity duration-300   ${showSettings ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"} flex backdrop-blur-sm bg-black/20 justify-center items-center`}>
+        <div ref={settingSection} className={`fixed z-[100] left-0 right-0 bottom-0 top-0 transition-opacity duration-300   ${showSettings ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"} flex backdrop-blur-sm bg-black/20 justify-center items-center`}>
           <div className={`max-w-[350px] h-[400px] ${showSettings ? "opacity-100" : "opacity-0"} transition-all bg-primary border border-line w-full rounded-lg flex flex-col p-4 relative`}>
             <div className="flex justify-end pb-2">
               <button onClick={() => setShowSettings(false)}>
@@ -198,7 +198,7 @@ const Navbar = () => {
                 <p className={`text-[12px] mt-2 [word-spacing:-2px] text-accent ${!context.enabled3dSpline && "hidden"}`}>Hint: Go to Home page to play the games, enjoy!</p>
               </div>
             </div>
-            <p className="flex items-end text-center">Created by raj-alam and the design inspired by yanka</p>
+            <p className="flex items-end text-center">Created by <span className="text-accent">raj-alam</span> and the design inspired by <a href="https://www.behance.net/darelova" target="_blank" className="text-accent underline">yanka</a></p>
           </div>
         </div>
       </nav>

@@ -36,7 +36,7 @@ export const AppProvider = ( { children }: { children: ReactNode } ) => {
             type: "dark"
         },
         {
-            name: "Snowy",
+            name: "Snowy (Development)",
             bg_outside: "#D8D9DA",
             primary: "#fff",
             secondary: "#1b232b",

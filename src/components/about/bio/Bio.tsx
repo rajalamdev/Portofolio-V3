@@ -133,7 +133,7 @@ const Bio =  () => {
                     <div className="mb-2 text-secondary">
                       {exp.company}
                     </div>
-                      <ul className="list-disc list-outside text-textiary space-y-1 pl-5">
+                      <ul className="list-disc text-sm list-outside text-textiary space-y-1 pl-5">
                         {exp.details.map((detail, i) => (
                           <li
                             key={i}

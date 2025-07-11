@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { useAppContext } from "@/context/AppContext"
 import Alert from "@/components/Alert";
 import LoadingBar from "@/components/LoadingBar";
+import TimeDisplay from "@/components/TimeDisplay";
 
 const Contact = () => {
   const contactBoxList = [
@@ -13,8 +14,6 @@ const Contact = () => {
     {name: "Spotify", icon: "spotify", href: "https://open.spotify.com/user/282hoo67ycjs0zlqef1asq74h?si=4865dce312d1481f"},
   ]
 
-  const [time, setTime] = useState("")
-  const [DMY, setDMY] = useState("")
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -23,23 +22,6 @@ const Contact = () => {
   const [alertKey, setAlertKey] = useState(0); // agar alert selalu rerender
   const [errorFields, setErrorFields] = useState<{[key: string]: boolean}>({});
   const [shakeFields, setShakeFields] = useState<{[key: string]: boolean}>({});
-
-  useEffect(() => {
-    const currentTime = new Date().toLocaleTimeString()
-    setTime(currentTime)
-
-    const getDMY = new Date().toLocaleDateString("en-US", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    })
-    setDMY(getDMY)
-
-    setInterval(() => {
-      const currentTime = new Date().toLocaleTimeString()
-      setTime(currentTime)
-    }, 1000)
-  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,7 +41,6 @@ const Contact = () => {
       return;
     }
     setLoading(true); // pastikan loading bar muncul
-    setAlert(null);
     setAlertKey(Date.now());
     try {
       const res = await fetch("/api/contact", {
@@ -135,19 +116,19 @@ const Contact = () => {
         
         <div className="flex h-20 gap-4 mt-8 justify-end">
           <div className="self-center">
-            <h3 className="text-xl font-semibold text-secondary mb-1 text-right">{DMY}</h3>
-            <p className="text-base text-right">{time}</p>
+            <TimeDisplay />
           </div>
           <div className="bg-accent w-1 h-full"></div>
         </div>
         <LoadingBar show={loading} />
-        {alert && (
+        {alert && ( 
           <Alert
             key={alertKey}
             type={alert.type}
             message={alert.message}
             onClose={() => setAlert(null)}
             showLoadingBar={true} // Selalu true
+            setAlert={setAlert}
           />
         )}
     </div>

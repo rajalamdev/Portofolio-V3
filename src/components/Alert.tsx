@@ -6,6 +6,7 @@ interface AlertProps {
   onClose: () => void;
   duration?: number;
   showLoadingBar?: boolean;
+  setAlert?: React.Dispatch<React.SetStateAction<{ type: "success" | "error"; message: string } | null>>;
 }
 
 const icons = {
@@ -29,23 +30,24 @@ const Alert: React.FC<AlertProps> = ({
   onClose,
   duration = 2000,
   showLoadingBar = false,
+  setAlert
 }) => {
-  const [visible, setVisible] = React.useState(true);
+  const [visible, setVisible] = React.useState(true); 
 
   React.useEffect(() => {
-    if (!showLoadingBar) {
-      const timer = setTimeout(() => {
-        setVisible(false);
-        setTimeout(onClose, 500); // waktu fade out
-      }, duration);
-      return () => clearTimeout(timer);
-    }
-  }, [onClose, duration, showLoadingBar]);
+    console.log("mounted")
+    const timer = setTimeout(() => {
+      setVisible(false);
+      setTimeout(onClose, 500); // waktu fade out
+      console.log("SELESAI")
+    }, duration);
+    return () => clearTimeout(timer);
+  }, [onClose, duration]);
 
   return (
     <div
       className={
-        `fixed top-8 right-8 z-50
+        `top-8 right-8
         min-w-[280px] max-w-[90vw] sm:max-w-md
         pl-6 pr-10 pt-4 pb-3 rounded-xl shadow-2xl
         flex flex-col items-start gap-2
@@ -54,7 +56,7 @@ const Alert: React.FC<AlertProps> = ({
           ? "from-green-100 to-green-50 border-l-4 border-accent"
           : "from-red-100 to-red-50 border-l-4 border-red-500"}
         animate-fade-in-out
-        ${!visible ? 'opacity-0 transition-opacity duration-500' : ''}`
+        ${!visible ? 'opacity-0 transition-opacity duration-500 -z-10 fixed  pointer-events-none' : 'z-[100] fixed '}`
       }
       style={{ boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.15)" }}
     >

@@ -47,7 +47,7 @@ const ProjectsClient = ({ projectsApi, projectsCategoriesApi, showFilter = false
 
   return (
     <section className="flex flex-col h-full w-full overflow-auto">
-      <div className="relative w-full h-72 flex justify-center items-center">
+      <div className="relative z-30 w-full h-72 flex justify-center items-center">
         <Image 
           src="/bg-projects.webp"
           alt="Projects Background"
@@ -56,7 +56,7 @@ const ProjectsClient = ({ projectsApi, projectsCategoriesApi, showFilter = false
           priority
         />
         <div className="absolute inset-0 bg-black/60" />
-        <div className="flex gap-3 md:gap-4 md:max-w-5xl flex-wrap justify-center items-center relative z-20 px-2">
+        <div className="flex gap-3 md:gap-4 md:max-w-5xl h-full flex-wrap justify-center items-center content-start pt-5 sm:pt-0 sm:content-center relative z-10 px-2">
           {projectsCategoriesApi.map((cat: any) => {
             const isActive = queryLanguage.includes(cat.query);
             const found = tagIconColorList.find(item => item.tag === cat.query);
@@ -81,7 +81,7 @@ const ProjectsClient = ({ projectsApi, projectsCategoriesApi, showFilter = false
           </div>
       }
       {projects.length > 0 && 
-      <div className="flex-1 min-h-0 -mt-8 px-6">
+      <div className="flex-1 min-h-0 -mt-8 px-6 relative z-50">
           <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-6 pb-8">
             {projects.map((project: any) => (
               <Link
