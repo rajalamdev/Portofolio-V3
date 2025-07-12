@@ -196,7 +196,7 @@ const Navbar = () => {
                 <p className={`text-[12px] mt-2 [word-spacing:-2px] text-accent ${!context.enabled3dSpline && "hidden"}`}>Hint: Go to Home page to play the games, enjoy!</p>
               </div>
             </div>
-            <p className="flex items-end text-center">Created by <span className="text-accent">raj-alam</span> and the design inspired by <a href="https://www.behance.net/darelova" target="_blank" className="text-accent underline">yanka</a></p>
+            <p className="items-end text-center">Created by <span className="text-accent">raj-alam</span> and the design inspired by <a href="https://www.behance.net/darelova" target="_blank" className="text-accent underline">yanka</a></p>
           </div>
         </div>
       </nav>
