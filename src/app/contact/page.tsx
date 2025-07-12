@@ -11,7 +11,7 @@ const Contact = () => {
     {name: "LinkedIn", icon: "linkedin", href: "https://linkedin.com/in/rajalamdev"},
     {name: "Instagram", icon: "instagram", href: "https://instagram.com/rajalamdev"},
     {name: "Github", icon: "github", href: "https://github.com/rajalamdev"},
-    {name: "Spotify", icon: "spotify", href: "https://open.spotify.com/user/282hoo67ycjs0zlqef1asq74h?si=4865dce312d1481f"},
+    {name: "Gmail", icon: "mail", href: "https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&to=rajalamdev@gmail.com&subject=MISSED%20CALL%20EZTRADER&body=Just%20wanted%20to%20say%20hi%20:D"},
   ]
 
   const [name, setName] = useState("");
@@ -103,7 +103,7 @@ const Contact = () => {
           <div className="flex-1 flex gap-8 justify-center flex-wrap content-center">
             {contactBoxList.map(contact => {
               return (
-                <a target="_blank" href={contact.href} className="group lg:w-56 w-64 lg:h-[120px] h-[130px] cursor-pointer" key={contact.name}>
+                <a target="_blank" href={contact.href} className="group cursor-link lg:w-56 w-64 lg:h-[120px] h-[130px]" key={contact.name}>
                   <div className="bg-accent buttonColorful w-full h-full rounded-br-3xl rounded-tl-3xl flex justify-center items-center relative group-hover:-translate-y-4 transition-all duration-300">
                     <DynamicSvgIcon name={contact.icon} className="w-10 fill-white" />
                     <p className="absolute text-secondary bottom-0 opacity-0 group-hover:opacity-100 group-hover:-bottom-8 -z-10 transition-all duration-300">{contact.name}</p>

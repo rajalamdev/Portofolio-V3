@@ -20,7 +20,7 @@
 ::-webkit-scrollbar-thumb:hover {background-color: var(--secondary);}
 ::-webkit-scrollbar-corner { border-left: 1px solid var(--line);}
 @layer base {body {@apply bg-bg-outside text-tertiary text-sm;}}
-@layer utilities {.light .buttonColorful {@apply text-white} .dark .buttonColorful {@apply text-black} .button-hover {@apply hover:bg-button-hover hover:text-secondary cursor-pointer;} .transition-maxHeight {transition: max-height 0.25s linear;}}
+@layer utilities {.light .buttonColorful {@apply text-white} .dark .buttonColorful {@apply text-black} .button-hover {@apply hover:bg-button-hover hover:text-secondary;} .transition-maxHeight {transition: max-height 0.25s linear;}}
 
 @keyframes fadeIn {
   from { opacity: 0; }

@@ -106,7 +106,6 @@ const BlogClient = ({ blogs, categories }: {blogs: any, categories: any}) => {
       const removeDuplicateCategories = Array.from(new Set(getAllCategories))
       setBlog({data: searchBlogFilter, meta: blog.meta})
       setCategoriesInclude(removeDuplicateCategories)
-      console.log(currentCategory)
      
     }
   }, [searchBlog])

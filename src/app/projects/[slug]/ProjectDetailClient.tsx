@@ -308,7 +308,7 @@ const ProjectDetailClient = ({ project, allProjects }: { project: any, allProjec
       {/* Fullscreen Modal */}
       {fullscreenImg && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm animate-fadeIn"
+          className="fixed inset-0 z-[500] flex items-center justify-center bg-black/80 backdrop-blur-sm animate-fadeIn"
           onClick={() => setFullscreenImg(null)}
         >
           <div className="relative max-w-3xl w-full h-[80vh] flex items-center justify-center animate-zoomIn">

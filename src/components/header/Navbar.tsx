@@ -11,8 +11,6 @@ const Navbar = () => {
   const pathname = usePathname();
   const subPath = pathname.split("/")
   const audio = useAudio('/music/background.mp3', { volume: 1, playbackRate: 1, loop: true})
-  console.log(subPath, pathname)
-
 
   const context = useAppContext();  
   
@@ -93,7 +91,7 @@ const Navbar = () => {
                   pathname.includes("/blog") && nav.href === "/blog"
                     ? active
                     : ""
-                } px-6 border-r h-full border-line text-center button-hover flex items-center`}
+                } cursor-link px-6 border-r h-full border-line text-center button-hover flex items-center`}
               >
                 {nav.text}
               </Link>

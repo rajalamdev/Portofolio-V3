@@ -35,11 +35,9 @@ const Alert: React.FC<AlertProps> = ({
   const [visible, setVisible] = React.useState(true); 
 
   React.useEffect(() => {
-    console.log("mounted")
     const timer = setTimeout(() => {
       setVisible(false);
       setTimeout(onClose, 500); // waktu fade out
-      console.log("SELESAI")
     }, duration);
     return () => clearTimeout(timer);
   }, [onClose, duration]);

@@ -29,7 +29,7 @@ const Footer = () => {
                 key={link.name}
                 href={link.href}
                 target="_blank"
-                className={`px-4 flex-1 border-r border-line button-hover h-full`}
+                className={`px-4 cursor-link flex-1 border-r border-line button-hover h-full`}
               >
                 <DynamicSvgIcon
                   name={link.name}
@@ -43,7 +43,7 @@ const Footer = () => {
       <a
         href="https://github.com/rajalamdev"
         target="_blank"
-        className="px-4 border-l border-line button-hover items-center gap-2 sm:flex hidden"
+        className="px-4 cursor-link border-l border-line button-hover items-center gap-2 sm:flex hidden"
       >
         <p>@rajalamdev</p>
         <DynamicSvgIcon name="github" className="w-5" />

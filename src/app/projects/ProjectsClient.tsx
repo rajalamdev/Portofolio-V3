@@ -28,9 +28,6 @@ const ProjectsClient = ({ projectsApi, projectsCategoriesApi, showFilter = false
   }
 
   useEffect(() => {
-    console.log("queryLanguage:", queryLanguage);
-    console.log("projectsApi:", projectsApi);
-
     if (queryLanguage.length === 0) {
       // Sort all projects by created date descending
       const sorted = [...projectsApi].sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());

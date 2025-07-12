@@ -64,8 +64,8 @@ const About = () => {
   ]);
 
   const contactList = [
-    {icon: "mail", href: "", name: "rajalamdev@gmail.com"},
-    {icon: "discord", href: "", name:"waganonawaazura"},
+    {icon: "mail", href: "https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&to=rajalamdev@gmail.com&subject=MISSED%20CALL%20EZTRADER&body=Just%20wanted%20to%20say%20hi%20:D", name: "rajalamdev@gmail.com"},
+    {icon: "instagram", href: "https://instagram.com/rajalamdev", name:"rajalamdev"},
   ]
 
   const [activeFiles, setActiveFiles] = useState<any>({
@@ -125,7 +125,7 @@ const About = () => {
     <div className="flex h-full md:flex-row flex-col ">
       <section className="flex max-w-full md:max-w-[275px] w-full">
         <div className="px-4 py-4 border-r border-line md:block hidden">
-          <DynamicSvgIcon name="file" className="w-6" />
+          <DynamicSvgIcon name="file" className="w-6" /> 
         </div>
         <div className="flex flex-col flex-1 border-r border-line">
           <div className="max-h-60 overflow-auto">
@@ -178,8 +178,23 @@ const About = () => {
             <DynamicSvgIcon name="trianglePrimary" className={`w-[10px]`}/>spotify now playing
             </h4>
             {isLoading && <SpotifyNowPlayingSkeleton />}
-            {!data?.isPlaying && !isLoading && <p className="px-2 py-2">currently not listening to anything</p>}
-            {data?.isPlaying && !isLoading && <a href={data?.songUrl} target="_blank" className="flex gap-2 py-2 px-6 md:px-2 md:py-2 items-center">
+            {!data?.isPlaying && !isLoading && (
+              <div className="flex gap-2 py-2 px-6 md:px-2 md:py-2 items-center cursor-help">
+                <DynamicSvgIcon name="spotify" width={50} height={50} alt="spotify" className="self-start text-accent fill-accent" />
+                <div>
+                  <h4 className="text-[12px] [word-spacing:-2px] text-secondary">Not listening to anything</h4>
+                  <p className="text-[10px] [word-spacing:-2px]">Spotify is paused or inactive</p>
+                  <div className="flex gap-[3px] opacity-40">
+                    <span className="bg-accent w-1 h-2 inline-block rounded-full"></span>
+                    <span className="bg-accent w-1 h-2 inline-block rounded-full"></span>
+                    <span className="bg-accent w-1 h-2 inline-block rounded-full"></span>
+                    <span className="bg-accent w-1 h-2 inline-block rounded-full"></span>
+                    <span className="bg-accent w-1 h-2 inline-block rounded-full"></span>
+                  </div>
+                </div>
+              </div>
+            )}
+            {data?.isPlaying && !isLoading && <a href={data?.songUrl} target="_blank" className="flex cursor-link gap-2 py-2 px-6 md:px-2 md:py-2 items-center">
               <Image src={data?.albumImageUrl} width={50} height={50} alt="spotify album" className="self-start" placeholder="blur" blurDataURL={data?.hashImage} />
               <div>
                 <h4 className="text-[12px] [word-spacing:-2px] text-secondary">{data?.title}</h4>

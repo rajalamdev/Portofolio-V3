@@ -5,6 +5,7 @@
   content: counter(listing);
   display: inline-block;
   padding: 0 2em 0 1em;
+  color: var(--tertiary);
 }
 .transparent code[class*="language-"],
 .transparent pre[class*="language-"] {
@@ -75,7 +76,7 @@
 code[class*="language-"],
 pre[class*="language-"] {
   background: #0d1117;
-  color: var(--tertiary);
+  color: var(--secondary);
   text-shadow: 0 1px rgba(0, 0, 0, 0.3);
   direction: ltr;
   text-align: left;
