@@ -128,7 +128,7 @@ const Bio =  () => {
                   <div className="ml-4 flex-1">
                     <div className="flex flex-col md:flex-row md:items-center gap-4 mb-1">
                       <span className="font-bold text-lg text-accent ">{exp.title}</span>
-                      <span className="text-secondary text-xs flex-1 flex md:justify-end">{exp.period}</span>
+                      <span className="text-secondary text-[10px] flex-1 flex md:justify-end">{exp.period}</span>
                     </div>
                     <div className="mb-2 text-secondary">
                       {exp.company}
