@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import DynamicSvgIcon from "../svg/DynamicSvgIcon";
 import ButtonEnableDisable from "../ButtonEnableDisable";
 import { useEffect, useRef, useState } from "react";
-import { useAppContext } from "@/context/AppContext";
+import { useAppContext, Theme } from "@/context/AppContext";
 import useAudio from "@/hooks/useAudio";
 
 const Navbar = () => {
@@ -22,13 +22,24 @@ const Navbar = () => {
   const settingSection = useRef<any>()
 
   useEffect(() => {
-    themeSection.current.addEventListener("click", (e: any) => {
-      if(e.target === themeSection.current) return setShowTheme(false)
-    })
-
-    settingSection.current.addEventListener("click", (e: any) => {
-      if(e.target === settingSection.current) return setShowSettings(false)
-    })
+    const themeRef = themeSection.current;
+    const settingRef = settingSection.current;
+    
+    const handleThemeClick = (e: MouseEvent) => {
+      if (e.target === themeRef) setShowTheme(false);
+    };
+    
+    const handleSettingClick = (e: MouseEvent) => {
+      if (e.target === settingRef) setShowSettings(false);
+    };
+    
+    themeRef?.addEventListener("click", handleThemeClick);
+    settingRef?.addEventListener("click", handleSettingClick);
+    
+    return () => {
+      themeRef?.removeEventListener("click", handleThemeClick);
+      settingRef?.removeEventListener("click", handleSettingClick);
+    };
   }, [])
 
   useEffect(() => {
@@ -50,10 +61,10 @@ const Navbar = () => {
 
   const active = "text-secondary border-b-2 border-b-accent";
 
-  function themeHandler(currentTheme: any){
+  function themeHandler(currentTheme: Theme){
     if(context.theme.name === currentTheme.name) return
-    const root = document.querySelector<any>(":root");
-    const html = document.querySelector<any>("html");
+    const root = document.documentElement;
+    const html = document.documentElement;
     if (currentTheme.type === "dark") {
       html.className = "dark";
     } else {

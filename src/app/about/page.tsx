@@ -26,7 +26,11 @@ const fetcher = (url: string) => fetch(url).then(res => res.json())
 const About = () => {
   const [personalInfoActive, setPersonalInfoActive] = useState(true)
   const [contactActive, setContactActive] = useState(true)
-  const { data, error, isLoading } = useSWR(`/api/now-playing`, fetcher)
+  const { data, error, isLoading } = useSWR(`/api/now-playing`, fetcher, {
+    refreshInterval: 1000, // Poll every 1 second for real-time updates
+    revalidateOnFocus: true, // Refresh when tab becomes active
+    dedupingInterval: 500, // Avoid duplicate requests within 500ms
+  })
   const context = useAppContext();
   
   useEffect(() => {

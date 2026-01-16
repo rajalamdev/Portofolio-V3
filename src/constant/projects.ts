@@ -1,5 +1,35 @@
 export const projects = [
   {
+    id: 15,
+    slug: "notuai",
+    title: "Notu.AI - Meeting Transcription & AI Notes Platform",
+    description: "Platform Meeting Transcription & AI Notes berbasis web yang mendukung upload audio/video, bot untuk Google Meet, dan real-time microphone transcription dengan speaker diarization menggunakan Faster-Whisper.",
+    thumbnail: "/projects/notuai/thumb.png",
+    screenshots: ["/projects/notuai/1.png", "/projects/notuai/2.png", "/projects/notuai/3.png", "/projects/notuai/4.png", "/projects/notuai/5.png", "/projects/notuai/6.png", "/projects/notuai/7.png", "/projects/notuai/8.png", "/projects/notuai/9.png", "/projects/notuai/10.png", "/projects/notuai/11.png", "/projects/notuai/12.png", "/projects/notuai/13.png", "/projects/notuai/14.png", "/projects/notuai/15.png", "/projects/notuai/16.png", "/projects/notuai/17.png"],
+    link: "https://notu.ai",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Node.js", "WebSocket", "Faster-Whisper", "MongoDB", "Playwright", "OpenRouter API", "Express.js"],
+    category: "AI Platform",
+    status: "Done",
+    featured: true,
+    created: "2026-01-17",
+    updated: "2026-01-17",
+    contributors: 1,
+    views: 5200,
+    progress: 100,
+    funFact: "This is my thesis project - a full-stack AI transcription platform with 3 different transcription pipelines: file upload, real-time microphone, and meeting bot integration.",
+    features: [
+      "🎙️ Speech-to-Text using Faster-Whisper (optimized OpenAI Whisper)",
+      "👥 Speaker Diarization using MFCC + KMeans Clustering",
+      "🤖 AI Meeting Notes & Chatbot using OpenRouter API (LLM)",
+      "📊 Analytics Dashboard for meeting data visualization",
+      "📋 Kanban Board for action items management",
+      "🔗 Collaboration with share & collaborator features",
+      "📤 Upload Audio/Video with automatic transcription",
+      "🎥 Meeting Bot auto-join Google Meet & record captions",
+      "🎤 Realtime Microphone transcription with live preview"
+    ],
+  },
+  {
     id: 14,
     slug: "sidata",
     title: "SIDATA - Family Data Information System for South Tangerang",
@@ -14,7 +44,7 @@ export const projects = [
     updated: "2025-06-20",
     contributors: 3,
     views: 2345,
-    progress: 90,
+    progress: 100,
     funFact: "SIDATA is an internship project assigned by the mayor of South Tangerang.",
     features: [
       "Real-time population statistics",
@@ -86,7 +116,7 @@ export const projects = [
     updated: "2023-07-10",
     contributors: 9,
     views: 2100,
-    progress: 80,
+    progress: 100,
     funFact: "This project is a collaboration between Informatics students at the Indonesian Institute of Technology.",
     features: [
       "Student data management",

@@ -11,16 +11,15 @@ const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`
 const NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`
 
 export const getNowPlaying = async () => {
-    const { access_token } = await getAccessToken();
+  const { access_token } = await getAccessToken();
 
-    return fetch(NOW_PLAYING_ENDPOINT, {
-      headers: {
-        Authorization: `Bearer ${access_token}`,
-      },
-      next: { revalidate: 1 },
-      // cache: 'no-store',
-    })
-} 
+  return fetch(NOW_PLAYING_ENDPOINT, {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+    cache: 'no-store',
+  })
+}
 
 export const getTopArtist = async (query: string) => {
   const { access_token } = await getAccessToken();
@@ -32,19 +31,18 @@ export const getTopArtist = async (query: string) => {
 }
 
 const getAccessToken = async () => {
-    const response = await fetch(TOKEN_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          Authorization: `Basic ${basic}`,
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: querystring.stringify({
-          grant_type: 'refresh_token',
-          refresh_token,
-        }),
-        next: { revalidate: 1 },
-        // cache: 'no-store'
-      })
-    
-      return response.json()
+  const response = await fetch(TOKEN_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      Authorization: `Basic ${basic}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: querystring.stringify({
+      grant_type: 'refresh_token',
+      refresh_token,
+    }),
+    cache: 'no-store',
+  })
+
+  return response.json()
 }

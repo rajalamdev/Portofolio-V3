@@ -1,8 +1,20 @@
 "use client"
-import Mini3dGame from "../components/mini3dGame/Mini3dGame";
 import { useAppContext } from "@/context/AppContext";
+import dynamic from 'next/dynamic';
 // import Vercel from "../../public/vercel.svg"
 import Background from "../../public/background.svg"
+
+const Mini3dGame = dynamic(() => import('../components/mini3dGame/Mini3dGame'), {
+  loading: () => (
+    <div className="absolute right-0 top-0 h-full w-1/2 hidden lg:flex items-center justify-center">
+      <div className="text-center">
+        <p className="animate-pulse text-accent">Loading 3D Game...</p>
+        <p className="text-xs text-tertiary mt-2">Please wait</p>
+      </div>
+    </div>
+  ),
+  ssr: false,
+});
 
 export default function Home() {
 
