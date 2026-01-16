@@ -167,7 +167,7 @@ const Bio =  () => {
         </div>
         <div className="flex justify-start mt-10">
           <a
-            href="/CV Raj Alam - 2025.pdf" // Ganti dengan path CV kamu
+            href="/CV Raj Alam - 2026.pdf" // Ganti dengan path CV kamu
             download
             className="group inline-flex items-center gap-2 px-6 py-2 rounded-lg bg-accent text-black font-bold shadow-lg hover:ring-2 ring-accent ring-offset-4 active:ring-offset-1 ring-offset-primary transition-all"
           >
