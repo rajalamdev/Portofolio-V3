@@ -3,6 +3,18 @@
 // import Mini3dGame from "@/components/mini3dGame/Mini3dGame";
 import { createContext, useContext, ReactNode, useMemo, useState, useRef, useEffect } from "react"
 
+export interface Theme {
+    name: string;
+    bg_outside: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    accent: string;
+    button_hover: string;
+    button_active: string;
+    line: string;
+    type: string;
+}
 
 interface DefaultContext {
     [x: string]: any;
@@ -121,7 +133,7 @@ export const AppProvider = ( { children }: { children: ReactNode } ) => {
         },
     ]
 
-    const [theme, setTheme] = useState({
+    const [theme, setTheme] = useState<Theme>({
         name: "Default",
         bg_outside: "#010c15",
         primary: "#011627",
